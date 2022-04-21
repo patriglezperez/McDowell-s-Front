@@ -1,19 +1,30 @@
+$green_clear: #8ae68a9e;
+$green_dark: #256A25;
+
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
 }
+
+html {
+  //at 1200px 0.833vw roughly equals 10px;
+  font-size: 0.833vw;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   position: relative;
   background-color: #ffffff;
   color: #000;
+  font-size: 1.6rem;
 }
 
 p {
   color: #000;
   font-size: 16px;
 }
+
 h1,
 h3 {
   color: #000;

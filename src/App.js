@@ -1,8 +1,9 @@
+import Header from "./components/header";
+import './sscc/global.scss';
+
 function App() {
   return (
-    <div className="App">
-      <p>Funciona!!!</p>
-    </div>
+    <Header />
   );
 }
 

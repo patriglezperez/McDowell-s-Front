@@ -1,10 +1,11 @@
 import React from "react";
-import StaffSignIn from "./components/staffSignIn";
+// import StaffSignIn from "./components/staffSignIn";
 
 function App() {
   return (
     <>
-      <StaffSignIn />
+      Funciona !!
+      {/* <StaffSignIn /> */}
     </>
   );
 }

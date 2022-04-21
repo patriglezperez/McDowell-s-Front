@@ -1,7 +1,10 @@
+import StaffSignIn from "./components/StaffSignIn";
+
 function App() {
   return (
     <div className="App">
-      <p>Funciona!!!</p>
+      {/* <p>Funciona!!!</p> */}
+      <StaffSignIn />
     </div>
   );
 }

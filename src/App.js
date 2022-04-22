@@ -1,7 +1,10 @@
+import MenuPreview from "./components/menuPreview";
+
 function App() {
   return (
     <div className="App">
-      <p>Funciona!!!</p>
+      {/* <p>Funciona!!!</p> */}
+      <MenuPreview />
     </div>
   );
 }

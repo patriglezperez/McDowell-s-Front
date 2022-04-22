@@ -1,14 +1,14 @@
 import logoBurguer from "../assets/img/logoBurguer.png";
 import React, { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
-import axios from "axios";
+// import axios from "axios";
 
 function StaffSignIn() {
   // const navigate = useNavigate();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [allUsers, setAllUsers] = useState();
+  // const [allUsers, setAllUsers] = useState();
   // const [isLogin, setIsLogin] = useState("");
 
   async function handleLogin(e) {

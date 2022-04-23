@@ -14,7 +14,7 @@ function StaffSignIn() {
   // const [allUsers, setAllUsers] = useState();
   // const [isLogin, setIsLogin] = useState("");
 
-  /*Hacemos el login*/
+  /*We login*/
   async function handleLogin(event) {
     event.preventDefault();
     setPassword("");
@@ -24,14 +24,14 @@ function StaffSignIn() {
     return { userEmail, md5Password };
   }
 
-  /*Ciframos la contraseña*/
+  /*We encrypt the password*/
   async function encryptedPassword(password) {
     const encrypted = md5(password);
     setMd5Password(encrypted);
     return encrypted;
   }
 
-  /*Para poder usar el botón de enter del teclado*/
+  /*To be able to use the enter button on the keypad*/
   const trySubmit = (e) => {
     if (e.which === 13) handleLogin();
   };

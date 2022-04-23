@@ -1,26 +1,37 @@
 import logoBurguer from "../assets/img/logoBurguer.png";
 import React, { useState, useEffect } from "react";
+import md5 from "md5-hash";
+
 // import { useNavigate } from "react-router-dom";
 // import axios from "axios";
 
 function StaffSignIn() {
   // const navigate = useNavigate();
 
-  const [username, setUsername] = useState("");
+  const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [md5Password, setMd5Password] = useState();
   // const [allUsers, setAllUsers] = useState();
   // const [isLogin, setIsLogin] = useState("");
 
-  async function handleLogin(e) {
-    e.preventDefault();
+  /*Hacemos el login*/
+  async function handleLogin(event) {
+    event.preventDefault();
     setPassword("");
-    setUsername("");
-    // await isLogin({ username, password });
-    console.log(password, "la contraseña");
-    console.log(username, "el usuario");
+    setUserEmail("");
+    encryptedPassword(password);
     console.log("Entrando en McDowell's");
+    return { userEmail, md5Password };
   }
 
+  /*Ciframos la contraseña*/
+  async function encryptedPassword(password) {
+    const encrypted = md5(password);
+    setMd5Password(encrypted);
+    return encrypted;
+  }
+
+  /*Para poder usar el botón de enter del teclado*/
   const trySubmit = (e) => {
     if (e.which === 13) handleLogin();
   };
@@ -57,9 +68,8 @@ function StaffSignIn() {
             <input
               type="text"
               name="username"
-              value={username}
-              onKeyPress={(e) => trySubmit(e)}
-              onChange={(e) => setUsername(e.target.value)}
+              value={userEmail}
+              onChange={(event) => setUserEmail(event.target.value)}
               className="input username"
               placeholder="Usuario"
             />
@@ -71,8 +81,7 @@ function StaffSignIn() {
               type="password"
               name="password"
               value={password}
-              onKeyPress={(e) => trySubmit(e)}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={(event) => setPassword(event.target.value)}
               className="input password"
               placeholder="Contraseña"
             />
@@ -80,7 +89,12 @@ function StaffSignIn() {
           <br />
           <br />
           <div>
-            <button type="submit" className="cta" onClick={handleLogin}>
+            <button
+              type="submit"
+              className="cta"
+              onClick={handleLogin}
+              onKeyPress={(event) => trySubmit(event)}
+            >
               <span>Entrar</span>
               <svg viewBox="0 0 13 10" height="10px" width="15px">
                 <path d="M1,5 L11,5"></path>

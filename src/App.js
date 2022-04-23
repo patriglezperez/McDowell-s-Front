@@ -1,11 +1,12 @@
+import Header from "./components/header";
 import StaffSignIn from "./components/StaffSignIn";
 
 function App() {
   return (
-    <div className="App">
-      {/* <p>Funciona!!!</p> */}
+    <>
+      <Header />
       <StaffSignIn />
-    </div>
+    </>
   );
 }
 

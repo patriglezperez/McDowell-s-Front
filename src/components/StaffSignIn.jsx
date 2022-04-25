@@ -1,9 +1,24 @@
 import logoBurguer from "../assets/img/logoBurguer.png";
 import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
 import md5 from "md5-hash";
-
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
 // import { useNavigate } from "react-router-dom";
-// import axios from "axios";
+
+/* Verification */
+/* const schemaUser = yup.object().shape({
+  email: yup
+    .string()
+    .email("Formato de correo electrónico no válido")
+    .required("El correo electrónico es necesario"),
+  password: yup
+    .string()
+    .required("La contraseña es obligatoria")
+    .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{5,}$/),
+  //Must Contain 5 characters, One Uppercase, One Lowercase, One Number and one special case Character
+}); */
 
 function StaffSignIn() {
   // const navigate = useNavigate();
@@ -11,18 +26,57 @@ function StaffSignIn() {
   const [userEmail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
   const [md5Password, setMd5Password] = useState();
-  // const [allUsers, setAllUsers] = useState();
-  // const [isLogin, setIsLogin] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
+
+  //yup validation
+  /* const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schemaUser),
+  });
+
+  //Por desarrollar: Obtener los usuarioS
+  //Ojo el puerto
+  const onSubmit = async (data) => {
+    encryptedPassword(password);
+    console.log("Entrando en McDowell's");
+
+    await axios
+      .post("http://localhost:3000/api/staff/login", {
+        email: data.email,
+        password: data.password,
+      })
+
+      .then((res) => {
+        try {
+          if (res.status === 200) {
+            setIsLogin(true);
+          }
+        } catch (error) {
+          console.log(errors, "Error al iniciar sesion");
+        }
+      });
+  };
+ */
 
   /*We login*/
-  async function handleLogin(event) {
+  async function onSubmit(event) {
     event.preventDefault();
     setPassword("");
     setUserEmail("");
     encryptedPassword(password);
     console.log("Entrando en McDowell's");
+
     return { userEmail, md5Password };
   }
+
+  //Por desarrollar: para ver si esta logeado y que le lleve a x pantalla
+  // useEffect(() => {
+  //   console.log(isLogin, "Si isLogin okkk...");
+  //   if (isLogin) navigate("/");
+  // }, [isLogin, navigate]);
 
   /*We encrypt the password*/
   async function encryptedPassword(password) {
@@ -33,32 +87,15 @@ function StaffSignIn() {
 
   /*To be able to use the enter button on the keypad*/
   const trySubmit = (e) => {
-    if (e.which === 13) handleLogin();
+    if (e.which === 13) onSubmit();
   };
-
-  //Por desarrollar: para ver si esta logeado y que le lleve a x pantalla
-  // useEffect(() => {
-  //   console.log(isLogin, "Si isLogin okkk...");
-  //   if (isLogin) navigate("/");
-  // }, [isLogin, navigate]);
-
-  //Por desarrollar: Obtener los usuarios
-  //Ojo el puerto
-  // async function getUsers () {
-  //   let url = "http://localhost:3000/api/staff/all"
-  //   try {
-  //    let data = await axios.get(url);
-  //    setAllUsers(data);
-  //   } catch (error) {
-  //     console.log("Error al obtener usuarios");
-  //   }
-  // }
 
   return (
     <>
       <div className="form">
-        {/* Añadir en la linea del form:  action="staff/login" */}
-        <form method="POST">
+        {/* Añadir en la linea del form:  action="staff/login"
+        onSubmit={handleSubmit(onSubmit) */}
+        <form method="POST" onSubmit={onSubmit}>
           <h1 className="title">McDowell's</h1>
           <br />
           <img src={logoBurguer} alt="logoBurguer" className="logoBurger" />
@@ -67,11 +104,12 @@ function StaffSignIn() {
           <div>
             <input
               type="text"
-              name="username"
+              name="useremail"
               value={userEmail}
               onChange={(event) => setUserEmail(event.target.value)}
-              className="input username"
-              placeholder="Usuario"
+              className="input useremail"
+              placeholder="Email"
+              // {...register("email", {})}
             />
           </div>
           <br />
@@ -84,6 +122,7 @@ function StaffSignIn() {
               onChange={(event) => setPassword(event.target.value)}
               className="input password"
               placeholder="Contraseña"
+              // {...register("password", {})}
             />
           </div>
           <br />
@@ -92,7 +131,7 @@ function StaffSignIn() {
             <button
               type="submit"
               className="cta"
-              onClick={handleLogin}
+              onClick={onSubmit}
               onKeyPress={(event) => trySubmit(event)}
             >
               <span>Entrar</span>

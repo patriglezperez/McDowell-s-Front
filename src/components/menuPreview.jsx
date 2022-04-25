@@ -4,31 +4,31 @@ import React, { useState } from "react";
 
 const menus = [
   {
-    name: "Menu McDowell's",
-    price: "6.95€",
-    image: burguer,
+    name: "McDowell's",
+    price: "6,95 €",
+    image: menuBurguer,
   },
   {
-    name: "Menu McDowell's Jr",
-    price: "5.99€",
-    image: menuBurguer,
+    name: "McDowell's Jr",
+    price: "5,99 €",
+    image: burguer,
   },
 ];
 function MenuPreview() {
   return (
     <>
       {menus.map((menu) => (
-        <div class="card">
-          <div class="blob"></div>
-          <img src={menu.image} alt="logoBurguer" className="img" />
-          <h2>
-            {menu.name}
-            <br />
-            <span>{menu.price}</span>
-          </h2>
-          <p>
-            <b>Añadir</b>
-          </p>
+        <div className="menu">
+          <div className="card">
+            <div className="blob"></div>
+            <img src={menu.image} alt="logoBurguer" className="img" />
+            <h2 className="description">
+              Menu <br />
+              {menu.name}
+              <br />
+              <span>{menu.price}</span>
+            </h2>
+          </div>
         </div>
       ))}
     </>

@@ -46,7 +46,7 @@ function StaffSignIn() {
     await axios
       .post("http://localhost:3000/api/staff/login", {
         email: data.email,
-        password: data.password,
+        password: data.md5Password,
       })
 
       .then((res) => {

@@ -1,9 +1,12 @@
 import Header from "./components/header";
-import './sscc/global.scss';
+import StaffSignIn from "./components/StaffSignIn";
 
 function App() {
   return (
-    <Header />
+    <>
+      <Header />
+      <StaffSignIn />
+    </>
   );
 }
 

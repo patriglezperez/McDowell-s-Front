@@ -7,7 +7,9 @@ import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MenuIcon from '@mui/icons-material/Menu';
 
 export default function DrawerMenu() {
+    // sets the position the menu will come from;
     const drawerPosition = 'left';
+
     const greenDark = '#256A25';
 
     const [openDrawer, setOpenDrawer] = useState({
@@ -15,7 +17,7 @@ export default function DrawerMenu() {
     });
     const [expandAccordion, setExpandAccordion] = useState(false);
 
-
+    //Accordion and AccordionSummary defines custom styles to said MUI components;
     const Accordion = styled((props) => (
         <MuiAccordion disableGutters elevation={0} square {...props} />
     ))(({ theme }) => ({
@@ -51,9 +53,9 @@ export default function DrawerMenu() {
         setOpenDrawer({ ...openDrawer, [anchor]: open });
     };
 
+    //This is the layout for the menu;
     const list = (anchor) => (
         <Box role="presentation">
-
             <List>
                 <ListItem button
                     onClick={toggleDrawer(anchor, false)}

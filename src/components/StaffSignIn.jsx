@@ -9,10 +9,9 @@ import axios from "axios";
 
 /* Verification */
 /* const schemaUser = yup.object().shape({
-  email: yup
+  user: yup
     .string()
-    .email("Formato de correo electrónico no válido")
-    .required("El correo electrónico es necesario"),
+    .required("El nombre de usuario es necesario"),
   password: yup
     .string()
     .required("La contraseña es obligatoria")
@@ -23,7 +22,7 @@ import axios from "axios";
 function StaffSignIn() {
   // const navigate = useNavigate();
 
-  const [userEmail, setUserEmail] = useState("");
+  const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const [md5Password, setMd5Password] = useState();
   const [isLogin, setIsLogin] = useState(false);
@@ -45,7 +44,7 @@ function StaffSignIn() {
 
     await axios
       .post("http://localhost:3000/api/staff/login", {
-        email: data.email,
+        user: data.user,
         password: data.md5Password,
       })
 
@@ -65,11 +64,11 @@ function StaffSignIn() {
   async function onSubmit(event) {
     event.preventDefault();
     setPassword("");
-    setUserEmail("");
+    setUser("");
     encryptedPassword(password);
     console.log("Entrando en McDowell's");
 
-    return { userEmail, md5Password };
+    return { user, md5Password };
   }
 
   //Por desarrollar: para ver si esta logeado y que le lleve a x pantalla
@@ -104,12 +103,12 @@ function StaffSignIn() {
           <div>
             <input
               type="text"
-              name="useremail"
-              value={userEmail}
-              onChange={(event) => setUserEmail(event.target.value)}
-              className="input useremail"
-              placeholder="Email"
-              // {...register("email", {})}
+              name="user"
+              value={user}
+              onChange={(event) => setUser(event.target.value)}
+              className="input user"
+              placeholder="User"
+              // {...register("user", {})}
             />
           </div>
           <br />

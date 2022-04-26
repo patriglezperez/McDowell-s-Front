@@ -1,6 +1,5 @@
 import burguer from "../../src/assets/img/logoBurguer.png";
 import menuBurguer from "../assets/img/Menu1.png";
-import React, { useState } from "react";
 
 const menus = [
   {
@@ -14,6 +13,7 @@ const menus = [
     image: burguer,
   },
 ];
+
 function MenuPreview() {
   return (
     <>
@@ -35,29 +35,3 @@ function MenuPreview() {
   );
 }
 export default MenuPreview;
-
-/*<div class="card">
-        <div class="blob"></div>
-        <img src={menu1.image.burguer} alt="logoBurguer" className="img" />
-        <h2>
-          {menu1.name}
-          <br />
-          <span>{menu1.price}</span>
-        </h2>
-        <p>
-          <b>Añadir</b>
-        </p>
-      </div>
-      <div class="card">
-        <div class="blob"></div>
-        <img src={menu2.image.menuBurguer} alt="logoBurguer" className="img" />
-        <h2>
-          {menu2.name}
-          <br />
-          <span>{menu2.price}</span>
-        </h2>
-        <p>
-          <b>Añadir</b>
-        </p>
-      </div>
-*/

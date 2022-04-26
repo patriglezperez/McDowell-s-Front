@@ -1,20 +1,44 @@
+//Variables
+// $background-color: #00000;
+$green_clear: #8ae68a9e;
+$green_dark: #256a25;
+
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
+
+html {
+  //at 1200px 0.833vw roughly equals 10px;
+  font-size: 0.833vw;
+}
+
 body {
   font-family: "Roboto", sans-serif;
   position: relative;
   background-color: #ffffff;
   color: #000;
+  font-size: 1.6rem;
+}
+
+header {
+  width: 100%;
+  height: 8rem;
+  background-color: $green_dark;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 p {
   color: #000;
   font-size: 16px;
 }
+
 h1,
 h3 {
   color: #000;
@@ -39,8 +63,3 @@ h3 {
 //       width: 60%;
 //     }
 //   }
-
-// Ya definiremos las variables
-// $background-color: #00000;
-$green_clear: #8ae68a9e;
-$green_dark: #256a25;

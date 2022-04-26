@@ -1,11 +1,14 @@
+import Header from "./components/header";
+import StaffSignIn from "./components/StaffSignIn";
 import MenuPreview from "./components/menuPreview";
 
 function App() {
   return (
-    <div className="App">
-      {/* <p>Funciona!!!</p> */}
+    <>
+      <Header />
+      {/* <StaffSignIn /> */}
       <MenuPreview />
-    </div>
+    </>
   );
 }
 

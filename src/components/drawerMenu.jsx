@@ -1,14 +1,9 @@
 import { useState } from "react";
 
-import { styled } from '@mui/material/styles';
+import { Box, Drawer, IconButton, List, ListItem, styled } from '@mui/material'
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
 import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import MenuIcon from '@mui/icons-material/Menu';
 
 export default function DrawerMenu() {
@@ -18,7 +13,7 @@ export default function DrawerMenu() {
     const [openDrawer, setOpenDrawer] = useState({
         [drawerPosition]: false
     });
-    const [expandAccordion, setExpandAccordion] = useState('panel1');
+    const [expandAccordion, setExpandAccordion] = useState(false);
 
 
     const Accordion = styled((props) => (
@@ -49,10 +44,6 @@ export default function DrawerMenu() {
         },
     }));
 
-    const toggleAccordion = (panel) => (event, newExpanded) => {
-        setExpandAccordion(newExpanded ? panel : false);
-    };
-
     const toggleDrawer = (anchor, open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
@@ -62,17 +53,17 @@ export default function DrawerMenu() {
 
     const list = (anchor) => (
         <Box role="presentation">
-         
+
             <List>
                 <ListItem button
                     onClick={toggleDrawer(anchor, false)}
                     onKeyDown={toggleDrawer(anchor, false)}
-                    sx={{marginLeft:'1.8rem', marginBottom:'1rem', marginTop:'1.5rem'}}
+                    sx={{ marginLeft: '1.8rem', marginBottom: '1rem', marginTop: '1.5rem' }}
                 >
                     <p className='drawer-item'>Inicio</p>
                 </ListItem>
 
-                <Accordion expanded={expandAccordion === 'panel1'} onChange={toggleAccordion('panel1')} sx={{marginBottom:'1rem'}}>
+                <Accordion expanded={expandAccordion} onChange={() => setExpandAccordion(!expandAccordion)} sx={{ marginBottom: '1rem' }}>
                     <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
                         <p className='drawer-item'>
                             Pedidos
@@ -80,7 +71,7 @@ export default function DrawerMenu() {
                     </AccordionSummary>
 
                     <ListItem button
-                        sx={{ marginLeft: '2.8rem', marginBottom:'0.5rem' }}
+                        sx={{ marginLeft: '2.8rem', marginBottom: '0.5rem' }}
                         onClick={toggleDrawer(anchor, false)}
                         onKeyDown={toggleDrawer(anchor, false)}
                     >
@@ -90,7 +81,7 @@ export default function DrawerMenu() {
                     </ListItem>
 
                     <ListItem button
-                        sx={{ marginLeft: '2.8rem', marginBottom:'0.5rem' }}
+                        sx={{ marginLeft: '2.8rem', marginBottom: '0.5rem' }}
                         onClick={toggleDrawer(anchor, false)}
                         onKeyDown={toggleDrawer(anchor, false)}
                     >
@@ -103,7 +94,7 @@ export default function DrawerMenu() {
                 <ListItem button
                     onClick={toggleDrawer(anchor, false)}
                     onKeyDown={toggleDrawer(anchor, false)}
-                    sx={{marginLeft:'1.8rem', marginBottom:'1rem'}}
+                    sx={{ marginLeft: '1.8rem', marginBottom: '1rem' }}
                 >
                     <p className='drawer-item'>Personal</p>
                 </ListItem>
@@ -111,7 +102,7 @@ export default function DrawerMenu() {
                 <ListItem button
                     onClick={toggleDrawer(anchor, false)}
                     onKeyDown={toggleDrawer(anchor, false)}
-                    sx={{marginLeft:'1.8rem', marginBottom:'1rem'}}
+                    sx={{ marginLeft: '1.8rem', marginBottom: '1rem' }}
                 >
                     <p className='drawer-item'>Cerrar sesión</p>
                 </ListItem>

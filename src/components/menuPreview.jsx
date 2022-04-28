@@ -14,6 +14,8 @@ const menus = [
   },
 ];
 
+/*the menus are collected from the back*/
+
 function MenuPreview() {
   return (
     <>

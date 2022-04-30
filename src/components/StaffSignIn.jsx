@@ -1,12 +1,17 @@
-import logoBurguer from "../assets/img/logoBurguer.png";
 import React, { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import md5 from "md5-hash";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
-import axios from "axios";
-import AmplifyService from "./services/amplifyService";
 // import { useNavigate } from "react-router-dom";
+
+import * as yup from "yup";
+import md5 from "md5-hash";
+import axios from "axios";
+import Snackbar from '@mui/material/Snackbar';
+import MuiAlert from '@mui/material/Alert';
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+
+import AmplifyService from "./services/amplifyService";
+import logoBurguer from "../assets/img/logoBurguer.png";
+
 
 /* Verification */
 const schemaUser = yup.object().shape({
@@ -21,10 +26,10 @@ const schemaUser = yup.object().shape({
 });
 
 function StaffSignIn() {
-
   // const navigate = useNavigate();
   // const [md5Password, setMd5Password] = useState();
   const [isLogin, setIsLogin] = useState(false);
+  const [alertState, setAlertState] = useState({ open: false, message: '', severity: '' });
 
   //yup validation
   const {
@@ -44,11 +49,11 @@ function StaffSignIn() {
       //navigate();
     } else if (response === AmplifyService.userNotFound) {
       //change alerts for a snackbar alert or something like that;
-      alert('Este usuario no existe');
+      setAlertState({ ...alertState, open: true, severity: 'error', message: 'Este usuario no existe.' });
     } else if (response === AmplifyService.failed) {
-      alert('Email o contraseña incorrectos');
+      setAlertState({ ...alertState, open: true, severity: 'error', message: 'Email o contraseña incorrectos.' });
     } else {
-      alert('Algo salió mal. Inténtalo de nuevo más tarde');
+      setAlertState({ ...alertState, open: true, severity: 'error', message: 'Algo salió mal. Inténtelo de nuevo más tarde.' });
     }
   }
 
@@ -69,6 +74,17 @@ function StaffSignIn() {
   const keyPressSubmit = (e) => {
     if (e.which === 13) handleSignIn();
   };
+
+  const closeSnackbarAlert = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setAlertState({ ...alertState, open: false });
+  };
+
+  const Alert = React.forwardRef(function Alert(props, ref) {
+    return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+  });
 
   return (
     <>
@@ -119,6 +135,11 @@ function StaffSignIn() {
             </button>
           </div>
         </form>
+        <Snackbar open={alertState.open} autoHideDuration={6000} onClose={closeSnackbarAlert}>
+          <Alert onClose={closeSnackbarAlert} severity={alertState.severity} sx={{ width: '100%', fontSize: '2rem' }}>
+            {alertState.message}
+          </Alert>
+        </Snackbar>
         <br />
       </div>
     </>

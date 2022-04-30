@@ -28,7 +28,7 @@ const schemaUser = yup.object().shape({
 function StaffSignIn() {
   // const navigate = useNavigate();
   // const [md5Password, setMd5Password] = useState();
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [alertState, setAlertState] = useState({ open: false, message: '', severity: '' });
 
   //yup validation
@@ -56,6 +56,11 @@ function StaffSignIn() {
       setAlertState({ ...alertState, open: true, severity: 'error', message: 'Algo salió mal. Inténtelo de nuevo más tarde.' });
     }
   }
+
+  useEffect(() => {
+    const token = localStorage.getItem('idToken');
+    (token != null) ? setIsLoggedIn(true) : setIsLoggedIn(false);
+  }, [])
 
   //Por desarrollar: para ver si esta logeado y que le lleve a x pantalla
   // useEffect(() => {

@@ -5,30 +5,29 @@ import md5 from "md5-hash";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
+import AmplifyService from "./services/amplifyService";
 // import { useNavigate } from "react-router-dom";
 
 /* Verification */
-/* const schemaUser = yup.object().shape({
-  user: yup
+const schemaUser = yup.object().shape({
+  email: yup
     .string()
-    .required("El nombre de usuario es necesario"),
+    .required("El nombre de usuario es necesario."),
   password: yup
     .string()
-    .required("La contraseña es obligatoria")
-    .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{5,}$/),
-  //Must Contain 5 characters, One Uppercase, One Lowercase, One Number and one special case Character
-}); */
+    .required("La contraseña es obligatoria.")
+    .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/, 'Debe contener 5 caracteres, una mayúscula, una minúscula y un número.'),
+  //Must Contain 5 characters, One Uppercase, One Lowercase and One Number
+});
 
 function StaffSignIn() {
-  // const navigate = useNavigate();
 
-  const [user, setUser] = useState("");
-  const [password, setPassword] = useState("");
-  const [md5Password, setMd5Password] = useState();
+  // const navigate = useNavigate();
+  // const [md5Password, setMd5Password] = useState();
   const [isLogin, setIsLogin] = useState(false);
 
   //yup validation
-  /* const {
+  const {
     register,
     handleSubmit,
     formState: { errors },
@@ -36,39 +35,21 @@ function StaffSignIn() {
     resolver: yupResolver(schemaUser),
   });
 
-  //Por desarrollar: Obtener los usuarioS
-  //Ojo el puerto
-  const onSubmit = async (data) => {
-    encryptedPassword(password);
-    console.log("Entrando en McDowell's");
-
-    await axios
-      .post("http://localhost:3000/api/staff/login", {
-        user: data.user,
-        password: data.md5Password,
-      })
-
-      .then((res) => {
-        try {
-          if (res.status === 200) {
-            setIsLogin(true);
-          }
-        } catch (error) {
-          console.log(errors, "Error al iniciar sesion");
-        }
-      });
-  };
- */
-
   /*We login*/
-  async function onSubmit(event) {
-    event.preventDefault();
-    setPassword("");
-    setUser("");
-    encryptedPassword(password);
-    console.log("Entrando en McDowell's");
-
-    return { user, md5Password };
+  async function handleSignIn(userInput) {
+    const response = await AmplifyService.signIn(userInput);
+    console.log(response);
+    if (response === AmplifyService.success) {
+      console.log("Entrando en McDowell's");
+      //navigate();
+    } else if (response === AmplifyService.userNotFound) {
+      //change alerts for a snackbar alert or something like that;
+      alert('Este usuario no existe');
+    } else if (response === AmplifyService.failed) {
+      alert('Email o contraseña incorrectos');
+    } else {
+      alert('Algo salió mal. Inténtalo de nuevo más tarde');
+    }
   }
 
   //Por desarrollar: para ver si esta logeado y que le lleve a x pantalla
@@ -78,15 +59,15 @@ function StaffSignIn() {
   // }, [isLogin, navigate]);
 
   /*We encrypt the password*/
-  async function encryptedPassword(password) {
-    const encrypted = md5(password);
-    setMd5Password(encrypted);
-    return encrypted;
-  }
+  // async function encryptedPassword(password) {
+  //   const encrypted = md5(password);
+  //   setMd5Password(encrypted);
+  //   return encrypted;
+  // }
 
   /*To be able to use the enter button on the keypad*/
-  const trySubmit = (e) => {
-    if (e.which === 13) onSubmit();
+  const keyPressSubmit = (e) => {
+    if (e.which === 13) handleSignIn();
   };
 
   return (
@@ -94,35 +75,33 @@ function StaffSignIn() {
       <div className="form">
         {/* Añadir en la linea del form:  action="staff/login"
         onSubmit={handleSubmit(onSubmit) */}
-        <form method="POST" onSubmit={onSubmit}>
+        <form method="POST" onSubmit={handleSubmit(handleSignIn)}>
           <h1 className="title">McDowell's</h1>
           <br />
           <img src={logoBurguer} alt="logoBurguer" className="logoBurger" />
           <br />
 
-          <div>
+          <div className="input-wrapper">
             <input
-              type="text"
-              name="user"
-              value={user}
-              onChange={(event) => setUser(event.target.value)}
+              type="email"
+              name="email"
               className="input user"
-              placeholder="User"
-              // {...register("user", {})}
+              placeholder="Email"
+              {...register("email", {})}
             />
+            <sub className="input-error">{errors.email && errors.email.message}</sub>
           </div>
           <br />
 
-          <div>
+          <div className="input-wrapper">
             <input
               type="password"
               name="password"
-              value={password}
-              onChange={(event) => setPassword(event.target.value)}
               className="input password"
               placeholder="Contraseña"
-              // {...register("password", {})}
+              {...register("password", {})}
             />
+            <sub className="input-error">{errors.password && errors.password.message}</sub>
           </div>
           <br />
           <br />
@@ -130,8 +109,7 @@ function StaffSignIn() {
             <button
               type="submit"
               className="cta"
-              onClick={onSubmit}
-              onKeyPress={(event) => trySubmit(event)}
+              onKeyPress={(event) => keyPressSubmit(event)}
             >
               <span>Entrar</span>
               <svg viewBox="0 0 13 10" height="10px" width="15px">

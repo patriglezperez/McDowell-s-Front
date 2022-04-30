@@ -26,7 +26,8 @@ function setDefaultLocalStorage() {
         localStorage.setItem(key, value);
     });
 }
-export default class AuthService {
+
+export default class AmplifyService {
     static failed = 0;
     static success = 1;
     static newPasswordRequired = 2;
@@ -35,7 +36,7 @@ export default class AuthService {
     static userNotConfirmed = 5;
     static userNotFound = 6;
 
-    static handleSignUp = async (userInput) => {
+    static signUp = async (userInput) => {
         try {
             const { user } = await Auth.signUp({
                 username: userInput.email,
@@ -54,7 +55,7 @@ export default class AuthService {
         }
     }
 
-    static handleSignIn = async (userInput) => {
+    static signIn = async (userInput) => {
         try {
             user = await Auth.signIn(userInput.email, userInput.password);
             if (user.challengeName === exceptions.setNewPassword) {
@@ -67,6 +68,7 @@ export default class AuthService {
                 return this.success;
             }
         } catch (error) {
+            //remove this depending on final sign up workflow
             if (error.name === exceptions.userNotConfirmed) {
                 return this.userNotConfirmed;
             } else if (error.name === exceptions.userNotFound) {
@@ -77,7 +79,9 @@ export default class AuthService {
         }
     }
 
-    static handleSetPassword = async (userInput) => {
+    //This is used when a user is created directly from the cognito console
+    //we'll have to decide the workflow we want, but just in case I'll leave it here for now
+    static completePassword = async (userInput) => {
         try {
             await Auth.completeNewPassword(
                 user,
@@ -95,8 +99,8 @@ export default class AuthService {
             return this.failed;
         }
     }
-    
-    static handleSignOut = async () => {
+
+    static signOut = async () => {
         try {
             await Auth.signOut();
             const keys = [tokenKeyNames.idToken, tokenKeyNames.refreshToken, tokenKeyNames.userId];

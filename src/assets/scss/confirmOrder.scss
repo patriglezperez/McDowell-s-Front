@@ -1,0 +1,43 @@
+.confirm-order {
+    height: 30rem;
+    background-color: $green_clear;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .section-title {
+        font-size: 2.7rem;
+        margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: flex-start;
+    }
+}
+
+.total {
+    font-size: 2rem;
+    color: #515050;
+}
+
+.total-price {
+    font-size: 2rem;
+}
+
+.price-wrapper {
+    width: 35rem;
+    margin-bottom: 2.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.action-button {
+    width: 30rem;
+    height: 6rem;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    background-color: $green_dark;
+    border-radius: 10px;
+    border-color: $green_dark;
+}

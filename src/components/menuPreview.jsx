@@ -20,7 +20,7 @@ const menus = [
 
 function MenuPreview() {
   return (
-    <>
+    <div className="space-menus">
       {menus.map((menu) => (
         <div className="menu" key={menu.id}>
           <div
@@ -38,7 +38,7 @@ function MenuPreview() {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 }
 export default MenuPreview;

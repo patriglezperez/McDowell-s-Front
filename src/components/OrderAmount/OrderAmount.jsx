@@ -74,11 +74,11 @@ function OrderAmount() {
               </button>
             </div>
 
-            <h2 className="nameMenu">
+            <p className="nameMenu">
               Menú <br />
               {menu.name}
-            </h2>
-            <h3 className="priceMenu">{menu.price}</h3>
+            </p>
+            <p className="priceMenu">{menu.price}</p>
           </div>
         </div>
       ))}

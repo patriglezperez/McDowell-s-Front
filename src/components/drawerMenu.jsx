@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { Box, Drawer, IconButton, List, ListItem, styled } from '@mui/material'
 import ArrowForwardIosSharpIcon from '@mui/icons-material/ArrowForwardIosSharp';
@@ -9,13 +10,13 @@ import MenuIcon from '@mui/icons-material/Menu';
 export default function DrawerMenu() {
     // sets the position the menu will come from;
     const drawerPosition = 'left';
-
-    const greenDark = '#256A25';
-
     const [openDrawer, setOpenDrawer] = useState({
         [drawerPosition]: false
     });
     const [expandAccordion, setExpandAccordion] = useState(false);
+    const navigate = useNavigate();
+    const greenDark = '#256A25';
+
 
     //Accordion and AccordionSummary defines custom styles to said MUI components;
     const Accordion = styled((props) => (
@@ -58,8 +59,8 @@ export default function DrawerMenu() {
         <Box role="presentation">
             <List>
                 <ListItem button
-                    onClick={toggleDrawer(anchor, false)}
-                    onKeyDown={toggleDrawer(anchor, false)}
+                    onClick={() => { toggleDrawer(anchor, false); navigate('/admin/dashboard') }}
+                    onKeyDown={() => { toggleDrawer(anchor, false); navigate('/admin/dashboard') }}
                     sx={{ marginLeft: '1.8rem', marginBottom: '1rem', marginTop: '1.5rem' }}
                 >
                     <p className='drawer-item'>Inicio</p>
@@ -74,8 +75,8 @@ export default function DrawerMenu() {
 
                     <ListItem button
                         sx={{ marginLeft: '2.8rem', marginBottom: '0.5rem' }}
-                        onClick={toggleDrawer(anchor, false)}
-                        onKeyDown={toggleDrawer(anchor, false)}
+                        onClick={() => { toggleDrawer(anchor, false); navigate('/admin/orders/ongoing') }}
+                        onKeyDown={() => { toggleDrawer(anchor, false); navigate('/admin/orders/ongoing') }}
                     >
                         <p className='drawer-item'>
                             Pedidos en curso
@@ -84,8 +85,8 @@ export default function DrawerMenu() {
 
                     <ListItem button
                         sx={{ marginLeft: '2.8rem', marginBottom: '0.5rem' }}
-                        onClick={toggleDrawer(anchor, false)}
-                        onKeyDown={toggleDrawer(anchor, false)}
+                        onClick={() => { toggleDrawer(anchor, false); navigate('/admin/orders/history') }}
+                        onKeyDown={() => { toggleDrawer(anchor, false); navigate('/admin/orders/history') }}
                     >
                         <p className='drawer-item' >
                             Historial de pedidos
@@ -94,8 +95,8 @@ export default function DrawerMenu() {
                 </Accordion>
 
                 <ListItem button
-                    onClick={toggleDrawer(anchor, false)}
-                    onKeyDown={toggleDrawer(anchor, false)}
+                    onClick={() => { toggleDrawer(anchor, false); navigate('/admin/employees') }}
+                    onKeyDown={() => { toggleDrawer(anchor, false); navigate('/admin/employees') }}
                     sx={{ marginLeft: '1.8rem', marginBottom: '1rem' }}
                 >
                     <p className='drawer-item'>Personal</p>

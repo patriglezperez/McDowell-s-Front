@@ -2,6 +2,10 @@ import burguer from "../../assets/img/logoBurguer.png";
 import menuBurguer from "../../assets/img/Menu1.png";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import axios, { Axios } from "axios";
+
+// const baseUrl = "http://localhost:3001/api/orders/new";
+// const data = await axios.post(baseUrl,{menus, id, user})
 
 const menus = [
   {

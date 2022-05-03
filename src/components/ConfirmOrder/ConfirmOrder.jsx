@@ -1,43 +1,69 @@
 import burguer from "../../assets/img/logoBurguer.png";
 import menuBurguer from "../../assets/img/Menu1.png";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+
+const menus = [
+  {
+    name: "McDowell's",
+    price: "6,95 €",
+    image: menuBurguer,
+  },
+  {
+    name: "McDowell's Jr",
+    price: "5,99 €",
+    image: burguer,
+  },
+];
 
 /*the menus are collected from the back*/
 
 function ConfirmOrder() {
-  const [menus, setMenus] = useState([
-    {
-      id: 1,
-      name: "McDowell's",
-      price: "6,95 €",
-      image: menuBurguer,
-    },
-    {
-      id: 2,
-      name: "McDowell's Jr",
-      price: "5,99 €",
-      image: burguer,
-    },
-  ]);
+  // const navigate = useNavigate();
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+    console.log("confimado");
+  }
+
+  //Alert
+  function showAlert() {
+    alert("¿Estás seguro de que deseas cancelar tu pedido?");
+  }
 
   return (
     <>
       <div className="ticketBackground">
-        <div className="position">
+        <form className="position">
           <h3>Resumen de tu pedido</h3>
           <div className="price">
             <p>TOTAL</p>
             <p>
-              18
+              {totalPrice}
               <span> €</span>
             </p>
           </div>
           <div className="btn-container">
-            <button className="order confirm">Confirmar pedido</button>
+            <button
+              type="submit"
+              className="order confirm"
+              onClick={handleSubmit}
+            >
+              Confirmar pedido
+            </button>
             <br />
-            <button className="order cancel">Cancelar pedido</button>
+            <button
+              className="order cancel"
+              onClick={() => {
+                showAlert();
+                // navigate("/");
+              }}
+            >
+              Cancelar pedido
+            </button>
           </div>
-        </div>
+        </form>
       </div>
     </>
   );

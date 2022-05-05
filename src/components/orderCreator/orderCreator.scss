@@ -1,0 +1,21 @@
+.orderCreator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+  height: 90vh;
+}
+
+.menu-away {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  margin: 40px;
+}
+
+.welcome-title {
+  color: $green_dark;
+}

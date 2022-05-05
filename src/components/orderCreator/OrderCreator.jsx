@@ -4,8 +4,9 @@ import MenuPreview from "../menuPreview/menuPreview";
 function OrderCreator() {
   return (
     <div className="orderCreator">
-      <h1>Bienvenidos a McDowell's</h1>
-      <h2>¿Dónde vas a comer hoy?</h2>
+      <h2 className="welcome-title">Bienvenidos a McDowell's</h2>
+      <h1>¿Dónde vas a comer hoy?</h1>
+
       <MenuPreview />
     </div>
   );

@@ -18,12 +18,11 @@ function Welcome() {
 
   return (
     <>
-      <Header />
       <div className="start">
         <h1 className="title">McDowell's</h1>
-        <br />
+
         <img src={logoBurguer} alt="logoBurguer" className="logoBurger" />
-        <br />
+
         <div>
           <button type="submit" className="cta" onClick={start}>
             <span>Comenzar pedido</span>

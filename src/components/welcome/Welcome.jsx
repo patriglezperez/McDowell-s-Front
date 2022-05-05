@@ -4,10 +4,14 @@ import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/header";
 import { useContext } from "react";
-// import StaticContext from "../../context/staticContext";
+
+import StaticContext from "../../context/staticContext";
 
 function Welcome() {
   //   const navigate = useNavigate();
+  const { uuid_user, setUuid_user } = useContext(StaticContext);
+  console.log(uuid_user);
+
 
   // const { uuid_user, setUuid_user } = useContext(StaticContext);
   // const { order, setOrder } = useContext(StaticContext);

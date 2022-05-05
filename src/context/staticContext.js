@@ -5,7 +5,7 @@ const StaticContext = React.createContext({});
 export function StaticContextProvider({ children }) {
   const [order, setOrder] = useState([
     {
-      uuid_user: null,
+      uuid_user: [],
       menus: [],
     },
   ]);

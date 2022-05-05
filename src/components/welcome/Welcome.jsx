@@ -9,12 +9,12 @@ import StaticContext from "../../context/staticContext";
 function Welcome() {
   const navigate = useNavigate();
   const { order, setOrder } = useContext(StaticContext);
-
+  console.log(order);
   //Create a uuuid_user for the new order
   async function start() {
-    const id = uuidv4();
-    setOrder((order[0].uuid_user = id));
-    navigate(`order/${id}`);
+    const id = await uuidv4();
+    await order[0].uuid_user.push(id);
+    await navigate(`order/${id}`);
   }
 
   return (

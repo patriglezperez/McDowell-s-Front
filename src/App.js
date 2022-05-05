@@ -1,13 +1,20 @@
-import Header from "./components/header";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import StaffSignIn from "./components/StaffSignIn/StaffSignIn";
 import MenuPreview from "./components/menuPreview/menuPreview";
+import Welcome from "./components/welcome/Welcome";
+import Header from "./components/header";
 
 function App() {
   return (
     <>
-      <Header />
-      {/* <StaffSignIn /> */}
-      <MenuPreview />
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/customers" element={<Welcome />} />
+          {/* <StaffSignIn /> */}
+          {/* <MenuPreview /> */}
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }

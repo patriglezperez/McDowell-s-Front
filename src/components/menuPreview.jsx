@@ -6,13 +6,11 @@ const menus = [
     id: 1,
     name: "McDowell's",
     price: "6,95 €",
-    image: menuBurguer,
   },
   {
     id: 2,
     name: "McDowell's Jr",
     price: "5,99 €",
-    image: burguer,
   },
 ];
 
@@ -28,7 +26,11 @@ function MenuPreview() {
             onClick={() => console.log(`add to cart${menu.name}`)}
           >
             <div className="blob"></div>
-            <img src={menu.image} alt="logoBurguer" className="img" />
+            <img
+              src={menu.name === "McDowell's" ? menuBurguer : burguer}
+              alt="logoBurguer"
+              className="img"
+            />
             <h2 className="description">
               Menu <br />
               {menu.name}

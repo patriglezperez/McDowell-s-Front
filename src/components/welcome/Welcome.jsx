@@ -8,18 +8,13 @@ import { useContext } from "react";
 import StaticContext from "../../context/staticContext";
 
 function Welcome() {
-  //   const navigate = useNavigate();
-  const { uuid_user, setUuid_user } = useContext(StaticContext);
-  console.log(uuid_user);
+  //   const navigate = useNavigate()
 
-
-  // const { uuid_user, setUuid_user } = useContext(StaticContext);
-  // const { order, setOrder } = useContext(StaticContext);
-
+  const { order, setOrder } = useContext(StaticContext);
+  console.log(order, "order");
   //Create a uuuid_user for the new order
   async function start() {
-    // setUuid_user(uuidv4());
-    // setOrder((order.uuidUser = uuidv4()));
+    setOrder((order.uuidUser = uuidv4()));
     console.log("Comenzando pedido");
     // navigate("/");
   }

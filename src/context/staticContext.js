@@ -3,12 +3,14 @@ import React, { useState } from "react";
 const StaticContext = React.createContext({});
 
 export function StaticContextProvider({ children }) {
-  const [uuid_user, setUuid_user] = useState("");
-  const [menus, setMenus] = useState([]);
+  const [menus, setMenus] = useState([
+    {
+      uuid_user: "",
+      menus: [],
+    },
+  ]);
   return (
-    <StaticContext.Provider
-      value={{ uuid_user, setUuid_user, menus, setMenus }}
-    >
+    <StaticContext.Provider value={{ menus, setMenus }}>
       {children}
     </StaticContext.Provider>
   );

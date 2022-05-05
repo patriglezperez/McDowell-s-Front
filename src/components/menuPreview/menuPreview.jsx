@@ -20,7 +20,7 @@ function MenuPreview() {
   return (
     <>
       {menus.map((menu) => (
-        <div className="menu">
+        <div className="menu" key={menu.name}>
           <div className="card">
             <div className="blob"></div>
             <img src={menu.image} alt="logoBurguer" className="img" />

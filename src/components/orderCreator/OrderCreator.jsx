@@ -1,8 +1,8 @@
 import MenuPreview from "../menuPreview/menuPreview";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import takeHere from "../../assets/img/restaurant.png";
 import takeAway from "../../assets/img/takeAway.png";
-
+import axios from "axios";
 /*the menus are collected from the back*/
 
 function OrderCreator() {
@@ -11,6 +11,7 @@ function OrderCreator() {
   const [uuid_user, setUuid_user] = useState(""); //eliminar useState cuando lo deje de usar
   const [renderId, setRenderId] = useState(0);
   const [order, setOrder] = useState([]);
+  const [data, setData] = useState("");
 
   const typeOfRestaurant = [
     {
@@ -44,20 +45,19 @@ function OrderCreator() {
     setOrder({ tomar: 0 }); //definir si tomar:1 es para tomar aqui y tomar:2 es para llevar
   }
 
-  // useEffect(() => {
-  //   console.log("añadimos al pedido");
+  useEffect(() => {
+    function getMenusData() {
+      try {
+        axios
+          .get("http://localhost:3001/api/menus/all")
+          .then((res) => setData(res.data));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getMenusData();
+  }, []);
 
-  //   function handleClick() {
-  //     try {
-  //       setTake(true);
-  //       axios
-  //         .get("http://localhost:3001/api/menus/all")
-  //         .then((res) => setData(res.data));
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  // }, []);
   return (
     <div className="orderCreator">
       <h2 className="welcome-title">

@@ -9,6 +9,8 @@ export function StaticContextProvider({ children }) {
       menus: [],
     },
   ]);
+  const [dataMenus, setDataMenus] = useState([]);
+
   return (
     <StaticContext.Provider value={{ order, setOrder }}>
       {children}

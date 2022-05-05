@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/header";
 import { useContext } from "react";
+
 import StaticContext from "../../context/staticContext";
 
 function Welcome() {
@@ -11,9 +12,14 @@ function Welcome() {
   const { uuid_user, setUuid_user } = useContext(StaticContext);
   console.log(uuid_user);
 
-  /*Create a uuuid_user for the new order*/
+
+  // const { uuid_user, setUuid_user } = useContext(StaticContext);
+  // const { order, setOrder } = useContext(StaticContext);
+
+  //Create a uuuid_user for the new order
   async function start() {
-    setUuid_user(uuidv4());
+    // setUuid_user(uuidv4());
+    // setOrder((order.uuidUser = uuidv4()));
     console.log("Comenzando pedido");
     // navigate("/");
   }

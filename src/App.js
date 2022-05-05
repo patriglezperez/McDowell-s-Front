@@ -3,8 +3,8 @@ import StaffSignIn from "./components/StaffSignIn/StaffSignIn";
 import MenuPreview from "./components/menuPreview/menuPreview";
 import Header from "./components/header";
 import Welcome from "./components/welcome/Welcome";
-import { useContext } from "react";
 import { StaticContextProvider } from "./context/staticContext";
+import OrderCreator from "./components/orderCreator/OrderCreator";
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route path="/customers" element={<Welcome />} />
+            <Route path="/customers/order/:id" element={<OrderCreator />} />
             {/* <StaffSignIn /> */}
             {/* <MenuPreview /> */}
           </Routes>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 // import { useNavigate } from "react-router-dom";
 
 import * as yup from "yup";
-import md5 from "md5-hash";
 import axios from "axios";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
@@ -44,13 +43,13 @@ function StaffSignIn() {
   async function handleSignIn(userInput) {
     const response = await AmplifyService.signIn(userInput);
     console.log(response);
-    if (response === AmplifyService.success) {
+    if (response === AmplifyService.responses.success) {
       console.log("Entrando en McDowell's");
       //navigate();
-    } else if (response === AmplifyService.userNotFound) {
+    } else if (response === AmplifyService.responses.userNotFound) {
       //change alerts for a snackbar alert or something like that;
       setAlertState({ ...alertState, open: true, severity: 'error', message: 'Este usuario no existe.' });
-    } else if (response === AmplifyService.failed) {
+    } else if (response === AmplifyService.responses.failed) {
       setAlertState({ ...alertState, open: true, severity: 'error', message: 'Email o contraseña incorrectos.' });
     } else {
       setAlertState({ ...alertState, open: true, severity: 'error', message: 'Algo salió mal. Inténtelo de nuevo más tarde.' });
@@ -63,17 +62,11 @@ function StaffSignIn() {
   }, [])
 
   //Por desarrollar: para ver si esta logeado y que le lleve a x pantalla
+  // es necesario ver el rol del empleado
   // useEffect(() => {
   //   console.log(isLogin, "Si isLogin okkk...");
   //   if (isLogin) navigate("/");
   // }, [isLogin, navigate]);
-
-  /*We encrypt the password*/
-  // async function encryptedPassword(password) {
-  //   const encrypted = md5(password);
-  //   setMd5Password(encrypted);
-  //   return encrypted;
-  // }
 
   /*To be able to use the enter button on the keypad*/
   const keyPressSubmit = (e) => {
@@ -94,9 +87,7 @@ function StaffSignIn() {
   return (
     <>
       <div className="form">
-        {/* Añadir en la linea del form:  action="staff/login"
-        onSubmit={handleSubmit(onSubmit) */}
-        <form method="POST" onSubmit={handleSubmit(handleSignIn)}>
+        <form method="POST" action="staff/login" onSubmit={handleSubmit(handleSignIn)}>
           <h1 className="title">McDowell's</h1>
           <br />
           <img src={logoBurguer} alt="logoBurguer" className="logoBurger" />

@@ -3,15 +3,18 @@ import { useState, useContext, useEffect } from "react";
 import takeHere from "../../assets/img/restaurant.png";
 import takeAway from "../../assets/img/takeAway.png";
 import axios from "axios";
+import StaticContext from "../../context/staticContext";
 /*the menus are collected from the back*/
 
 function OrderCreator() {
   const [take, setTake] = useState(false);
-  // const {order, setOrder} = useContext(staticContext)
-  const [uuid_user, setUuid_user] = useState(""); //eliminar useState cuando lo deje de usar
-  const [renderId, setRenderId] = useState(0);
-  const [order, setOrder] = useState([]);
+  const { order, setOrder } = useContext(StaticContext);
+  const { dataMenus, setDataMenus } = useContext(StaticContext);
+
   const [data, setData] = useState("");
+  const [renderId, setRenderId] = useState(0);
+  // const [order, setOrder] = useState([]);
+  console.log(order, "order");
 
   const typeOfRestaurant = [
     {
@@ -42,21 +45,21 @@ function OrderCreator() {
   function handleClick() {
     console.log("añadimos al pedido si tomar o llevar"); //Añadimos eso al contexto
     setTake(true);
-    setOrder({ tomar: 0 }); //definir si tomar:1 es para tomar aqui y tomar:2 es para llevar
+    order[0].menus.push({ tomar: 0 }); //definir si tomar:1 es para tomar aqui y tomar:2 es para llevar
   }
 
-  useEffect(() => {
-    function getMenusData() {
-      try {
-        axios
-          .get("http://localhost:3001/api/menus/all")
-          .then((res) => setData(res.data));
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getMenusData();
-  }, []);
+  // useEffect(() => {
+  //   function getMenusData() {
+  //     try {
+  //       axios
+  //         .get("http://localhost:3001/api/menus/all")
+  //         .then((res) => setData(res.data));
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   getMenusData();
+  // }, []);
 
   return (
     <div className="orderCreator">

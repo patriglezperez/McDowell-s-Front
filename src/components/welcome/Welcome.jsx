@@ -10,12 +10,12 @@ function Welcome() {
   //   const navigate = useNavigate();
 
   const { uuid_user, setUuid_user } = useContext(StaticContext);
-  // const { menus, setMenus } = useContext(StaticContext);
+  // const { order, setOrder } = useContext(StaticContext);
 
   //Create a uuuid_user for the new order
   async function start() {
     setUuid_user(uuidv4());
-    // setMenus((menus.uuidUser = uuidv4()));
+    // setOrder((order.uuidUser = uuidv4()));
     console.log("Comenzando pedido");
     // navigate("/");
   }

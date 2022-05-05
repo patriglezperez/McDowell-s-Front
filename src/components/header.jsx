@@ -1,6 +1,8 @@
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
 
+import DrawerMenu from './drawerMenu';
+
 export default function Header() {
   const locationUrl = window.location.href;
   const orderCreatorView = '/customers/orders';
@@ -14,7 +16,7 @@ export default function Header() {
     )
   } else if (locationUrl.includes(adminView)) {
     iconRender = (
-      <MenuIcon className='drawer-button' sx={{ color: '#ffffff', fontSize: '3rem', cursor: 'pointer' }} />
+      <DrawerMenu />
     )
   } else {
     iconRender = <></>;

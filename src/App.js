@@ -1,6 +1,6 @@
 import Header from "./components/header";
-import StaffSignIn from "./components/StaffSignIn";
-import MenuPreview from "./components/menuPreview";
+import StaffSignIn from "./components/StaffSignIn/StaffSignIn";
+import MenuPreview from "./components/menuPreview/menuPreview";
 
 import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from './aws-exports';

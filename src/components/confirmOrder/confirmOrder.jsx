@@ -23,10 +23,10 @@ export default function ConfirmOrder() {
         navigate('/customers');
     }
 
-    function confirmOrder() {
+    async function confirmOrder() {
         const finishedOrder = { order: order.menus };
         try {
-            const confirmationResponse = axios.post(`${process.env.REACT_APP_API_URL}/orders/new`, { order: finishedOrder });
+            const confirmationResponse = await axios.post(`${process.env.REACT_APP_API_URL}/orders/new`, { order: finishedOrder });
             navigate(`customers/order/${order.id[0]}/completed`, { orderNumber: confirmationResponse.data.orderNumber });
         } catch (error) {
             console.log(error);

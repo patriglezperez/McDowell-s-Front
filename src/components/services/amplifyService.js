@@ -1,13 +1,13 @@
-import { Auth } from 'aws-amplify';
+import { Auth } from "aws-amplify";
 
 let user = {};
 // key names of the entries we'll keep in the localStorage;
-const tokenKeyNames = { idToken: 'idToken', refreshToken: 'refreshToken', userId: 'userId' };
+const tokenKeyNames = { idToken: "idToken", refreshToken: "refreshToken", userId: "userId" };
 // all posible exceptions for our current amplify functions;
-const exceptions = { refreshSession: 'NotAuthorizedException', userExists: 'UsernameExistsException', userNotConfirmed: 'UserNotConfirmedException', userNotFound: 'UserNotFoundException' };
+const exceptions = { refreshSession: "NotAuthorizedException", userExists: "UsernameExistsException", userNotConfirmed: "UserNotConfirmedException", userNotFound: "UserNotFoundException" };
 
 let defaultLocalStorage;
-if (typeof window !== 'undefined') {
+if (typeof window !== "undefined") {
     defaultLocalStorage = { ...localStorage };
 }
 

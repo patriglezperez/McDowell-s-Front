@@ -70,7 +70,7 @@ function StaffSignIn() {
       const userId = getUserId();
       try {
         const response = await axios.get(`${process.env.REACT_APP_API_URL}/staff/${userId}`);
-        const adminsRole = 'admin';
+        const adminsRole = "admin";
         const userRole = response.data.role;
         if (userRole === adminsRole) {
           navigate(`/admin/dashboard`);

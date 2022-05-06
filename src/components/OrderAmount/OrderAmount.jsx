@@ -15,7 +15,7 @@ const menus = [
     id: 8,
     name: "McDowell's Jr",
     price: "5,99 €",
-    quantityMenuJr: 2,
+    quantityMenuJr: 0,
   },
 ];
 

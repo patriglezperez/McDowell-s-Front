@@ -20,7 +20,7 @@ export default function ConfirmOrder() {
 
     function cancelOrder() {
         setOrder({ id: [], menus: [] });
-        navigate('/customers');
+        navigate("/customers");
     }
 
     async function confirmOrder() {
@@ -34,14 +34,14 @@ export default function ConfirmOrder() {
     }
 
     return (
-        <section className='confirm-order'>
-            <p className='section-title'>Resumen de tu pedido</p>
-            <span className='price-wrapper'>
-                <p className='total'>TOTAL</p>
-                <b className='total-price'>€{orderTotal}</b>
+        <section className="confirm-order">
+            <p className="section-title">Resumen de tu pedido</p>
+            <span className="price-wrapper">
+                <p className="total">TOTAL</p>
+                <b className="total-price">€{orderTotal}</b>
             </span>
-            <button className='action-button' onClick={confirmOrder}>CONFIRMAR PEDIDO</button>
-            <button className='action-button' onClick={cancelOrder}>CANCELAR PEDIDO</button>
+            <button className="action-button" onClick={confirmOrder}>CONFIRMAR PEDIDO</button>
+            <button className="action-button" onClick={cancelOrder}>CANCELAR PEDIDO</button>
         </section>
     )
 }

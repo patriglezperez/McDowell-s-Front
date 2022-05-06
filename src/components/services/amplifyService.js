@@ -1,7 +1,9 @@
 import { Auth } from 'aws-amplify';
 
 let user = {};
+// key names of the entries we'll keep in the localStorage;
 const tokenKeyNames = { idToken: 'idToken', refreshToken: 'refreshToken', userId: 'userId' };
+// all posible exceptions for our current amplify functions;
 const exceptions = { refreshSession: 'NotAuthorizedException', userExists: 'UsernameExistsException', userNotConfirmed: 'UserNotConfirmedException', userNotFound: 'UserNotFoundException' };
 
 let defaultLocalStorage;
@@ -9,18 +11,22 @@ if (typeof window !== 'undefined') {
     defaultLocalStorage = { ...localStorage };
 }
 
+// used to save idToken, refreshToken and userId in the localStorage;
 function setInLocalStorage(keys, values) {
     for (let i = 0; i < keys.length; i++) {
         localStorage.setItem(keys[i], values[i]);
     }
 }
 
+// used to remove idToken, refreshToken and userId from the localStorage;
 function removeFromLocalStorage(keys) {
     for (let i = 0; i < keys.length; i++) {
         localStorage.removeItem(keys[i]);
     }
 }
 
+// wipes localStorage to avoid saving not needed data from amplify;
+// but keeps any non-amplify-related entries;
 function setDefaultLocalStorage() {
     localStorage.clear();
     Object.entries(defaultLocalStorage).forEach(([key, value]) => {

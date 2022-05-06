@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import * as yup from "yup";
-import Snackbar from '@mui/material/Snackbar';
-import MuiAlert from '@mui/material/Alert';
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
@@ -19,14 +19,14 @@ const schemaUser = yup.object().shape({
   password: yup
     .string()
     .required("La contraseña es obligatoria.")
-    .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/, 'Debe contener 5 caracteres, una mayúscula, una minúscula y un número.'),
+    .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/, "Debe contener 5 caracteres, una mayúscula, una minúscula y un número."),
   //Must Contain 5 characters, One Uppercase, One Lowercase and One Number
 });
 
 function StaffSignIn() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [alertState, setAlertState] = useState({ open: false, message: '' });
+  const [alertState, setAlertState] = useState({ open: false, message: "" });
 
   //yup validation
   const {
@@ -45,18 +45,18 @@ function StaffSignIn() {
       console.log("Entrando en McDowell's");
       setIsLoggedIn(true);
     } else if (response === AmplifyService.responses.userNotFound) {
-      setAlertState({ ...alertState, open: true, message: 'Este usuario no existe.' });
+      setAlertState({ ...alertState, open: true, message: "Este usuario no existe." });
     } else if (response === AmplifyService.responses.failed) {
-      setAlertState({ ...alertState, open: true, message: 'Email o contraseña incorrectos.' });
+      setAlertState({ ...alertState, open: true, message: "Email o contraseña incorrectos." });
     } else if (response === AmplifyService.responses.userNotConfirmed) {
-      setAlertState({ ...alertState, open: true, message: 'Debes confirmar tu cuenta. Por favor, revisa tu correo.' });
+      setAlertState({ ...alertState, open: true, message: "Debes confirmar tu cuenta. Por favor, revisa tu correo." });
     } else {
-      setAlertState({ ...alertState, open: true, message: 'Algo salió mal. Inténtelo de nuevo más tarde.' });
+      setAlertState({ ...alertState, open: true, message: "Algo salió mal. Inténtelo de nuevo más tarde." });
     }
   }
 
   const getUserId = () => {
-    return localStorage.getItem('userId');
+    return localStorage.getItem("userId");
   }
 
   useEffect(() => {
@@ -70,7 +70,7 @@ function StaffSignIn() {
   }, [isLoggedIn, navigate]);
 
   const closeSnackbarAlert = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     setAlertState({ ...alertState, open: false });
@@ -127,7 +127,7 @@ function StaffSignIn() {
           </div>
         </form>
         <Snackbar open={alertState.open} autoHideDuration={6000} onClose={closeSnackbarAlert}>
-          <Alert onClose={closeSnackbarAlert} severity={'error'} sx={{ width: '100%', fontSize: '2rem' }}>
+          <Alert onClose={closeSnackbarAlert} severity={"error"} sx={{ width: "100%", fontSize: "2rem" }}>
             {alertState.message}
           </Alert>
         </Snackbar>
@@ -136,4 +136,5 @@ function StaffSignIn() {
     </>
   );
 }
+
 export default StaffSignIn;

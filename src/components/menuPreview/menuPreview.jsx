@@ -3,11 +3,13 @@ import menuBurguer from "../../assets/img/Menu1.png";
 
 const menus = [
   {
+    id: 5,
     name: "McDowell's",
     price: "6,95 €",
     image: menuBurguer,
   },
   {
+    id: 8,
     name: "McDowell's Jr",
     price: "5,99 €",
     image: burguer,
@@ -20,7 +22,7 @@ function MenuPreview() {
   return (
     <>
       {menus.map((menu) => (
-        <div className="menu">
+        <div className="menu" key={menu.id}>
           <div className="card">
             <div className="blob"></div>
             <img src={menu.image} alt="logoBurguer" className="img" />

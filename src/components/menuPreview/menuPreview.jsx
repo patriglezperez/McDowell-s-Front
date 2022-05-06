@@ -22,11 +22,7 @@ function MenuPreview() {
   return (
     <>
       {menus.map((menu) => (
-<<<<<<< HEAD
-        <div className="menu" key={menu.name}>
-=======
         <div className="menu" key={menu.id}>
->>>>>>> 63d3f2f0cf31d4306331785e67bae036e402c986
           <div className="card">
             <div className="blob"></div>
             <img src={menu.image} alt="logoBurguer" className="img" />

@@ -1,14 +1,25 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import StaffSignIn from "./components/StaffSignIn/StaffSignIn";
+import MenuPreview from "./components/menuPreview/menuPreview";
 import Header from "./components/header";
-import StaffSignIn from "./components/StaffSignIn";
-import MenuPreview from "./components/menuPreview";
+import Welcome from "./components/welcome/Welcome";
+import { useContext } from "react";
+import { StaticContextProvider } from "./context/staticContext";
 
 function App() {
   return (
-    <>
-      <Header />
-      {/* <StaffSignIn /> */}
-      <MenuPreview />
-    </>
+    <div>
+      <StaticContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/customers" element={<Welcome />} />
+            {/* <StaffSignIn /> */}
+            {/* <MenuPreview /> */}
+          </Routes>
+          <Header />
+        </BrowserRouter>
+      </StaticContextProvider>
+    </div>
   );
 }
 

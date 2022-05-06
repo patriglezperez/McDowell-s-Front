@@ -1,4 +1,4 @@
-import logoBurguer from "../assets/img/logoBurguer.png";
+import logoBurguer from "../../assets/img/logoBurguer.png";
 import React, { useState, useEffect } from "react";
 import md5 from "md5-hash";
 

@@ -1,5 +1,5 @@
-import burguer from "../../src/assets/img/logoBurguer.png";
-import menuBurguer from "../assets/img/Menu1.png";
+import burguer from "../../assets/img/logoBurguer.png";
+import menuBurguer from "../../assets/img/Menu1.png";
 
 const menus = [
   {

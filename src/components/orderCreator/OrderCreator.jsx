@@ -14,6 +14,7 @@ function OrderCreator() {
   const [data, setData] = useState("");
   const [renderId, setRenderId] = useState(0);
   // const [order, setOrder] = useState([]);
+  console.log(take, "take ahora");
   console.log(order, "order");
 
   const typeOfRestaurant = [
@@ -45,7 +46,7 @@ function OrderCreator() {
   function handleClick(id) {
     const typerestaurant = id;
     setTake(true);
-    order[0].menus.push({ tomar: typerestaurant });
+    order[0].menus.push({ tomar_llevar: typerestaurant });
   }
 
   // useEffect(() => {

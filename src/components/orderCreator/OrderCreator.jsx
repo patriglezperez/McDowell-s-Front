@@ -46,6 +46,7 @@ function OrderCreator() {
 
   function choose(id) {
     const typerestaurant = id;
+    setRenderId(id);
     console.log("clikkk");
     setView(true);
     order[0].menus.push({ consumo: typerestaurant });

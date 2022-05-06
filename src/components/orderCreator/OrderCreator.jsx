@@ -48,7 +48,7 @@ function OrderCreator() {
     const typerestaurant = id;
     console.log("clikkk");
     setView(true);
-    order[0].menus.push({ tomar_llevar: typerestaurant });
+    order[0].menus.push({ consumo: typerestaurant });
   }
 
   // useEffect(() => {

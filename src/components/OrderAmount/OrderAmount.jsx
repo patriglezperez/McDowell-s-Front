@@ -2,6 +2,7 @@ import burguer from "../../assets/img/logoBurguer.png";
 import menuBurguer from "../../assets/img/Menu1.png";
 import { useState, useContext } from "react";
 import StaticContext from "../../context/staticContext";
+import { v4 as uuidv4 } from "uuid";
 
 const menus = [
   {
@@ -43,22 +44,24 @@ function OrderAmount() {
   /*Add menus*/
   //add a menu of our account //Menu "McDowell's"
   function addMenu1() {
-    if (
-      order[0].menus === null ||
-      "undefined" ||
-      order[0].menus.length === "" ||
-      0
-    ) {
-      order[0].menus.push({ MenuMcDowells: 1 });
-    } else if (order[0].menus.MenuMcDowells.length >= 0) {
-      order[0].menus.MenuMcDowells(order[0].menus.MenuMcDowells.value + 1);
-    }
-    order[0].menus.push({ MenuMcDowells: 1 });
+    const uuid_menu = "";
+
+    order[0].menus.push({
+      MenuMcDowells: 1,
+      uuid_menu: uuidv4(),
+    });
+
     setCounter1(counter1 + 1);
   }
 
   //add a menu of our account //Menu "McDowell's Jr",
   function addMenu2() {
+    const uuid_menu = "";
+
+    order[0].menus.push({
+      McDowellsJr: 1,
+      uuid_menu: uuidv4(),
+    });
     setCounter2(counter2 + 1);
   }
 

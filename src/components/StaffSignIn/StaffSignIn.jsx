@@ -69,11 +69,6 @@ function StaffSignIn() {
     if (isLoggedIn) { navigate(`/staff/${userId}`) };
   }, [isLoggedIn, navigate]);
 
-  /*Allows to trigger handleSignIn with the enter key*/
-  const keyPressSubmit = (e) => {
-    if (e.which === 13) handleSignIn();
-  };
-
   const closeSnackbarAlert = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -122,7 +117,6 @@ function StaffSignIn() {
             <button
               type="submit"
               className="cta"
-              onKeyPress={(event) => keyPressSubmit(event)}
             >
               <span>Entrar</span>
               <svg viewBox="0 0 13 10" height="10px" width="15px">

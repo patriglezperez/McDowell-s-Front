@@ -1,6 +1,5 @@
-import logoBurguer from "../../assets/img/logoBurguer.png";
 import React, { useState, useEffect } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import * as yup from "yup";
 import axios from "axios";
@@ -9,8 +8,8 @@ import MuiAlert from '@mui/material/Alert';
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
-import AmplifyService from "./services/amplifyService";
-import logoBurguer from "../assets/img/logoBurguer.png";
+import AmplifyService from "../services/amplifyService";
+import logoBurguer from "../../assets/img/logoBurguer.png";
 
 
 /* Verification */
@@ -26,10 +25,9 @@ const schemaUser = yup.object().shape({
 });
 
 function StaffSignIn() {
-  // const navigate = useNavigate();
-  // const [md5Password, setMd5Password] = useState();
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [alertState, setAlertState] = useState({ open: false, message: '', severity: '' });
+  const [alertState, setAlertState] = useState({ open: false, message: '' });
 
   //yup validation
   const {
@@ -48,12 +46,13 @@ function StaffSignIn() {
       console.log("Entrando en McDowell's");
       //navigate();
     } else if (response === AmplifyService.responses.userNotFound) {
-      //change alerts for a snackbar alert or something like that;
-      setAlertState({ ...alertState, open: true, severity: 'error', message: 'Este usuario no existe.' });
+      setAlertState({ ...alertState, open: true, message: 'Este usuario no existe.' });
     } else if (response === AmplifyService.responses.failed) {
-      setAlertState({ ...alertState, open: true, severity: 'error', message: 'Email o contraseña incorrectos.' });
+      setAlertState({ ...alertState, open: true, message: 'Email o contraseña incorrectos.' });
+    } else if (response === AmplifyService.responses.userNotConfirmed) {
+      setAlertState({ ...alertState, open: true, message: 'Debes confirmar tu cuenta. Por favor, revisa tu correo.' });
     } else {
-      setAlertState({ ...alertState, open: true, severity: 'error', message: 'Algo salió mal. Inténtelo de nuevo más tarde.' });
+      setAlertState({ ...alertState, open: true, message: 'Algo salió mal. Inténtelo de nuevo más tarde.' });
     }
   }
 
@@ -133,7 +132,7 @@ function StaffSignIn() {
           </div>
         </form>
         <Snackbar open={alertState.open} autoHideDuration={6000} onClose={closeSnackbarAlert}>
-          <Alert onClose={closeSnackbarAlert} severity={alertState.severity} sx={{ width: '100%', fontSize: '2rem' }}>
+          <Alert onClose={closeSnackbarAlert} severity={'error'} sx={{ width: '100%', fontSize: '2rem' }}>
             {alertState.message}
           </Alert>
         </Snackbar>

@@ -1,7 +1,7 @@
 import burguer from "../../assets/img/logoBurguer.png";
 import menuBurguer from "../../assets/img/Menu1.png";
 import { useState, useContext } from "react";
-// import StaticContext from "../../context/staticContext";
+import StaticContext from "../../context/staticContext";
 
 const menus = [
   {
@@ -26,7 +26,8 @@ function OrderAmount() {
   console.log(counter1, "contador1 inicial");
   console.log(counter2, "contador2 inicial");
 
-  // const { order, setOrder } = useContext(StaticContext);
+  const { order, setOrder } = useContext(StaticContext);
+  console.log(order, "order");
 
   /*Remove menus*/
   //remove a menu from our account  //Menu "McDowell's"
@@ -42,6 +43,17 @@ function OrderAmount() {
   /*Add menus*/
   //add a menu of our account //Menu "McDowell's"
   function addMenu1() {
+    if (
+      order[0].menus === null ||
+      "undefined" ||
+      order[0].menus.length === "" ||
+      0
+    ) {
+      order[0].menus.push({ MenuMcDowells: 1 });
+    } else if (order[0].menus.MenuMcDowells.length >= 0) {
+      order[0].menus.MenuMcDowells(order[0].menus.MenuMcDowells.value + 1);
+    }
+    order[0].menus.push({ MenuMcDowells: 1 });
     setCounter1(counter1 + 1);
   }
 

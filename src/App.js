@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import StaffSignIn from "./components/StaffSignIn/StaffSignIn";
 import MenuPreview from "./components/menuPreview/menuPreview";
-import OrderAmount from "./components/OrderAmount";
+import OrderAmount from "./components/OrderAmount/OrderAmount";
 import Header from "./components/header";
 import Welcome from "./components/welcome/Welcome";
 import { useContext } from "react";

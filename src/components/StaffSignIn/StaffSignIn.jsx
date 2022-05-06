@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import * as yup from "yup";
-import axios from "axios";
 import Snackbar from '@mui/material/Snackbar';
 import MuiAlert from '@mui/material/Alert';
 import { useForm } from "react-hook-form";
@@ -39,12 +38,12 @@ function StaffSignIn() {
   });
 
   /*We login*/
-  async function handleSignIn(userInput) {
+  const handleSignIn = async (userInput) => {
     const response = await AmplifyService.signIn(userInput);
     console.log(response);
     if (response === AmplifyService.responses.success) {
       console.log("Entrando en McDowell's");
-      //navigate();
+      setIsLoggedIn(true);
     } else if (response === AmplifyService.responses.userNotFound) {
       setAlertState({ ...alertState, open: true, message: 'Este usuario no existe.' });
     } else if (response === AmplifyService.responses.failed) {
@@ -56,19 +55,21 @@ function StaffSignIn() {
     }
   }
 
+  const getUserId = () => {
+    return localStorage.getItem('userId');
+  }
+
   useEffect(() => {
-    const token = localStorage.getItem('idToken');
-    (token != null) ? setIsLoggedIn(true) : setIsLoggedIn(false);
+    const userId = getUserId();
+    (userId != null) ? setIsLoggedIn(true) : setIsLoggedIn(false);
   }, [])
 
-  //Por desarrollar: para ver si esta logeado y que le lleve a x pantalla
-  // es necesario ver el rol del empleado
-  // useEffect(() => {
-  //   console.log(isLogin, "Si isLogin okkk...");
-  //   if (isLogin) navigate("/");
-  // }, [isLogin, navigate]);
+  useEffect(() => {
+    const userId = getUserId();
+    if (isLoggedIn) { navigate(`/staff/${userId}`) };
+  }, [isLoggedIn, navigate]);
 
-  /*To be able to use the enter button on the keypad*/
+  /*Allows to trigger handleSignIn with the enter key*/
   const keyPressSubmit = (e) => {
     if (e.which === 13) handleSignIn();
   };

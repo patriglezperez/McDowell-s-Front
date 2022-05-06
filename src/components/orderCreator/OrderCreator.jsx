@@ -4,7 +4,6 @@ import takeHere from "../../assets/img/restaurant.png";
 import takeAway from "../../assets/img/takeAway.png";
 import axios from "axios";
 import StaticContext from "../../context/staticContext";
-import { Streetview } from "@mui/icons-material";
 
 /*the menus are collected from the back*/
 
@@ -14,9 +13,6 @@ function OrderCreator() {
   const [view, setView] = useState(false);
 
   const [renderId, setRenderId] = useState(0);
-
-  console.log(view, "view ahora");
-  console.log(order, "order");
 
   const typeOfRestaurant = [
     {
@@ -47,7 +43,6 @@ function OrderCreator() {
   function choose(id) {
     const typerestaurant = id;
     setRenderId(id);
-    console.log("clikkk");
     setView(true);
     order[0].menus.push({ consumo: typerestaurant });
   }

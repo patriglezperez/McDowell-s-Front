@@ -4,17 +4,18 @@ import takeHere from "../../assets/img/restaurant.png";
 import takeAway from "../../assets/img/takeAway.png";
 import axios from "axios";
 import StaticContext from "../../context/staticContext";
+import { Streetview } from "@mui/icons-material";
+
 /*the menus are collected from the back*/
 
 function OrderCreator() {
-  const [take, setTake] = useState(false);
   const { order, setOrder } = useContext(StaticContext);
   const { dataMenus, setDataMenus } = useContext(StaticContext);
+  const [view, setView] = useState(false);
 
-  const [data, setData] = useState("");
   const [renderId, setRenderId] = useState(0);
-  // const [order, setOrder] = useState([]);
-  console.log(take, "take ahora");
+
+  console.log(view, "view ahora");
   console.log(order, "order");
 
   const typeOfRestaurant = [
@@ -43,9 +44,10 @@ function OrderCreator() {
     },
   ];
 
-  function handleClick(id) {
+  function choose(id) {
     const typerestaurant = id;
-    setTake(true);
+    console.log("clikkk");
+    setView(true);
     order[0].menus.push({ tomar_llevar: typerestaurant });
   }
 
@@ -65,20 +67,21 @@ function OrderCreator() {
   return (
     <div className="orderCreator">
       <h2 className="welcome-title">
-        {take === false ? titles[0].name1 : titles[1].name1}
+        {view === false ? titles[0].name1 : titles[1].name1}
       </h2>
-      <h1>{take === false ? titles[0].name2 : titles[1].name2}</h1>
+      <h1>{view === false ? titles[0].name2 : titles[1].name2}</h1>
 
-      {take === false ? (
+      {view === false ? (
         <div className="space-menus">
           {typeOfRestaurant.map((restaurant) => (
             <div className="menu" key={restaurant.id}>
-              <div className="card" onClick={handleClick(restaurant.id)}>
+              <div className="card">
                 <div className="blob"></div>
                 <img
                   src={restaurant.id === 0 ? takeHere : takeAway}
                   alt="tomar o llevar"
                   className="img"
+                  onClick={() => choose(restaurant.id)}
                 />
                 <h2 className="description">{restaurant.name}</h2>
               </div>

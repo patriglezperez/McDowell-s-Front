@@ -42,10 +42,10 @@ function OrderCreator() {
     },
   ];
 
-  function handleClick() {
-    console.log("añadimos al pedido si tomar o llevar"); //Añadimos eso al contexto
+  function handleClick(id) {
+    const typerestaurant = id;
     setTake(true);
-    order[0].menus.push({ tomar: 0 }); //definir si tomar:1 es para tomar aqui y tomar:2 es para llevar
+    order[0].menus.push({ tomar: typerestaurant });
   }
 
   // useEffect(() => {
@@ -72,7 +72,7 @@ function OrderCreator() {
         <div className="space-menus">
           {typeOfRestaurant.map((restaurant) => (
             <div className="menu" key={restaurant.id}>
-              <div className="card" onClick={handleClick}>
+              <div className="card" onClick={handleClick(restaurant.id)}>
                 <div className="blob"></div>
                 <img
                   src={restaurant.id === 0 ? takeHere : takeAway}

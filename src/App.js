@@ -11,13 +11,13 @@ function App() {
     <div>
       <StaticContextProvider>
         <BrowserRouter>
+          <Header />
           <Routes>
             <Route path="/customers" element={<Welcome />} />
             <Route path="/customers/order/:id" element={<OrderCreator />} />
             {/* <StaffSignIn /> */}
             {/* <MenuPreview /> */}
           </Routes>
-          <Header />
         </BrowserRouter>
       </StaticContextProvider>
     </div>

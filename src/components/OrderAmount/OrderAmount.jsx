@@ -1,18 +1,19 @@
 import burguer from "../../assets/img/logoBurguer.png";
 import menuBurguer from "../../assets/img/Menu1.png";
-import { useState } from "react";
+import { useState, useContext } from "react";
+// import StaticContext from "../../context/staticContext";
 
 const menus = [
   {
+    id: 9,
     name: "McDowell's",
     price: "6,95 €",
-    image: menuBurguer,
     quantityMenu: 5,
   },
   {
+    id: 8,
     name: "McDowell's Jr",
     price: "5,99 €",
-    image: burguer,
     quantityMenuJr: 2,
   },
 ];
@@ -24,6 +25,8 @@ function OrderAmount() {
   const [counter2, setCounter2] = useState(0); //Menu "McDowell's Jr",
   console.log(counter1, "contador1 inicial");
   console.log(counter2, "contador2 inicial");
+
+  // const { order, setOrder } = useContext(StaticContext);
 
   /*Remove menus*/
   //remove a menu from our account  //Menu "McDowell's"
@@ -50,9 +53,13 @@ function OrderAmount() {
   return (
     <>
       {menus.map((menu) => (
-        <div className="menus">
+        <div className="menus" key={menu.id}>
           <div className="container">
-            <img src={menu.image} alt="logoBurguer" className="img" />
+            <img
+              src={menu.name === "McDowell's" ? menuBurguer : burguer}
+              alt="logoBurguer"
+              className="img"
+            />
             <div className="quantity">
               <button
                 className="removeMenu"

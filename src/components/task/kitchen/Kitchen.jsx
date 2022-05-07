@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Countdown from "./countdown/Countdown";
 import burguer from "../../assets/img/logoBurguer.png";
 
+
 export default function Kitchen(id) {
 
     const [orders, setOrders] = useState("");
@@ -26,8 +27,9 @@ export default function Kitchen(id) {
         setBusy = !busy; // False/True 
     }
 
-    return (<div> Cocinero <button onSubmit={(handleBusy())} > Recibir Pedidos </button>
-        {!orders ? null : <div>
+    return (<div> Cocinero 
+        <button onSubmit={(handleBusy())} > {!busy ? "Recibir Pedidos" : "Pausa"} </button>
+        {!orders ? null : <div className="orders--kitchen">
             <div> Menu: <Countdown startingMinutes={orders.time} /> </div>
             <div> <img src={burguer} /> </div>
             <div> {orders.uuid} </div>

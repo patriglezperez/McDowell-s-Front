@@ -1,6 +1,6 @@
-import burguer from "../../assets/img/logoBurguer.png";
-import menuBurguer from "../../assets/img/Menu1.png";
-import StaticContext from "../../context/staticContext";
+import burguer from "../../../assets/img/logoBurguer.png";
+import menuBurguer from "../../../assets/img/Menu1.png";
+import StaticContext from "../../../context/staticContext";
 import { useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
 

@@ -32,6 +32,7 @@ function MenuPreview() {
       uuid_menu: uuidv4(),
       time_process: 3,
     });
+    console.log(order);
   }
 
   function addMenu2() {
@@ -44,6 +45,7 @@ function MenuPreview() {
       uuid_menu: uuidv4(),
       time_process: 2,
     });
+    console.log(order);
   }
 
   return (

@@ -65,22 +65,26 @@ function StaffSignIn() {
     (userId != null) ? setIsLoggedIn(true) : setIsLoggedIn(false);
   }, [])
 
-  useEffect(async () => {
-    if (isLoggedIn) {
-      const userId = getUserId();
-      try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/staff/${userId}`);
-        const adminsRole = "admin";
-        const userRole = response.data.role;
-        if (userRole === adminsRole) {
-          navigate(`/admin/dashboard`);
-        } else {
-          navigate(`/staff/${userId}`);
+  useEffect(() => {
+    const handleUserRedirection = async () => {
+      if (isLoggedIn) {
+        const userId = getUserId();
+        try {
+          const response = await axios.get(`${process.env.REACT_APP_API_URL}/staff/${userId}`);
+          const adminsRole = "admin";
+          const userRole = response.data.role;
+          if (userRole === adminsRole) {
+            navigate(`/admin/dashboard`);
+          } else {
+            navigate(`/staff/${userId}`);
+          }
+        } catch (error) {
+          console.log(error);
         }
-      } catch (error) {
-        console.log(error);
       }
     }
+
+    handleUserRedirection();
   }, [isLoggedIn, navigate]);
 
   const closeSnackbarAlert = (event, reason) => {

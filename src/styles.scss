@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap");
-@import "./assets/scss/glocal.scss";
-@import "./assets/scss/menuPreview.scss";
-@import "./assets/scss/staffSignIn.scss";
-@import "./assets/scss/orderCreator.scss";
-@import "./components/welcome//assets/scss/welcome.scss";
+@import "./assets/scss/global.scss";
+@import "./components/menuPreview/assets/scss/menuPreview.scss";
+@import "./components/staffSignIn/assets/scss/staffSignIn.scss";
+@import "./components/confirmOrder/assets/scss/confirmOrder.scss";
+@import "./components/orderCreator/assets/scss/orderCreator.scss";
+@import "./components/welcome/assets/scss/welcome.scss";

@@ -7,7 +7,7 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import AmplifyService from "../services/amplifyService";
+import AmplifyService from "./services/amplifyService";
 
 export default function DrawerMenu() {
     // sets the position the menu will come from;

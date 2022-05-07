@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import StaffSignIn from "./components/staffSignIn/staffSignIn";
-import MenuPreview from "./components/menuPreview/menuPreview";
-import Header from "./components/header";
-import Welcome from "./components/welcome/welcome";
+import StaffSignIn from "./components/staffSignIn/StaffSignIn";
+import MenuPreview from "./components/menuPreview/MenuPreview";
+import Header from "./components/Header";
+import Welcome from "./components/welcome/Welcome";
 import { StaticContextProvider } from "./context/staticContext";
 import OrderCreator from "./components/orderCreator/OrderCreator";
 
-import Amplify, { Auth } from 'aws-amplify';
-import awsconfig from './aws-exports';
+import Amplify, { Auth } from "aws-amplify";
+import awsconfig from "./aws-exports";
 Amplify.configure(awsconfig);
 
 function App() {
@@ -27,5 +27,4 @@ function App() {
     </div>
   );
 }
-
 export default App;

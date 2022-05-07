@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100;
-  height: 100vh;
+  height: 90vh;
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -23,14 +23,27 @@
   border-radius: 25px;
 }
 
-/*Imagen de burguer*/
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input-error {
+  width: 300px;
+  color: #de0000;
+  text-align: center;
+  margin-top: 1rem;
+}
+
+/*Burger image*/
 .logoBurger {
   width: 180px;
   height: 150px;
   margin-bottom: 50px;
 }
 
-/* Boton de entrar */
+/* Login button */
 .cta {
   position: relative;
   margin: auto;

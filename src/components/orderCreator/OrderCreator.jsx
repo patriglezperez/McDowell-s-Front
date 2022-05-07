@@ -1,4 +1,4 @@
-import MenuPreview from "../menuPreview/MenuPreview";
+import MenuPreview from "../../components/menuPreview/menuPreview";
 import { useState, useContext, useEffect } from "react";
 import takeHere from "../../assets/img/restaurant.png";
 import takeAway from "../../assets/img/takeAway.png";

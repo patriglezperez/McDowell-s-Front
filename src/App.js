@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import StaffSignIn from "./components/staffSignIn/StaffSignIn";
-import MenuPreview from "./components/menuPreview/MenuPreview";
 import OrderAmount from "./components/OrderAmount/OrderAmount";
 import Header from "./components/header";
 import Welcome from "./components/welcome/Welcome";

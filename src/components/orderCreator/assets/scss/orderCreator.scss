@@ -1,0 +1,34 @@
+.titleCreator {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  height: 10vh;
+}
+
+.menu-away {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  margin: 40px;
+}
+
+.welcome-title {
+  color: $green_dark;
+}
+
+.space-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  button {
+    width: 200px;
+    height: 30px;
+    margin: 10px;
+  }
+}

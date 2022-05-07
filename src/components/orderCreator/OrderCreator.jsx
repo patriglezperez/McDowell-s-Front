@@ -92,6 +92,11 @@ function OrderCreator() {
       ) : (
         <MenuPreview />
       )}
+
+      <div className="space-buttons">
+        <button>Finalizar pedido</button>
+        <button>Cancelar pedido</button>
+      </div>
     </div>
   );
 }

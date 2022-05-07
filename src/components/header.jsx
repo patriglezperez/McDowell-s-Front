@@ -1,7 +1,7 @@
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import DrawerMenu from './drawerMenu';
+import DrawerMenu from './DrawerMenu';
 
 export default function Header() {
   const locationUrl = window.location.href;

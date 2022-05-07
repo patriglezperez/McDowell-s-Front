@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Kitchen from "./kitchen/Kitchen";
 
 
 export default function Task() {
@@ -15,7 +16,7 @@ export default function Task() {
     });
 
     return (<>
-        {rol === "kitchen" ? <Kitchen /> : <Delivering />}
+        {rol === "kitchen" ? <Kitchen id={urlId} /> : <Delivering id={urlId} />}
         </>
     );
 }

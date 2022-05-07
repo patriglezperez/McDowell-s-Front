@@ -7,6 +7,8 @@ import MuiAccordion from '@mui/material/Accordion';
 import MuiAccordionSummary from '@mui/material/AccordionSummary';
 import MenuIcon from '@mui/icons-material/Menu';
 
+import AmplifyService from "../services/amplifyService";
+
 export default function DrawerMenu() {
     // sets the position the menu will come from;
     const drawerPosition = 'left';
@@ -47,20 +49,17 @@ export default function DrawerMenu() {
         },
     }));
 
-    const toggleDrawer = (anchor, open) => (event) => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        }
+    const handleDrawer = (anchor, open, link) => {
         setOpenDrawer({ ...openDrawer, [anchor]: open });
-    };
+        if (link) { navigate(link); }
+    }
 
     //This is the layout for the menu;
     const list = (anchor) => (
         <Box role="presentation">
             <List>
                 <ListItem button
-                    onClick={() => { toggleDrawer(anchor, false); navigate('/admin/dashboard') }}
-                    onKeyDown={() => { toggleDrawer(anchor, false); navigate('/admin/dashboard') }}
+                    onClick={() => { handleDrawer(anchor, false, '/admin/dashboard') }}
                     sx={{ marginLeft: '1.8rem', marginBottom: '1rem', marginTop: '1.5rem' }}
                 >
                     <p className='drawer-item'>Inicio</p>
@@ -75,8 +74,7 @@ export default function DrawerMenu() {
 
                     <ListItem button
                         sx={{ marginLeft: '2.8rem', marginBottom: '0.5rem' }}
-                        onClick={() => { toggleDrawer(anchor, false); navigate('/admin/orders/ongoing') }}
-                        onKeyDown={() => { toggleDrawer(anchor, false); navigate('/admin/orders/ongoing') }}
+                        onClick={() => { handleDrawer(anchor, false, '/admin/orders/ongoing') }}
                     >
                         <p className='drawer-item'>
                             Pedidos en curso
@@ -85,8 +83,7 @@ export default function DrawerMenu() {
 
                     <ListItem button
                         sx={{ marginLeft: '2.8rem', marginBottom: '0.5rem' }}
-                        onClick={() => { toggleDrawer(anchor, false); navigate('/admin/orders/history') }}
-                        onKeyDown={() => { toggleDrawer(anchor, false); navigate('/admin/orders/history') }}
+                        onClick={() => { handleDrawer(anchor, false, '/admin/orders/history') }}
                     >
                         <p className='drawer-item' >
                             Historial de pedidos
@@ -95,16 +92,14 @@ export default function DrawerMenu() {
                 </Accordion>
 
                 <ListItem button
-                    onClick={() => { toggleDrawer(anchor, false); navigate('/admin/employees') }}
-                    onKeyDown={() => { toggleDrawer(anchor, false); navigate('/admin/employees') }}
                     sx={{ marginLeft: '1.8rem', marginBottom: '1rem' }}
+                    onClick={() => { handleDrawer(anchor, false, '/admin/employees') }}
                 >
                     <p className='drawer-item'>Personal</p>
                 </ListItem>
 
                 <ListItem button
-                    onClick={toggleDrawer(anchor, false)}
-                    onKeyDown={toggleDrawer(anchor, false)}
+                    onClick={() => { handleDrawer(anchor, false, '/login'); AmplifyService.signOut() }}
                     sx={{ marginLeft: '1.8rem', marginBottom: '1rem' }}
                 >
                     <p className='drawer-item'>Cerrar sesión</p>
@@ -115,13 +110,13 @@ export default function DrawerMenu() {
 
     return (
         <>
-            <IconButton onClick={toggleDrawer('left', true)} sx={{ width: 'fit-content' }} >
+            <IconButton onClick={() => handleDrawer('left', true)} sx={{ width: 'fit-content' }} >
                 <MenuIcon sx={{ color: '#ffffff', fontSize: '3rem', cursor: 'pointer' }} />
             </IconButton>
             <Drawer
                 anchor={drawerPosition}
                 open={openDrawer[drawerPosition]}
-                onClose={toggleDrawer(drawerPosition, false)}
+                onClose={() => handleDrawer(drawerPosition, false)}
             >
                 {list(drawerPosition)}
             </Drawer>

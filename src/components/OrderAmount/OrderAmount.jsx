@@ -1,6 +1,6 @@
 import burguer from "../../assets/img/logoBurguer.png";
 import menuBurguer from "../../assets/img/Menu1.png";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import StaticContext from "../../context/staticContext";
 import { v4 as uuidv4 } from "uuid";
 
@@ -30,37 +30,51 @@ function OrderAmount() {
   const { order, setOrder } = useContext(StaticContext);
   console.log(order, "order");
 
-  /*Remove menus*/
-  //remove a menu from our account  //Menu "McDowell's"
+  //*Remove menus
+  //remove a Menu "McDowell's"
   function removeMenu1() {
+    let totalMenu1 = [];
+    order[0].menus.map((individual) => {
+      if (individual.num === 1) {
+        totalMenu1.push(individual);
+      }
+    });
+    console.log(totalMenu1, "totalMenu1");
+    totalMenu1.pop();
+    setOrder({ menus: totalMenu1 });
     setCounter1(counter1 - 1);
   }
 
-  //remove a menu from our account  //Menu "McDowell's Jr",
+  //remove a Menu "McDowell's Jr",
   function removeMenu2() {
     setCounter2(counter2 - 1);
   }
 
-  /*Add menus*/
-  //add a menu of our account //Menu "McDowell's"
+  //*Add menus
+  //add a Menu "McDowell's"
   function addMenu1() {
     const uuid_menu = "";
 
     order[0].menus.push({
-      MenuMcDowells: 1,
+      num: 1,
+      name: "McDowell's",
+      price: 6.95,
       uuid_menu: uuidv4(),
+      time_process: 3,
     });
-
     setCounter1(counter1 + 1);
   }
 
-  //add a menu of our account //Menu "McDowell's Jr",
+  //add a Menu "McDowell's Jr",
   function addMenu2() {
     const uuid_menu = "";
 
     order[0].menus.push({
-      McDowellsJr: 1,
+      num: 2,
+      name: "McDowell's Jr",
+      price: 5.99,
       uuid_menu: uuidv4(),
+      time_process: 2,
     });
     setCounter2(counter2 + 1);
   }

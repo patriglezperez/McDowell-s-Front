@@ -9,10 +9,11 @@ import StaticContext from "../../context/staticContext";
 
 function OrderCreator() {
   const { order, setOrder } = useContext(StaticContext);
-  const { dataMenus, setDataMenus } = useContext(StaticContext);
+  // const { dataMenus, setDataMenus } = useContext(StaticContext);
   const [view, setView] = useState(false);
-
   const [renderId, setRenderId] = useState(0);
+
+  let locationUrl = window.location.href;
 
   const typeOfRestaurant = [
     {
@@ -44,6 +45,9 @@ function OrderCreator() {
     const place = id;
     setRenderId(id);
     setView(true);
+    const uuid_user = order[0].uuid_user;
+    const createMenuView = `customers/order/${uuid_user}/create`;
+    locationUrl = createMenuView;
     order[0].menus.push({ consumption: place });
   }
 

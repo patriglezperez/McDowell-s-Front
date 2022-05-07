@@ -41,10 +41,10 @@ function OrderCreator() {
   ];
 
   function choose(id) {
-    const typerestaurant = id;
+    const place = id;
     setRenderId(id);
     setView(true);
-    order[0].menus.push({ consumo: typerestaurant });
+    order[0].menus.push({ consumption: place });
   }
 
   // useEffect(() => {
@@ -61,12 +61,13 @@ function OrderCreator() {
   // }, []);
 
   return (
-    <div className="orderCreator">
-      <h2 className="welcome-title">
-        {view === false ? titles[0].name1 : titles[1].name1}
-      </h2>
-      <h1>{view === false ? titles[0].name2 : titles[1].name2}</h1>
-
+    <div>
+      <div className="titleCreator">
+        <h2 className="welcome-title">
+          {view === false ? titles[0].name1 : titles[1].name1}
+        </h2>
+        <h1>{view === false ? titles[0].name2 : titles[1].name2}</h1>
+      </div>
       {view === false ? (
         <div className="space-menus">
           {typeOfRestaurant.map((restaurant) => (

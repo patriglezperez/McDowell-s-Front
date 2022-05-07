@@ -13,6 +13,9 @@ $green_dark: #256a25;
 html {
   //at 1200px 0.833vw roughly equals 10px;
   font-size: 0.833vw;
+  @media (max-width: 800px) {
+    font-size: 8px;
+  }
 }
 
 body {

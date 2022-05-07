@@ -1,5 +1,8 @@
 import burguer from "../../assets/img/logoBurguer.png";
 import menuBurguer from "../../assets/img/Menu1.png";
+import StaticContext from "../../context/staticContext";
+import { useContext } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 const menus = [
   {
@@ -17,13 +20,39 @@ const menus = [
 /*the menus are collected from the back*/
 
 function MenuPreview() {
+  const { order, setOrder } = useContext(StaticContext);
+
+  function addMenu1() {
+    const uuid_menu = "";
+
+    order[0].menus.push({
+      num: 1,
+      name: "McDowell's",
+      price: 6.95,
+      uuid_menu: uuidv4(),
+      time_process: 3,
+    });
+  }
+
+  function addMenu2() {
+    const uuid_menu = "";
+
+    order[0].menus.push({
+      num: 2,
+      name: "McDowell's Jr",
+      price: 5.99,
+      uuid_menu: uuidv4(),
+      time_process: 2,
+    });
+  }
+
   return (
     <div className="space-menus">
       {menus.map((menu) => (
         <div className="menu" key={menu.id}>
           <div
             className="card"
-            onClick={() => console.log(`add to cart${menu.name}`)}
+            onClick={menu.name === "McDowell's" ? addMenu1 : addMenu2}
           >
             <div className="blob"></div>
             <img

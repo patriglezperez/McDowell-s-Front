@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Countdown from "./countdown/Countdown";
-import SelectStatus from "./selectStatus/SelectStatus";
+import SelectStatus from "../selectStatus/SelectStatus";
 import burguer from "../../assets/img/logoBurguer.png";
 
 
 export default function Kitchen(id) {
+    /// estado del staff activo
+    const { statusStaff } = useContext(statusStaffContext)
+    const navigate = useNavigate();
+    const [orders, setOrders] = useState(""); /// pedidos asignado al cocinero
+    statusRef.current = statusStaff; /// se supone q da problemas el useState dentro del useEffect
 
-    const [orders, setOrders] = useState("");
-    /* const [busy, setBusy] = useState(false); */
-    const [status, setStatus] = useState(true);
-    statusRef.current = status; /// se supone q da problemas el useState dentro del useEffect
+    if (statusStaff === null) {
+        AmplifyService.signOut();
+        navigate(`/login`);
+    }
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -18,28 +25,16 @@ export default function Kitchen(id) {
                 .then((res) => {
                     if (res.status === 200) {
                         setOrders(res.data.orders);            
-                    } /* else {
-                        setOrders(res.statusText);
-                    } */
+                    } else {
+                        /// pedidos no encontrados
+                        /// errores
+                    }
             })
         }, 30000); // 30 seg
     }, []);
 
-    /* const handleBusy = () => {
-        setBusy = !busy; // False/True 
-    } */
-
-    const handleChange = (event) => {
-        if (event.target.value === null) {
-            /// logout
-        } else {
-            setStatus(event.target.value);
-        }
-    };
-
     return (<div> Cocinero 
-        {/* <button onSubmit={(handleBusy())} > {!busy ? "Recibir Pedidos" : "Pausa"} </button> */}
-        <SelectStatus handleChange={handleChange} />
+        <SelectStatus />
         {!orders ? null : <div className="orders--kitchen">
             <div> Menu: <Countdown startingMinutes={orders.time} /> </div>
             <div> <img src={burguer} /> </div>

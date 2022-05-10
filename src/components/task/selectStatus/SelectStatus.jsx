@@ -1,18 +1,18 @@
 import React, { useState, useContext } from "react";
+
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 
-export default function SelectStatus(props) {
-    const [status, setStatus] = useState(true);
+export default function SelectStatus() {
+    const { statusStaff, setStatusStaff } = useContext(statusStaffContext)
     const [open, setOpen] = useState(false);
-    const { handleChange } = props;
 
-    /* const handleChange = (event) => {
-        setStatus(event.target.value);
-    }; */
+    const handleChange = (event) => {
+        setStatusStaff(event.target.value);
+    }; 
 
     const handleClose = () => {
         setOpen(false);
@@ -32,7 +32,7 @@ export default function SelectStatus(props) {
                     open={open}
                     onClose={handleClose}
                     onOpen={handleOpen}
-                    value={status}
+                    value={statusStaff}
                     label="Status"
                     onChange={handleChange}>
                     <MenuItem value="">

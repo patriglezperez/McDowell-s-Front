@@ -1,6 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, createContext  } from "react";
+
+import AmplifyService from "../../services/amplifyService";
+
 import Kitchen from "./kitchen/Kitchen";
 
+const statusStaffContext = createContext({
+    statusStaff: [],
+    setStatusStaff: () => { },
+  });
+  
+export { statusStaffContext };
 
 export default function Task() {
     const { urlId } = useParams();
@@ -11,12 +20,13 @@ export default function Task() {
             if (res.status === 200) {
                 setRol(res.data.rol);            
             } else {
-                setRol(res.statusText); /// revisar
+                AmplifyService.signOut();
+                navigate(`/login`);
             }
     });
 
-    return (<>
-        {rol === "kitchen" ? <Kitchen id={urlId} /> : <Delivering id={urlId} />}
-        </>
+    return (<petsContext.Provider>
+            {rol === "kitchen" ? <Kitchen id={urlId} /> : <Delivering id={urlId} />}
+        </petsContext.Provider>
     );
 }

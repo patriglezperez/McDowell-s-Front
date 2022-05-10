@@ -1,10 +1,9 @@
-import MenuPreview from "../menuPreview/MenuPreview";
 import { useState, useContext, useEffect } from "react";
-import takeHere from "../../assets/img/restaurant.png";
-import takeAway from "../../assets/img/takeAway.png";
 import axios from "axios";
 import StaticContext from "../../context/staticContext";
-
+import takeHere from "../../assets/img/restaurant.png";
+import takeAway from "../../assets/img/takeAway.png";
+import MenuPreview from "../../components/orderCreator/menuPreview/menuPreview";
 /*the menus are collected from the back*/
 
 function OrderCreator() {
@@ -65,7 +64,7 @@ function OrderCreator() {
   // }, []);
 
   return (
-    <div>
+    <div className="order-page">
       <div className="titleCreator">
         <h2 className="welcome-title">
           {view === false ? titles[0].name1 : titles[1].name1}

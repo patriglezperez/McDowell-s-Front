@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import StaffSignIn from "./components/staffSignIn/StaffSignIn";
-import MenuPreview from "./components/menuPreview/MenuPreview";
-import Header from "./components/Header";
+import StaffSignIn from "./components/StaffSignIn/StaffSignIn";
+import Header from "./components/header";
 import Welcome from "./components/welcome/Welcome";
 import { StaticContextProvider } from "./context/staticContext";
 import OrderCreator from "./components/orderCreator/OrderCreator";

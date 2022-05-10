@@ -1,4 +1,4 @@
-import MenuPreview from "../menuPreview/menuPreview";
+import MenuPreview from "./menuPreview/menuPreview";
 import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import takeHere from "../../assets/img/restaurant.png";
@@ -55,7 +55,7 @@ function OrderCreator() {
 
   //cancel the order and empty the context
   function cancelOrder() {
-    setOrder({ uuid_user: [], menus: [] });
+    setOrder({ 0: { uuid_user: [], menus: [] } });
     console.log(order);
     navigate("/customers");
   }

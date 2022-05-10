@@ -8,12 +8,12 @@ const menus = [
   {
     id: 1,
     name: "McDowell's",
-    price: "6,95 €",
+    price: 6.95,
   },
   {
     id: 2,
     name: "McDowell's Jr",
-    price: "5,99 €",
+    price: 5.99,
   },
 ];
 
@@ -22,6 +22,7 @@ const menus = [
 function MenuPreview() {
   const { order, setOrder } = useContext(StaticContext);
 
+  //Add menu "McDowell's" to the context
   function addMenu1() {
     const uuid_menu = "";
 
@@ -35,6 +36,7 @@ function MenuPreview() {
     console.log(order);
   }
 
+  //Add menu "McDowell's Jr " to the context
   function addMenu2() {
     const uuid_menu = "";
 
@@ -66,7 +68,7 @@ function MenuPreview() {
               Menu <br />
               {menu.name}
               <br />
-              <span>{menu.price}</span>
+              <span>{menu.price}€</span>
             </h2>
           </div>
         </div>

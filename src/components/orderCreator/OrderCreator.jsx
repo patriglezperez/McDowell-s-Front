@@ -4,6 +4,7 @@ import StaticContext from "../../context/staticContext";
 import takeHere from "../../assets/img/restaurant.png";
 import takeAway from "../../assets/img/takeAway.png";
 import MenuPreview from "../../components/orderCreator/menuPreview/menuPreview";
+
 /*the menus are collected from the back*/
 
 function OrderCreator() {
@@ -67,6 +68,8 @@ function OrderCreator() {
     <div className="order-page">
       <div className="titleCreator">
         <h2 className="welcome-title">
+          {/* render take or take away and when you click on it, it renders the menus.  */}
+
           {view === false ? titles[0].name1 : titles[1].name1}
         </h2>
         <h1>{view === false ? titles[0].name2 : titles[1].name2}</h1>

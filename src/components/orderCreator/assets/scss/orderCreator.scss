@@ -34,7 +34,133 @@
 
   button {
     width: 200px;
-    height: 30px;
+    height: 50px;
     margin: 10px;
   }
+}
+
+//Cancel button
+.cancelOrder {
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: red;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  background: #e62222;
+}
+
+.cancelOrder,
+.cancelOrder span {
+  transition: 200ms;
+}
+
+.cancelOrder .text {
+  transform: translateX(35px);
+  color: white;
+  font-weight: bold;
+}
+
+.cancelOrder .icon {
+  position: absolute;
+  border-left: 1px solid #c41b1b;
+  transform: translateX(145px);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cancelOrder svg {
+  width: 15px;
+  fill: #eee;
+}
+
+.cancelOrder:hover {
+  background: #ff3636;
+}
+
+.cancelOrder:hover .text {
+  color: transparent;
+}
+
+.cancelOrder:hover .icon {
+  width: 150px;
+  border-left: none;
+  transform: translateX(35px);
+}
+
+.cancelOrder:focus {
+  outline: none;
+}
+
+.cancelOrder:active .icon svg {
+  transform: scale(0.8);
+}
+
+//Confirm button
+.confirmOrder {
+  width: 150px;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  background: $green_dark;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  background: $green_dark;
+}
+
+.confirmOrder,
+.confirmOrder span {
+  transition: 200ms;
+}
+
+.confirmOrder .text {
+  transform: translateX(35px);
+  color: white;
+  font-weight: bold;
+}
+
+.confirmOrder .icon {
+  position: absolute;
+  border-left: 1px solid #135113;
+  transform: translateX(145px);
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirmOrder svg {
+  width: 15px;
+  fill: #eee;
+}
+
+.confirmOrder:hover {
+  background: #409340;
+}
+
+.confirmOrder:hover .text {
+  color: transparent;
+}
+
+.confirmOrder:hover .icon {
+  width: 150px;
+  border-left: none;
+  transform: translateX(35px);
+}
+
+.confirmOrder:focus {
+  outline: none;
+}
+
+.confirmOrder:active .icon svg {
+  transform: scale(0.8);
 }

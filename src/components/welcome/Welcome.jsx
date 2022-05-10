@@ -10,6 +10,7 @@ function Welcome() {
   const navigate = useNavigate();
   const { order, setOrder } = useContext(StaticContext);
   console.log(order);
+
   //Create a uuuid_user for the new order
   async function start() {
     const id = uuidv4();

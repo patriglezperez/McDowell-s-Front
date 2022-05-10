@@ -1,11 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import StaffSignIn from "./components/StaffSignIn/StaffSignIn";
-import OrderAmount from "./components/OrderAmount/OrderAmount";
+import StaffSignIn from "./components/staffSignIn/StaffSignIn";
 import Header from "./components/header";
 import Welcome from "./components/welcome/Welcome";
 import { StaticContextProvider } from "./context/staticContext";
 import OrderCreator from "./components/orderCreator/OrderCreator";
-
+import OrderAmount from "./components/OrderAmount/OrderAmount";
 import Amplify, { Auth } from "aws-amplify";
 import awsconfig from "./aws-exports";
 Amplify.configure(awsconfig);

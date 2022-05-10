@@ -6,13 +6,14 @@ import { v4 as uuidv4 } from "uuid";
 
 const menus = [
   {
-    id: 9,
+    num: 1,
     name: "McDowell's",
-    price: "6,95 €",
-    quantityMenu: 5,
+    price: 6.95,
+    uuid_menu: uuidv4(),
+    time_process: 3,
   },
   {
-    id: 8,
+    num: 2,
     name: "McDowell's Jr",
     price: "5,99 €",
     quantityMenuJr: 0,
@@ -30,59 +31,25 @@ function OrderAmount() {
   const { order, setOrder } = useContext(StaticContext);
   console.log(order, "order");
 
-  //*Remove menus
-  //remove a Menu "McDowell's"
-  function removeMenu1() {
-    let totalMenu1 = [];
-    order[0].menus.map((individual) => {
-      if (individual.num === 1) {
-        totalMenu1.push(individual);
-      }
-    });
-    console.log(totalMenu1, "totalMenu1");
-    totalMenu1.pop();
-    setOrder({ menus: totalMenu1 });
-    setCounter1(counter1 - 1);
-  }
+  //Add menus
+  const addMenu = (num) => {
+    const burguer = menus.filter((menu) => menu.num === num);
+    setOrder([order[0].menus, ...burguer]);
+    console.log(burguer);
+    // burguer.num === num ? setCounter1(counter1 + 1) : setCounter2(counter2 + 1)
+  };
 
-  //remove a Menu "McDowell's Jr",
-  function removeMenu2() {
-    setCounter2(counter2 - 1);
-  }
-
-  //*Add menus
-  //add a Menu "McDowell's"
-  function addMenu1() {
-    const uuid_menu = "";
-
-    order[0].menus.push({
-      num: 1,
-      name: "McDowell's",
-      price: 6.95,
-      uuid_menu: uuidv4(),
-      time_process: 3,
-    });
-    setCounter1(counter1 + 1);
-  }
-
-  //add a Menu "McDowell's Jr",
-  function addMenu2() {
-    const uuid_menu = "";
-
-    order[0].menus.push({
-      num: 2,
-      name: "McDowell's Jr",
-      price: 5.99,
-      uuid_menu: uuidv4(),
-      time_process: 2,
-    });
-    setCounter2(counter2 + 1);
-  }
+  //Delete menus
+  const deleteMenu = (num) => {
+    //quedan todas las hamburguesas menos la que hago el filter pero me cargo todas
+    const burguers = order.filter((menu) => menu.num !== num);
+    setOrder(burguers);
+  };
 
   return (
     <>
       {menus.map((menu) => (
-        <div className="menus" key={menu.id}>
+        <div className="menus" key={menu.num}>
           <div className="container">
             <img
               src={menu.name === "McDowell's" ? menuBurguer : burguer}
@@ -92,20 +59,13 @@ function OrderAmount() {
             <div className="quantity">
               <button
                 className="removeMenu"
-                onClick={menu.name === "McDowell's" ? removeMenu1 : removeMenu2}
+                onClick={() => deleteMenu(menu.num)}
               >
                 -
               </button>
-              <p>
-                {menu.quantityMenu
-                  ? menu.quantityMenu + counter1
-                  : menu.quantityMenuJr + counter2}
-              </p>
-              {/* <p>{menu.name === "McDowell's" ? counter1 : counter2}</p> */}
-              <button
-                className="addMenu"
-                onClick={menu.name === "McDowell's" ? addMenu1 : addMenu2}
-              >
+
+              <p>{menu.num === 1 ? `${counter1}` : `${counter2}`}</p>
+              <button className="addMenu" onClick={() => addMenu(menu.num)}>
                 +
               </button>
             </div>

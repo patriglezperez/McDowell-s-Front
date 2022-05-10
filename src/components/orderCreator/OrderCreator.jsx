@@ -79,7 +79,7 @@ function OrderCreator() {
   // }, []);
 
   return (
-    <div>
+    <div className="order-page">
       <div className="titleCreator">
         <h2 className="welcome-title">
           {view === false ? titles[0].name1 : titles[1].name1}

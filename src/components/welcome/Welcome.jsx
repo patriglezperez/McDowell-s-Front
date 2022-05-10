@@ -2,21 +2,19 @@ import logoBurguer from "../../assets/img/logoBurguer.png";
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
-import Header from "../../components/header";
+import Header from "../Header";
 import { useContext } from "react";
-
 import StaticContext from "../../context/staticContext";
 
 function Welcome() {
-  //   const navigate = useNavigate()
-
+  const navigate = useNavigate();
   const { order, setOrder } = useContext(StaticContext);
-  console.log(order, "order");
+  console.log(order);
   //Create a uuuid_user for the new order
   async function start() {
-    setOrder((order.uuidUser = uuidv4()));
-    console.log("Comenzando pedido");
-    // navigate("/");
+    const id = uuidv4();
+    order[0].uuid_user.push(id);
+    navigate(`order/${id}`);
   }
 
   return (

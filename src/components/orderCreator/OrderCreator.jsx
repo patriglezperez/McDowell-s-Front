@@ -13,7 +13,7 @@ function OrderCreator() {
   const [view, setView] = useState(false);
   const [renderId, setRenderId] = useState(0);
   const navigate = useNavigate();
-  // const { dataMenus, setDataMenus } = useContext(StaticContext);
+  const { dataMenus, setDataMenus } = useContext(StaticContext);
 
   let locationUrl = window.location.href;
 
@@ -43,11 +43,12 @@ function OrderCreator() {
     },
   ];
 
+  const uuid_user = order[0].uuid_user[0];
+
   function choose(id) {
     const place = id;
     setRenderId(id);
     setView(true);
-    const uuid_user = order[0].uuid_user;
     const createMenuView = `customers/order/${uuid_user}/create`;
     locationUrl = createMenuView;
     order[0].menus.push({ consumption: place });
@@ -61,22 +62,21 @@ function OrderCreator() {
   }
 
   async function confirmOrder() {
-    const uuid_user = order[0].uuid_user;
     navigate(`customers/order/${uuid_user}/cart`);
   }
 
-  // useEffect(() => {
-  //   function getMenusData() {
-  //     try {
-  //       axios
-  //         .get("http://localhost:3001/api/menus/all")
-  //         .then((res) => setData(res.data));
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   getMenusData();
-  // }, []);
+  useEffect(() => {
+    function getMenusData() {
+      try {
+        axios
+          .get("http://localhost:3000/api/menu/all")
+          .then((res) => console.log(res));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getMenusData();
+  }, []);
 
   return (
     <div className="order-page">

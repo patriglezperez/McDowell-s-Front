@@ -62,21 +62,21 @@ function OrderCreator() {
   }
 
   async function confirmOrder() {
-    navigate(`customers/order/${uuid_user}/cart`);
+    navigate(`/customers/order/${uuid_user}/cart`);
   }
 
-  useEffect(() => {
-    function getMenusData() {
-      try {
-        axios
-          .get("http://localhost:3000/api/menu/all")
-          .then((res) => console.log(res));
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getMenusData();
-  }, []);
+  // useEffect(() => {
+  //   function getMenusData() {
+  //     try {
+  //       axios
+  //         .get("http://localhost:3000/api/menu/all")
+  //         .then((res) => console.log(res));
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   getMenusData();
+  // }, []);
 
   return (
     <div className="order-page">

@@ -7,6 +7,7 @@ import OrderCreator from "./components/orderCreator/OrderCreator";
 import OrderAmount from "./components/OrderAmount/OrderAmount";
 import Amplify, { Auth } from "aws-amplify";
 import awsconfig from "./aws-exports";
+import OrderSummary from "./components/orderSummary/OrderSummary";
 Amplify.configure(awsconfig);
 
 function App() {
@@ -19,8 +20,10 @@ function App() {
             <Route path="/customers" element={<Welcome />} />
             <Route path="/login" element={<StaffSignIn />} />
             <Route path="/customers/order/:id" element={<OrderCreator />} />
-            {/* <MenuPreview /> */}
-            <Route path="/test" element={<OrderAmount />} />
+            <Route
+              path="/customers/order/:id/cart"
+              element={<OrderSummary />}
+            />
           </Routes>
         </BrowserRouter>
       </StaticContextProvider>

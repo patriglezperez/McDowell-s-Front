@@ -20,7 +20,6 @@ function Welcome() {
 
   return (
     <>
-      <Header />
       <div className="start">
         <h1 className="title">McDowell's</h1>
         <br />

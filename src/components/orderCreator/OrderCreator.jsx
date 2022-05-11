@@ -44,7 +44,7 @@ function OrderCreator() {
   ];
 
   const uuid_user = order[0].uuid_user[0];
-
+  console.log("order", order);
   function choose(id) {
     const place = id;
     setRenderId(id);
@@ -57,7 +57,6 @@ function OrderCreator() {
   //cancel the order and empty the context
   function cancelOrder() {
     setOrder({ 0: { uuid_user: [], menus: [] } });
-    console.log(order);
     navigate("/customers");
   }
 

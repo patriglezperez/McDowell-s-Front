@@ -21,7 +21,6 @@ const menus = [
 
 function MenuPreview() {
   const { order, setOrder } = useContext(StaticContext);
-
   //Add menu "McDowell's" to the context
   function addMenu1() {
     const uuid_menu = "";
@@ -33,6 +32,7 @@ function MenuPreview() {
       uuid_menu: uuidv4(),
       time_process: 3,
     });
+    console.log("order", order);
   }
 
   //Add menu "McDowell's Jr " to the context
@@ -46,6 +46,7 @@ function MenuPreview() {
       uuid_menu: uuidv4(),
       time_process: 2,
     });
+    console.log("order", order);
   }
 
   return (

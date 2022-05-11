@@ -15,35 +15,37 @@ const menus = [
   {
     num: 2,
     name: "McDowell's Jr",
-    price: "5,99 €",
+    price: 5.99,
     quantityMenuJr: 0,
   },
 ];
 
 /*the menus are collected from the back*/
-
 function OrderAmount() {
+  const { order, setOrder } = useContext(StaticContext);
   const [counter1, setCounter1] = useState(0); //Menu "McDowell's",
   const [counter2, setCounter2] = useState(0); //Menu "McDowell's Jr",
   console.log(counter1, "contador1 inicial");
   console.log(counter2, "contador2 inicial");
-
-  const { order, setOrder } = useContext(StaticContext);
   console.log(order, "order");
 
   //Add menus
   const addMenu = (num) => {
-    const burguer = menus.filter((menu) => menu.num === num);
-    setOrder([order[0].menus, ...burguer]);
-    console.log(burguer);
-    // burguer.num === num ? setCounter1(counter1 + 1) : setCounter2(counter2 + 1)
+    // const burguer = menus.filter((menu) => menu.num === num);
+    // console.log(num);
+    // setOrder([...order, ...burguer]);
+    // console.log(burguer);
+    // burguer.num === 1 ? setCounter1(counter1 + 1) : setCounter2(counter2 + 1);
+    num === 1 ? setCounter1(counter1 + 1) : setCounter2(counter2 + 1);
   };
 
   //Delete menus
   const deleteMenu = (num) => {
-    //quedan todas las hamburguesas menos la que hago el filter pero me cargo todas
-    const burguers = order.filter((menu) => menu.num !== num);
-    setOrder(burguers);
+    // //quedan todas las hamburguesas menos la que hago el filter pero me cargo todas
+    // const burguers = order.filter((menu) => menu.num !== num);
+    // setOrder(burguers);
+    // burguer.num === 1 ? setCounter1(counter1 - 1) : setCounter2(counter2 - 1);
+    num === 1 ? setCounter1(counter1 - 1) : setCounter2(counter2 - 1);
   };
 
   return (
@@ -74,7 +76,7 @@ function OrderAmount() {
               Menú <br />
               {menu.name}
             </p>
-            <p className="priceMenu">{menu.price}</p>
+            <p className="priceMenu">{menu.price}€</p>
           </div>
         </div>
       ))}

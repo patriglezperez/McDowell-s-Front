@@ -1,17 +1,17 @@
 import burguer from "../../../assets/img/logoBurguer.png";
 import menuBurguer from "../../../assets/img/Menu1.png";
 import StaticContext from "../../../context/staticContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const menus = [
   {
-    id: 1,
+    num: 1,
     name: "McDowell's",
     price: 6.95,
   },
   {
-    id: 2,
+    num: 2,
     name: "McDowell's Jr",
     price: 5.99,
   },
@@ -21,10 +21,14 @@ const menus = [
 
 function MenuPreview() {
   const { order, setOrder } = useContext(StaticContext);
+  const [counter1, setCounter1] = useState(0); //Menu "McDowell's",
+  const [counter2, setCounter2] = useState(0); //Menu "McDowell's Jr",
+
+  console.log("counter1", counter1);
+  console.log("counter2", counter2);
   //Add menu "McDowell's" to the context
   function addMenu1() {
     const uuid_menu = "";
-
     order[0].menus.push({
       num: 1,
       name: "McDowell's",
@@ -38,7 +42,6 @@ function MenuPreview() {
   //Add menu "McDowell's Jr " to the context
   function addMenu2() {
     const uuid_menu = "";
-
     order[0].menus.push({
       num: 2,
       name: "McDowell's Jr",
@@ -52,10 +55,18 @@ function MenuPreview() {
   return (
     <div className="space-menus">
       {menus.map((menu) => (
-        <div className="menu" key={menu.id}>
+        <div
+          className="menu"
+          key={menu.num}
+          onClick={menu.name === "McDowell's" ? addMenu1 : addMenu2}
+        >
           <div
             className="card"
-            onClick={menu.name === "McDowell's" ? addMenu1 : addMenu2}
+            onClick={() => {
+              menu.num === 1
+                ? setCounter1(counter1 + 1)
+                : setCounter2(counter2 + 1);
+            }}
           >
             <div className="blob"></div>
             <img
@@ -70,6 +81,7 @@ function MenuPreview() {
               <span>{menu.price}€</span>
             </h2>
           </div>
+          <p>{menu.num === 1 ? `${counter1}` : `${counter2}`}</p>
         </div>
       ))}
     </div>

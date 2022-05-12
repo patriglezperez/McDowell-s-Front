@@ -25,9 +25,25 @@ function OrderAmount() {
   const { order, setOrder } = useContext(StaticContext);
   const [counter1, setCounter1] = useState(0); //Menu "McDowell's",
   const [counter2, setCounter2] = useState(0); //Menu "McDowell's Jr",
+
+  console.log(order, "order");
+
+  //Contador
+  useEffect(() => {
+    function create() {
+      order[0].menus.map((menu) => {
+        if (menu.num === 1) {
+          setCounter1(counter1 + 1);
+        } else if (menu.num === 2) {
+          setCounter2(counter2 + 1);
+        }
+      });
+    }
+    create();
+  }, []);
+
   console.log(counter1, "contador1 inicial");
   console.log(counter2, "contador2 inicial");
-  console.log(order, "order");
 
   //Add menus
   const addMenu = (num) => {

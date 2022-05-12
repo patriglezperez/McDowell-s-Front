@@ -14,7 +14,6 @@ function OrderCreator() {
   const [renderId, setRenderId] = useState(0);
   const navigate = useNavigate();
   const { dataMenus, setDataMenus } = useContext(StaticContext);
-
   let locationUrl = window.location.href;
 
   const typeOfRestaurant = [

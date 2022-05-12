@@ -7,11 +7,13 @@ export default function Countdown(props) {
     const [mins, setMinutes] = useState(startingMinutes);
     const [secs, setSeconds] = useState(startingSeconds);
 
+    const [color, setColor] = useState("#000000");
+
     useEffect(() => {
         let sampleInterval = setInterval(() => {
             if (secs > 0) {
                 if ((mins === 0) && (secs <= 15)) {
-                    "Ponte colorado" /// colorado
+                    setColor("#DC143C"); // Crisom Red
                 } else {
                     setSeconds(secs - 1);
                 }
@@ -33,7 +35,7 @@ export default function Countdown(props) {
     return (
         <div>
             {!(mins && secs) ? "" : (
-                <p>
+                <p className="countdown--time" style={{color: color}}>
                     {" "}
                     {mins}:{secs < 10 ? `0${secs}` : secs}
                 </p>

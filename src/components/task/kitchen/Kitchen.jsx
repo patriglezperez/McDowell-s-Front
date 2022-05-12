@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { statusStaffContext } from "../Task";
 
 import Countdown from "./countdown/Countdown";
 import SelectStatus from "../selectStatus/SelectStatus";
 import burguer from "../../assets/img/logoBurguer.png";
 
 
-export default function Kitchen(id) {
+export default function Kitchen(props) {
+    const { id } = props;
     /// estado del staff activo
     const { statusStaff } = useContext(statusStaffContext)
     const navigate = useNavigate();
@@ -15,7 +18,7 @@ export default function Kitchen(id) {
 
     if (statusStaff === null) {
         AmplifyService.signOut();
-        navigate(`/login`);
+        navigate("/login");
     }
 
     useEffect(() => {
@@ -38,7 +41,7 @@ export default function Kitchen(id) {
         {!orders ? null : <div className="orders--kitchen">
             <div> Menu: <Countdown startingMinutes={orders.time} /> </div>
             <div> <img src={burguer} /> </div>
-            <div> {orders.uuid} </div>
-        </div>}
+            <div> {orders.uuid} </div> 
+        </div>} 
     </div>);
 }

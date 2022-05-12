@@ -7,6 +7,7 @@ import OrderCreator from "./components/orderCreator/OrderCreator";
 import OrderAmount from "./components/OrderAmount/OrderAmount";
 import Amplify, { Auth } from "aws-amplify";
 import awsconfig from "./aws-exports";
+import { CounterContextProvider } from "./context/counterContext";
 Amplify.configure(awsconfig);
 
 function App() {
@@ -18,9 +19,10 @@ function App() {
           <Routes>
             <Route path="/customers" element={<Welcome />} />
             <Route path="/login" element={<StaffSignIn />} />
-            <Route path="/customers/order/:id" element={<OrderCreator />} />
-            {/* <MenuPreview /> */}
-            <Route path="/test" element={<OrderAmount />} />
+            <CounterContextProvider>
+              <Route path="/customers/order/:id" element={<OrderCreator />} />
+              <Route path="/test" element={<OrderAmount />} />
+            </CounterContextProvider>
           </Routes>
         </BrowserRouter>
       </StaticContextProvider>

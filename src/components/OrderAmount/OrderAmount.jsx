@@ -28,20 +28,6 @@ function OrderAmount() {
 
   console.log(order, "order");
 
-  // //Contador
-  // useEffect(() => {
-  //   function create() {
-  //     order[0].menus.map((menu) => {
-  //       if (menu.num === 1) {
-  //         setCounter1(counter1 + 1);
-  //       } else if (menu.num === 2) {
-  //         setCounter2(counter2 + 1);
-  //       }
-  //     });
-  //   }
-  //   create();
-  // }, []);
-
   //Add menus
   const addMenu = (num) => {
     const burguer = menus.filter((menu) => menu.num === num);
@@ -64,7 +50,9 @@ function OrderAmount() {
   //Delete menus
   const deleteMenu = (num) => {
     // //quedan todas las hamburguesas menos la que hago el filter pero me cargo todas
-    // const burguers = order.filter((menu) => menu.num !== num);
+    const burguers = order.filter((menu) => menu.num === num);
+    order[0].menus.delete(...burguer);
+    console.log(order, "oder");
     // setOrder(burguers);
     // burguer.num === 1 ? setCounter1(counter1 - 1) : setCounter2(counter2 - 1);
     num === 1 ? setCounter1(counter1 - 1) : setCounter2(counter2 - 1);

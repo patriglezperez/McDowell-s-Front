@@ -19,6 +19,7 @@ function OrderCreator() {
   const [counter1, setCounter1] = useState(0); //Menu "McDowell's",
   const [counter2, setCounter2] = useState(0); //Menu "McDowell's Jr",
 
+  console.log(order);
   const typeOfRestaurant = [
     {
       id: 0,

@@ -23,36 +23,42 @@ const menus = [
 /*the menus are collected from the back*/
 function OrderAmount() {
   const { order, setOrder } = useContext(StaticContext);
-  const [counter1, setCounter1] = useState(0); //Menu "McDowell's",
-  const [counter2, setCounter2] = useState(0); //Menu "McDowell's Jr",
+  const [counter1, setCounter1] = useState(order.amountMenuMcDowewlls); //Menu "McDowell's",
+  const [counter2, setCounter2] = useState(order.amountMenuMcdowellsJr); //Menu "McDowell's Jr",
 
   console.log(order, "order");
 
-  //Contador
-  useEffect(() => {
-    function create() {
-      order[0].menus.map((menu) => {
-        if (menu.num === 1) {
-          setCounter1(counter1 + 1);
-        } else if (menu.num === 2) {
-          setCounter2(counter2 + 1);
-        }
-      });
-    }
-    create();
-  }, []);
-
-  console.log(counter1, "contador1 inicial");
-  console.log(counter2, "contador2 inicial");
+  // //Contador
+  // useEffect(() => {
+  //   function create() {
+  //     order[0].menus.map((menu) => {
+  //       if (menu.num === 1) {
+  //         setCounter1(counter1 + 1);
+  //       } else if (menu.num === 2) {
+  //         setCounter2(counter2 + 1);
+  //       }
+  //     });
+  //   }
+  //   create();
+  // }, []);
 
   //Add menus
   const addMenu = (num) => {
-    // const burguer = menus.filter((menu) => menu.num === num);
-    // console.log(num);
-    // setOrder([...order, ...burguer]);
-    // console.log(burguer);
-    // burguer.num === 1 ? setCounter1(counter1 + 1) : setCounter2(counter2 + 1);
+    const burguer = menus.filter((menu) => menu.num === num);
+    order[0].menus.push(...burguer);
+
     num === 1 ? setCounter1(counter1 + 1) : setCounter2(counter2 + 1);
+
+    //we change the state total with the amount
+    num === 1
+      ? setOrder({
+          ...order,
+          amountMenuMcDowewlls: counter1 + 1,
+        })
+      : setOrder({
+          ...order,
+          amountMenuMcdowellsJr: counter2 + 1,
+        });
   };
 
   //Delete menus

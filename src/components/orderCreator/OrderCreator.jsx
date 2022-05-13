@@ -16,6 +16,9 @@ function OrderCreator() {
   const { dataMenus, setDataMenus } = useContext(StaticContext);
   let locationUrl = window.location.href;
 
+  const [counter1, setCounter1] = useState(0); //Menu "McDowell's",
+  const [counter2, setCounter2] = useState(0); //Menu "McDowell's Jr",
+
   const typeOfRestaurant = [
     {
       id: 0,
@@ -43,14 +46,18 @@ function OrderCreator() {
   ];
 
   const uuid_user = order[0].uuid_user[0];
-  console.log("order", order);
+
+  // choose whether to take here or take away and you go to the next view
   function choose(id) {
     const place = id;
     setRenderId(id);
     setView(true);
     const createMenuView = `customers/order/${uuid_user}/create`;
     locationUrl = createMenuView;
-    order[0].menus.push({ consumption: place });
+    setOrder({
+      ...order,
+      consumption: place,
+    });
   }
 
   //cancel the order and empty the context
@@ -58,9 +65,15 @@ function OrderCreator() {
     setOrder({ 0: { uuid_user: [], menus: [] } });
     navigate("/customers");
   }
-
+  //finalize the cart
   async function confirmOrder() {
+    setOrder({
+      ...order,
+      amountMenuMcDowewlls: counter1,
+      amountMenuMcdowellsJr: counter2,
+    });
     navigate(`/customers/order/${uuid_user}/cart`);
+    console.log("order", order);
   }
 
   // useEffect(() => {
@@ -86,6 +99,8 @@ function OrderCreator() {
         </h2>
         <h1>{view === false ? titles[0].name2 : titles[1].name2}</h1>
       </div>
+
+      {/* view 1, take or take away */}
       {view === false ? (
         <div className="space-menus">
           {typeOfRestaurant.map((restaurant) => (
@@ -104,8 +119,17 @@ function OrderCreator() {
           ))}
         </div>
       ) : (
-        <MenuPreview />
+        // view 2, select menu type
+        <MenuPreview
+          counter1={counter1}
+          setCounter1={setCounter1}
+          counter2={counter2}
+          setCounter2={setCounter2}
+        />
       )}
+
+      {/* Confirm and Cancel buttons */}
+
       {view === false ? (
         <div className="space-buttons">
           <button className="cancelOrder" onClick={cancelOrder}>

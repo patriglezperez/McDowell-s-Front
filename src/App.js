@@ -1,13 +1,17 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import StaffSignIn from "./components/staffSignIn/StaffSignIn";
-import Header from "./components/header";
-import Welcome from "./components/welcome/Welcome";
-import { StaticContextProvider } from "./context/staticContext";
-import OrderCreator from "./components/orderCreator/OrderCreator";
-import OrderAmount from "./components/OrderAmount/OrderAmount";
+
 import Amplify, { Auth } from "aws-amplify";
 import awsconfig from "./aws-exports";
+
+import { StaticContextProvider } from "./context/staticContext";
+import StaffSignIn from "./components/staffSignIn/StaffSignIn";
+import Header from "./components/Header";
+import Welcome from "./components/welcome/Welcome";
+import OrderCreator from "./components/orderCreator/OrderCreator";
+import PlaceOrder from "./components/placeOrder/PlaceOrder";
+import OrderAmount from "./components/OrderAmount/OrderAmount";
 import OrderSummary from "./components/orderSummary/OrderSummary";
+
 Amplify.configure(awsconfig);
 
 function App() {
@@ -24,6 +28,11 @@ function App() {
               path="/customers/order/:id/cart"
               element={<OrderSummary />}
             />
+            <Route
+              path="customers/order/:id/completed"
+              element={<PlaceOrder />}
+            />
+            {/* <MenuPreview /> */}
           </Routes>
         </BrowserRouter>
       </StaticContextProvider>

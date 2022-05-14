@@ -26,8 +26,8 @@ export default function Task() {
             }
     });
 
-    return (<petsContext.Provider>
+    return (<StatusStaffContext.Provider>
             {rol === "kitchen" ? <Kitchen id={urlId} /> : <Delivering id={urlId} />}
-        </petsContext.Provider>
+        </StatusStaffContext.Provider>
     );
 }

@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import AmplifyService from "../../services/amplifyService";
 
-import { statusStaffContext } from "../Task";
+import { StatusStaffContext } from "../Task";
 
 import Countdown from "./countdown/Countdown";
 import SelectStatus from "../selectStatus/SelectStatus";
@@ -11,7 +12,7 @@ import burguer from "../../assets/img/logoBurguer.png";
 export default function Kitchen(props) {
     const { id } = props;
     /// estado del staff activo
-    const { statusStaff } = useContext(statusStaffContext)
+    const { statusStaff } = useContext(StatusStaffContext)
     const navigate = useNavigate();
     const [orders, setOrders] = useState(""); /// pedidos asignado al cocinero
     statusRef.current = statusStaff; /// se supone q da problemas el useState dentro del useEffect

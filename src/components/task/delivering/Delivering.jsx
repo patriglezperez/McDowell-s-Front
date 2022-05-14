@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import AmplifyService from "../../services/amplifyService";
 
-import { statusStaffContext } from "../Task";
+import { StatusStaffContext } from "../Task";
 
 import SelectStatus from "../selectStatus/SelectStatus";
 import OrderPreview from "../../orderPreview/OrderPreview";
-
 import burguer from "../../assets/img/logoBurguer.png";
 
 
 export default function Kitchen(props) {
     /// estado del staff activo
     const { id } = props;
-    const { statusStaff } = useContext(statusStaffContext)
+    const { statusStaff } = useContext(StatusStaffContext)
     const navigate = useNavigate();
     const [orders, setOrders] = useState(""); /// pedidos asignado al waiter
     const [finish, setFinish] = useState(false); /// pedido finalizado activar boton
@@ -44,6 +44,7 @@ export default function Kitchen(props) {
         try {
             // todos los pedidos habilitar boton
             axios.patch(`${process.env.REACT_APP_API_URL}orders/finish/${orders.orderDay}`)
+            // initialize
             setOrders("");
             setFinish(false);
         } catch (err) {

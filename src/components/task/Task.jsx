@@ -4,12 +4,12 @@ import AmplifyService from "../../services/amplifyService";
 
 import Kitchen from "./kitchen/Kitchen";
 
-const statusStaffContext = createContext({
-    statusStaff: [],
+const StatusStaffContext = createContext({
+    statusStaff: "",
     setStatusStaff: () => { },
   });
   
-export { statusStaffContext };
+export { StatusStaffContext };
 
 export default function Task() {
     const { urlId } = useParams();

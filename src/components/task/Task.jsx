@@ -6,7 +6,7 @@ import Kitchen from "./kitchen/Kitchen";
 import Delivering from "./delivering/Delivering";
 
 const StatusStaffContext = createContext({
-    statusStaff: "",
+    statusStaff: true, // En pausa por defecto
     setStatusStaff: () => { },
   });
   

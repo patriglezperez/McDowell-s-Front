@@ -46,7 +46,7 @@ function OrderCreator() {
     },
   ];
 
-  const uuid_user = order[0].uuid_user[0];
+  const uuid_user = order.uuid_user[0];
 
   // choose whether to take here or take away and you go to the next view
   function choose(id) {
@@ -63,7 +63,7 @@ function OrderCreator() {
 
   //cancel the order and empty the context
   function cancelOrder() {
-    setOrder({ 0: { uuid_user: [], menus: [] } });
+    setOrder({ uuid_user: [], menus: [] });
     navigate("/customers");
   }
   //finalize the cart

@@ -28,7 +28,7 @@ function MenuPreview({ counter1, counter2, setCounter1, setCounter2 }) {
   //add menus
   const addMenu = (num) => {
     let burguer = menus.filter((menu) => menu.num === num);
-    order[0].menus.push(...burguer);
+    order.menus.push(...burguer);
 
     num === 1 ? setCounter1(counter1 + 1) : setCounter2(counter2 + 1);
 
@@ -47,23 +47,32 @@ function MenuPreview({ counter1, counter2, setCounter1, setCounter2 }) {
   //delete menus
   const deleteMenu = (num) => {
     //we differentiate between the two types of hamburgers, we keep the ones that do not move and select the ones we have to delete
-    let differents = order[0].menus.filter((menu) => menu.num !== num);
-    let burguersSelected = order[0].menus.filter((menu) => menu.num === num);
+    let differents = order.menus.filter((menu) => menu.num !== num);
+    let burguersSelected = order.menus.filter((menu) => menu.num === num);
 
     burguersSelected.pop();
 
     //empty the menu array and add the hamburgers back to it
-    order[0].menus = [];
+    order.menus = [];
 
     differents.forEach((menu) => {
-      order[0].menus.push(menu);
+      order.menus.push(menu);
     });
 
     burguersSelected.forEach((menu) => {
-      order[0].menus.push(menu);
+      order.menus.push(menu);
     });
 
     num === 1 ? setCounter1(counter1 - 1) : setCounter2(counter2 - 1);
+
+    //we limit the number of hamburgers to 0
+    if (counter1 <= 0) {
+      setCounter1(0);
+    }
+
+    if (counter2 <= 0) {
+      setCounter2(0);
+    }
 
     //we change the state total with the amount
     num === 1
@@ -75,6 +84,21 @@ function MenuPreview({ counter1, counter2, setCounter1, setCounter2 }) {
           ...order,
           amountMenuMcdowellsJr: counter2 - 1,
         });
+
+    //we limit the total number of hamburgers to 0 so that they are coordinated
+    if (order.amountMenuMcDowewlls <= 0) {
+      setOrder({
+        ...order,
+        amountMenuMcDowewlls: 0,
+      });
+    }
+
+    if (order.amountMenuMcdowellsJr <= 0) {
+      setOrder({
+        ...order,
+        amountMenuMcdowellsJr: 0,
+      });
+    }
   };
 
   return (

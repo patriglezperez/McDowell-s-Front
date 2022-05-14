@@ -16,7 +16,8 @@ const menus = [
     num: 2,
     name: "McDowell's Jr",
     price: 5.99,
-    quantityMenuJr: 0,
+    uuid_menu: uuidv4(),
+    time_process: 2,
   },
 ];
 
@@ -26,12 +27,10 @@ function OrderAmount() {
   const [counter1, setCounter1] = useState(order.amountMenuMcDowewlls); //Menu "McDowell's",
   const [counter2, setCounter2] = useState(order.amountMenuMcdowellsJr); //Menu "McDowell's Jr",
 
-  console.log(order, "order");
-
-  //Add menus
+  //add menus
   const addMenu = (num) => {
-    const burguer = menus.filter((menu) => menu.num === num);
-    order[0].menus.push(...burguer);
+    let burguer = menus.filter((menu) => menu.num === num);
+    order.menus.push(...burguer);
 
     num === 1 ? setCounter1(counter1 + 1) : setCounter2(counter2 + 1);
 
@@ -47,17 +46,64 @@ function OrderAmount() {
         });
   };
 
-  //Delete menus
+  //delete menus
   const deleteMenu = (num) => {
-    // //quedan todas las hamburguesas menos la que hago el filter pero me cargo todas
-    const burguers = order.filter((menu) => menu.num === num);
-    order[0].menus.delete(...burguer);
-    console.log(order, "oder");
-    // setOrder(burguers);
-    // burguer.num === 1 ? setCounter1(counter1 - 1) : setCounter2(counter2 - 1);
+    //we differentiate between the two types of hamburgers, we keep the ones that do not move and select the ones we have to delete
+    let differents = order.menus.filter((menu) => menu.num !== num);
+    let burguersSelected = order.menus.filter((menu) => menu.num === num);
+
+    burguersSelected.pop();
+
+    //empty the menu array and add the hamburgers back to it
+    order.menus = [];
+
+    differents.forEach((menu) => {
+      order.menus.push(menu);
+    });
+
+    burguersSelected.forEach((menu) => {
+      order.menus.push(menu);
+    });
+
     num === 1 ? setCounter1(counter1 - 1) : setCounter2(counter2 - 1);
+
+    //we limit the number of hamburgers to 0
+    if (counter1 <= 0) {
+      setCounter1(0);
+    }
+
+    if (counter2 <= 0) {
+      setCounter2(0);
+    }
+
+    //we change the state total with the amount
+    num === 1
+      ? setOrder({
+          ...order,
+          amountMenuMcDowewlls: counter1 - 1,
+        })
+      : setOrder({
+          ...order,
+          amountMenuMcdowellsJr: counter2 - 1,
+        });
+
+    //we limit the total number of hamburgers to 0 so that they are coordinated
+    if (order.amountMenuMcDowewlls <= 0) {
+      setOrder({
+        ...order,
+        amountMenuMcDowewlls: 0,
+      });
+    }
+
+    if (order.amountMenuMcdowellsJr <= 0) {
+      setOrder({
+        ...order,
+        amountMenuMcdowellsJr: 0,
+      });
+    }
   };
 
+  console.log(order);
   return (
     <>
       {menus.map((menu) => (

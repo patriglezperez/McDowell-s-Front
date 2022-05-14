@@ -14,7 +14,7 @@ function Welcome() {
   //Create a uuuid_user for the new order
   async function start() {
     const id = uuidv4();
-    order[0].uuid_user.push(id);
+    order.uuid_user.push(id);
     navigate(`order/${id}`);
   }
 

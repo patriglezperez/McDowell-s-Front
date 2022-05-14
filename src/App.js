@@ -5,11 +5,12 @@ import awsconfig from "./aws-exports";
 
 import { StaticContextProvider } from "./context/staticContext";
 import StaffSignIn from "./components/staffSignIn/StaffSignIn";
-import MenuPreview from "./components/menuPreview/MenuPreview";
-import Header from "./components/Header";
+import Header from "./components/header";
 import Welcome from "./components/welcome/Welcome";
 import OrderCreator from "./components/orderCreator/OrderCreator";
 import PlaceOrder from "./components/placeOrder/PlaceOrder";
+import OrderAmount from "./components/OrderAmount/OrderAmount";
+
 
 Amplify.configure(awsconfig);
 
@@ -25,6 +26,7 @@ function App() {
             <Route path="/customers/order/:id" element={<OrderCreator />} />
             <Route path="customers/order/:id/completed" element={<PlaceOrder />} />
             {/* <MenuPreview /> */}
+            <Route path="/test" element={<OrderAmount />} />
           </Routes>
         </BrowserRouter>
       </StaticContextProvider>

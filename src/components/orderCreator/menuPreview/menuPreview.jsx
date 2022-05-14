@@ -46,15 +46,35 @@ function MenuPreview({ counter1, counter2, setCounter1, setCounter2 }) {
 
   //delete menus
   const deleteMenu = (num) => {
-    //filtro que hamburguesas quiero borrar (de que tipo)
-    let burguers = order[0].menus.filter((menu) => menu.num === num);
+    //we differentiate between the two types of hamburgers, we keep the ones that do not move and select the ones we have to delete
+    let differents = order[0].menus.filter((menu) => menu.num !== num);
+    let burguersSelected = order[0].menus.filter((menu) => menu.num === num);
 
-    console.log(burguers);
-    burguers.pop();
-    console.log(order, "oder");
-    // setOrder(burguers);
-    // burguer.num === 1 ? setCounter1(counter1 - 1) : setCounter2(counter2 - 1);
+    burguersSelected.pop();
+
+    //empty the menu array and add the hamburgers back to it
+    order[0].menus = [];
+
+    differents.forEach((menu) => {
+      order[0].menus.push(menu);
+    });
+
+    burguersSelected.forEach((menu) => {
+      order[0].menus.push(menu);
+    });
+
     num === 1 ? setCounter1(counter1 - 1) : setCounter2(counter2 - 1);
+
+    //we change the state total with the amount
+    num === 1
+      ? setOrder({
+          ...order,
+          amountMenuMcDowewlls: counter1 - 1,
+        })
+      : setOrder({
+          ...order,
+          amountMenuMcdowellsJr: counter2 - 1,
+        });
   };
 
   return (

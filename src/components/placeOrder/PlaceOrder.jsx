@@ -1,9 +1,12 @@
-import { useLocation } from "react-router-dom";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
-import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import { useContext } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
+import * as yup from "yup";
+
+import StaticContext from "../../context/staticContext";
 import mealBurger from "../../assets/img/meal.png";
 
 /* Verification */
@@ -13,6 +16,7 @@ const schemaEmail = yup.object().shape({
 });
 
 export default function PlaceOrder() {
+    const { order, setOrder } = useContext(StaticContext);
     const navigate = useNavigate();
     //const orderNumber = useLocation().orderNumber;
     const orderNumber = 123;
@@ -25,11 +29,18 @@ export default function PlaceOrder() {
         resolver: yupResolver(schemaEmail),
     });
 
-    function sendReceipt(userEmail) {
+    async function handleFinishOrder(userEmail) {
         if (userEmail.email != '') {
-            console.log(userEmail);
+            try {
+                //still unsure about what data we need
+                const data = { email: userEmail, order: { ...order } }
+                const response = await axios.post(`${process.env.REACT_APP_API_URL}/orders/sendReceipt`,)
+            } catch (error) {
+                console.log(error);
+            }
+            navigate('/customers');
         } else {
-            navigate('/customer');
+            navigate('/customers');
         }
     }
 
@@ -39,7 +50,7 @@ export default function PlaceOrder() {
             <h3 className="payment-instruction">Paga tu pedido en caja y prepárate para disfrutar de tu McComida</h3>
             <p className="place-order-subtitle">Número de pedido</p>
             {orderNumber && <div className="order-number">{orderNumber}</div>}
-            <form className="finish-order-form" onSubmit={handleSubmit(sendReceipt)}>
+            <form className="finish-order-form" onSubmit={handleSubmit(handleFinishOrder)}>
                 <p className="place-order-subtitle">¿Quieres recibir un email con el ticket?</p>
                 <input
                     type="email"
@@ -47,6 +58,7 @@ export default function PlaceOrder() {
                     placeholder="Email"
                     {...register("email", {})}
                 />
+                <sub className="input-error">{errors.email && errors.email.message}</sub>
                 <button type="submit" className="finish-order-button">Finalizar</button>
             </form>
         </section>

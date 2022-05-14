@@ -34,7 +34,7 @@ export default function PlaceOrder() {
             try {
                 //still unsure about what data we need
                 const data = { email: userEmail, order: { ...order } }
-                const response = await axios.post(`${process.env.REACT_APP_API_URL}/orders/sendReceipt`,)
+                const response = await axios.post(`${process.env.REACT_APP_API_URL}/orders/sendReceipt`, data)
             } catch (error) {
                 console.log(error);
             }

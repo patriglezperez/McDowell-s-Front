@@ -25,6 +25,14 @@ const menus = [
 function MenuPreview({ counter1, counter2, setCounter1, setCounter2 }) {
   const { order, setOrder } = useContext(StaticContext);
 
+  if (order.amountMenuMcDowells > 0) {
+    counter1 = order.amountMenuMcDowells;
+  }
+
+  if (order.amountMenuMcdowellsJr > 0) {
+    counter2 = order.amountMenuMcdowellsJr;
+  }
+
   //add menus
   const addMenu = (num) => {
     let burguer = menus.filter((menu) => menu.num === num);
@@ -36,7 +44,7 @@ function MenuPreview({ counter1, counter2, setCounter1, setCounter2 }) {
     num === 1
       ? setOrder({
           ...order,
-          amountMenuMcDowewlls: counter1 + 1,
+          amountMenuMcDowells: counter1 + 1,
         })
       : setOrder({
           ...order,
@@ -65,20 +73,11 @@ function MenuPreview({ counter1, counter2, setCounter1, setCounter2 }) {
 
     num === 1 ? setCounter1(counter1 - 1) : setCounter2(counter2 - 1);
 
-    //we limit the number of hamburgers to 0
-    if (counter1 <= 0) {
-      setCounter1(0);
-    }
-
-    if (counter2 <= 0) {
-      setCounter2(0);
-    }
-
     //we change the state total with the amount
     num === 1
       ? setOrder({
           ...order,
-          amountMenuMcDowewlls: counter1 - 1,
+          amountMenuMcDowells: counter1 - 1,
         })
       : setOrder({
           ...order,
@@ -86,20 +85,29 @@ function MenuPreview({ counter1, counter2, setCounter1, setCounter2 }) {
         });
 
     //we limit the total number of hamburgers to 0 so that they are coordinated
-    if (order.amountMenuMcDowewlls <= 0) {
+    if (order.amountMenuMcDowells < 0) {
       setOrder({
         ...order,
-        amountMenuMcDowewlls: 0,
+        amountMenuMcDowells: 0,
       });
     }
 
-    if (order.amountMenuMcdowellsJr <= 0) {
+    if (order.amountMenuMcdowellsJr < 0) {
       setOrder({
         ...order,
         amountMenuMcdowellsJr: 0,
       });
     }
   };
+
+  //we limit the number of hamburgers to 0
+  if (counter1 <= 0) {
+    setCounter1(0);
+  }
+
+  if (counter2 <= 0) {
+    setCounter2(0);
+  }
 
   return (
     <div className="space-menus">

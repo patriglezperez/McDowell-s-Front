@@ -3,6 +3,7 @@ import React, { useState, createContext  } from "react";
 import AmplifyService from "../../services/amplifyService";
 
 import Kitchen from "./kitchen/Kitchen";
+import Delivering from "./delivering/Delivering";
 
 const StatusStaffContext = createContext({
     statusStaff: "",

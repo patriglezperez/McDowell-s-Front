@@ -9,7 +9,7 @@ import OrderPreview from "../../orderPreview/OrderPreview";
 import burguer from "../../assets/img/logoBurguer.png";
 
 
-export default function Kitchen(props) {
+export default function Delivering(props) {
     /// estado del staff activo
     const { id } = props;
     const { statusStaff } = useContext(StatusStaffContext)
@@ -20,6 +20,9 @@ export default function Kitchen(props) {
 
     if (statusStaff === null) {
         AmplifyService.signOut();
+        // actualizar estado en tablas
+        await axios.patch(`${process.env.REACT_APP_API_URL}/staff/status`,
+            {"id": id,"status": "absent"});
         navigate("/login");
     }
 
@@ -30,6 +33,8 @@ export default function Kitchen(props) {
                 .then((res) => {
                     if (res.status === 200) {
                         const order = res.data.orders;
+                        // if all menus delivering finish = true
+                        setFinish(order.every((e) => {e.status === "delivering"}))
                         // verificar todos los pedidos estado reparto
                         setOrders(order);
                     } else {
@@ -60,7 +65,7 @@ export default function Kitchen(props) {
             <div> {orders.map((e, i) => {return (<OrderPreview uuid={e.uuid_menu} status={e.status} index={i} />)})}
             {/* /// componente para mostrar*/}
             </div> {/* /// ajustar si viene un solo menu o varios */}
-            <button onClick={handleFinish} > Finalizar </button>
+            {finish ? <button onClick={handleFinish} > Finalizar </button> : null}
         </div>}
     </div>);
 }

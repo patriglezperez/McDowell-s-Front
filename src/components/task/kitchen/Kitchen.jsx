@@ -19,6 +19,9 @@ export default function Kitchen(props) {
 
     if (statusStaff === null) {
         AmplifyService.signOut();
+        // actualizar estado en tablas
+        await axios.patch(`${process.env.REACT_APP_API_URL}/staff/status`,
+            {"id": id,"status": "absent"});
         navigate("/login");
     }
 

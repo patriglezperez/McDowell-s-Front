@@ -5,7 +5,7 @@ import awsconfig from "./aws-exports";
 
 import { StaticContextProvider } from "./context/staticContext";
 import StaffSignIn from "./components/staffSignIn/StaffSignIn";
-import Header from "./components/Header";
+import Header from "./components/header";
 import Welcome from "./components/welcome/Welcome";
 import OrderCreator from "./components/orderCreator/OrderCreator";
 import PlaceOrder from "./components/placeOrder/PlaceOrder";

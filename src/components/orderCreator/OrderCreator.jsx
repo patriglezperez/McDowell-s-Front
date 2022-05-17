@@ -88,6 +88,16 @@ function OrderCreator() {
   //   getMenusData();
   // }, []);
 
+  function changeCounter1(data1) {
+    setCounter1(data1);
+    console.log("data1", data1);
+  }
+
+  function changeCounter2(data2) {
+    setCounter2(data2);
+    console.log("data2", data2);
+  }
+
   return (
     <div className="order-page">
       <div className="titleCreator">
@@ -121,9 +131,9 @@ function OrderCreator() {
         // view 2, select menu type
         <MenuPreview
           counter1={counter1}
-          setCounter1={setCounter1}
+          changeCounter1={changeCounter1}
+          changeCounter2={changeCounter2}
           counter2={counter2}
-          setCounter2={setCounter2}
         />
       )}
 

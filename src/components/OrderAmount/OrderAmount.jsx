@@ -26,43 +26,15 @@ function OrderAmount() {
   const { order, setOrder } = useContext(StaticContext);
   const [counter1, setCounter1] = useState(order.amountMenuMcDowells); //Menu "McDowell's",
   const [counter2, setCounter2] = useState(order.amountMenuMcdowellsJr); //Menu "McDowell's Jr",
-  const [orderTotal1, setOrderTotal1] = useState(0);
-  const [orderTotal2, setOrderTotal2] = useState(0);
 
+  console.log(order);
   // total price of the menus
-  useEffect(() => {
-    if (order.menus && order.menus.length > 0) {
-      let totalSumMenu1 = 0;
-      let totalSumMenu2 = 0;
 
-      let menus1 = order.menus.filter((menu) => menu.num === 1);
-      let menus2 = order.menus.filter((menu) => menu.num === 2);
+  const priceMenu1 = menus[0].price;
+  const priceMenu2 = menus[1].price;
 
-      //total price of the menu 1 = Menu McDowells
-      totalSumMenu1 = menus1.reduce((previousValue, currentValue) => {
-        console.log(previousValue, "previousValue antes de nada");
-        console.log(currentValue, "currentValue antes de nada");
-        previousValue = previousValue.price;
-        currentValue = order.amountMenuMcDowells;
-        totalSumMenu1 = previousValue * currentValue;
-        console.log(previousValue, "previousValue");
-        console.log(currentValue, "currentValue");
-        console.log(totalSumMenu1, "totalSumMenu1");
-        return totalSumMenu1;
-      });
-
-      setOrderTotal1(totalSumMenu1);
-
-      //total price of the menu 2 = Menu McDowells Jr
-      totalSumMenu2 = menus2.reduce((previousValue2, currentValue2) => {
-        previousValue2 = previousValue2.price;
-        currentValue2 = order.amountMenuMcDowells;
-        totalSumMenu2 = previousValue2 * currentValue2;
-        return totalSumMenu2;
-      });
-      setOrderTotal2(totalSumMenu2);
-    }
-  }, [orderTotal1, orderTotal2]);
+  const orderTotal1 = priceMenu1 * order.amountMenuMcDowells;
+  const orderTotal2 = priceMenu2 * order.amountMenuMcdowellsJr;
 
   return (
     <>

@@ -22,7 +22,7 @@ const menus = [
 ];
 
 /*the menus are collected from the back*/
-function MenuPreview({ counter1, counter2, setCounter1, setCounter2 }) {
+function MenuPreview({ counter1, counter2, changeCounter1, changeCounter2 }) {
   const { order, setOrder } = useContext(StaticContext);
 
   if (order.amountMenuMcDowells > 0) {
@@ -34,11 +34,12 @@ function MenuPreview({ counter1, counter2, setCounter1, setCounter2 }) {
   }
 
   //add menus
+
   const addMenu = (num) => {
     let burguer = menus.filter((menu) => menu.num === num);
     order.menus.push(...burguer);
 
-    num === 1 ? setCounter1(counter1 + 1) : setCounter2(counter2 + 1);
+    num === 1 ? changeCounter1(counter1 + 1) : changeCounter2(counter2 + 1);
 
     //we change the state total with the amount
     num === 1
@@ -71,7 +72,7 @@ function MenuPreview({ counter1, counter2, setCounter1, setCounter2 }) {
       order.menus.push(menu);
     });
 
-    num === 1 ? setCounter1(counter1 - 1) : setCounter2(counter2 - 1);
+    num === 1 ? changeCounter1(counter1 - 1) : changeCounter2(counter2 - 1);
 
     //we change the state total with the amount
     num === 1
@@ -102,12 +103,17 @@ function MenuPreview({ counter1, counter2, setCounter1, setCounter2 }) {
 
   //we limit the number of hamburgers to 0
   if (counter1 <= 0) {
-    setCounter1(0);
+    changeCounter1((counter1 = 0));
   }
 
   if (counter2 <= 0) {
-    setCounter2(0);
+    changeCounter2((counter2 = 0));
   }
+
+  useEffect(() => {
+    addMenu();
+    deleteMenu();
+  }, [counter1, counter2]);
 
   return (
     <div className="space-menus">
@@ -119,8 +125,8 @@ function MenuPreview({ counter1, counter2, setCounter1, setCounter2 }) {
               className="card"
               onClick={() => {
                 menu.num === 1
-                  ? setCounter1(counter1 + 1)
-                  : setCounter2(counter2 + 1);
+                  ? changeCounter1(counter1 + 1)
+                  : changeCounter2(counter2 + 1);
               }}
             >
               <div className="blob"></div>

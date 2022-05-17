@@ -2,7 +2,6 @@ import logoBurguer from "../../assets/img/logoBurguer.png";
 import React, { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useNavigate } from "react-router-dom";
-import Header from "../header";
 import { useContext } from "react";
 import StaticContext from "../../context/staticContext";
 
@@ -19,7 +18,6 @@ function Welcome() {
 
   return (
     <>
-      <Header />
       <div className="start">
         <h1 className="title">McDowell's</h1>
         <br />

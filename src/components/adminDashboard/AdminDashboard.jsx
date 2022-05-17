@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import axios from "axios";
 import OrderPreview from "../orderPreview/OrderPreview";
@@ -10,7 +10,7 @@ export default function AdminDashboard() {
 
     async function getOngoingOrders() {
         try {
-            const ordersResponse = await axios.get(`${REACT_APP_API_URL}/orders/active`);
+            const ordersResponse = await axios.get(`${process.env.REACT_APP_API_URL}/orders/active`);
             setOngoingOrders(ordersResponse.data);
         } catch (error) {
             console.log(error);
@@ -19,7 +19,7 @@ export default function AdminDashboard() {
 
     async function getDeliveredOrders() {
         try {
-            const ordersResponse = await axios.get(`${REACT_APP_API_URL}/orders/delivered`);
+            const ordersResponse = await axios.get(`${process.env.REACT_APP_API_URL}/orders/delivered`);
             setDeliveredOrders(ordersResponse.data);
         } catch (error) {
             console.log(error);

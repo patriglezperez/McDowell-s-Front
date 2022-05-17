@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import AmplifyService from "../../services/amplifyService";
-
+import axios from "axios";
 import { StatusStaffContext } from "../Task";
 
 import Countdown from "./countdown/Countdown";
@@ -18,7 +18,7 @@ export default function Kitchen(props) {
     statusRef.current = statusStaff; /// se supone q da problemas el useState dentro del useEffect
 
     if (statusStaff === null) {
-        AmplifyService.signOut();
+        await AmplifyService.signOut();
         // actualizar estado en tablas
         await axios.patch(`${process.env.REACT_APP_API_URL}/staff/status`,
             {"id": id,"status": "absent"});

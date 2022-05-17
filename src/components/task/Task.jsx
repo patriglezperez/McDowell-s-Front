@@ -1,6 +1,7 @@
 import React, { useState, createContext  } from "react";
 
-import AmplifyService from "../../services/amplifyService";
+import AmplifyService from "../services/amplifyService";
+import axios from "axios";
 
 import Kitchen from "./kitchen/Kitchen";
 import Delivering from "./delivering/Delivering";

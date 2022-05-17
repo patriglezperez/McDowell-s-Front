@@ -70,9 +70,12 @@ function StaffSignIn() {
       if (isLoggedIn) {
         const userId = getUserId();
         try {
-          const response = await axios.get(`${process.env.REACT_APP_API_URL}/staff/${userId}`);
+          console.log('fer mamon',`${process.env.REACT_APP_API_URL}/staff/login/${userId}`); ///
+          const response = await axios.post(`${process.env.REACT_APP_API_URL}/staff/login/${userId}`);
+          console.log('response:',response); ///
           const adminsRole = "admin";
-          const userRole = response.data.role;
+          console.log('rol:', response.data.rol);
+          const userRole = response.data.rol;
           if (userRole === adminsRole) {
             navigate(`/admin/dashboard`);
           } else {

@@ -1,17 +1,19 @@
-import MenuPreview from "../menuPreview/MenuPreview";
+import MenuPreview from "./menuPreview/menuPreview";
 import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import takeHere from "../../assets/img/restaurant.png";
 import takeAway from "../../assets/img/takeAway.png";
 import axios from "axios";
 import StaticContext from "../../context/staticContext";
-
+import checkMark from "../../assets/img/checkbox_mark.png";
 /*the menus are collected from the back*/
 
 function OrderCreator() {
   const { order, setOrder } = useContext(StaticContext);
-  // const { dataMenus, setDataMenus } = useContext(StaticContext);
   const [view, setView] = useState(false);
   const [renderId, setRenderId] = useState(0);
+  const navigate = useNavigate();
+  // const { dataMenus, setDataMenus } = useContext(StaticContext);
 
   let locationUrl = window.location.href;
 
@@ -51,6 +53,18 @@ function OrderCreator() {
     order[0].menus.push({ consumption: place });
   }
 
+  //cancel the order and empty the context
+  function cancelOrder() {
+    setOrder({ 0: { uuid_user: [], menus: [] } });
+    console.log(order);
+    navigate("/customers");
+  }
+
+  async function confirmOrder() {
+    const uuid_user = order[0].uuid_user;
+    navigate(`customers/order/${uuid_user}/cart`);
+  }
+
   // useEffect(() => {
   //   function getMenusData() {
   //     try {
@@ -65,7 +79,7 @@ function OrderCreator() {
   // }, []);
 
   return (
-    <div>
+    <div className="order-page">
       <div className="titleCreator">
         <h2 className="welcome-title">
           {view === false ? titles[0].name1 : titles[1].name1}
@@ -92,12 +106,47 @@ function OrderCreator() {
       ) : (
         <MenuPreview />
       )}
-
-      <div className="space-buttons">
-        <button>Finalizar pedido</button>
-        <button>Cancelar pedido</button>
-      </div>
+      {view === false ? (
+        <div className="space-buttons">
+          <button className="cancelOrder" onClick={cancelOrder}>
+            <span className="text">Cancelar pedido</span>
+            <span className="icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      ) : (
+        <div className="space-buttons">
+          <button className="confirmOrder" onClick={confirmOrder}>
+            <span className="text">Finalizar pedido</span>
+            <span className="icon">
+              <img src={checkMark} alt="check" width="22" height="22" />
+            </span>
+          </button>
+          <button className="cancelOrder" onClick={cancelOrder}>
+            <span className="text">Cancelar pedido</span>
+            <span className="icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+              >
+                <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      )}
     </div>
   );
 }
+
 export default OrderCreator;

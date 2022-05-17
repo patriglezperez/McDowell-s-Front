@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import AmplifyService from "../../services/amplifyService";
 import axios from "axios";
@@ -6,7 +6,7 @@ import { StatusStaffContext } from "../Task";
 
 import Countdown from "./countdown/Countdown";
 import SelectStatus from "../selectStatus/SelectStatus";
-import burguer from "../../assets/img/logoBurguer.png";
+import burguer from "../../../assets/img/logoBurguer.png";
 
 
 export default function Kitchen(props) {
@@ -15,12 +15,13 @@ export default function Kitchen(props) {
     const { statusStaff } = useContext(StatusStaffContext)
     const navigate = useNavigate();
     const [orders, setOrders] = useState(""); /// pedidos asignado al cocinero
+    const statusRef = useRef(statusStaff);
     statusRef.current = statusStaff; /// se supone q da problemas el useState dentro del useEffect
 
     if (statusStaff === null) {
-        await AmplifyService.signOut();
+        AmplifyService.signOut();
         // actualizar estado en tablas
-        await axios.patch(`${process.env.REACT_APP_API_URL}/staff/status`,
+        axios.patch(`${process.env.REACT_APP_API_URL}/staff/status`,
             {"id": id,"status": "absent"});
         navigate("/login");
     }

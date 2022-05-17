@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import AmplifyService from "../../services/amplifyService";
 import axios from "axios";
@@ -6,7 +6,7 @@ import { StatusStaffContext } from "../Task";
 
 import SelectStatus from "../selectStatus/SelectStatus";
 import OrderPreview from "../../orderPreview/OrderPreview";
-import burguer from "../../assets/img/logoBurguer.png";
+import burguer from "../../../assets/img/logoBurguer.png";
 
 
 export default function Delivering(props) {
@@ -16,10 +16,11 @@ export default function Delivering(props) {
     const navigate = useNavigate();
     const [orders, setOrders] = useState(""); /// pedidos asignado al waiter
     const [finish, setFinish] = useState(false); /// pedido finalizado activar boton
+    const statusRef = useRef(statusStaff);
     statusRef.current = statusStaff; /// se supone q da problemas el useState dentro del useEffect
 
     if (statusStaff === null) {
-        await AmplifyService.signOut();
+        AmplifyService.signOut();
         // actualizar estado en tablas
         axios.patch(`${process.env.REACT_APP_API_URL}/staff/status`,
             {"id": id,"status": "absent"});
@@ -34,7 +35,7 @@ export default function Delivering(props) {
                     if (res.status === 200) {
                         const order = res.data.orders;
                         // if all menus delivering finish = true
-                        setFinish(order.every((e) => {e.status === "delivering"}))
+                        setFinish(order.every((e) => {return e.status === "delivering"}))
                         // verificar todos los pedidos estado reparto
                         setOrders(order);
                     } else {

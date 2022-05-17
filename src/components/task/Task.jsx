@@ -2,6 +2,8 @@ import React, { useState, createContext  } from "react";
 
 import AmplifyService from "../services/amplifyService";
 import axios from "axios";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Kitchen from "./kitchen/Kitchen";
 import Delivering from "./delivering/Delivering";
@@ -14,6 +16,7 @@ const StatusStaffContext = createContext({
 export { StatusStaffContext };
 
 export default function Task() {
+    const navigate = useNavigate();
     const { urlId } = useParams();
     const [rol, setRol] = useState("");
 

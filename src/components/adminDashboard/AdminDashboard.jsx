@@ -1,5 +1,8 @@
-import axios from "axios";
 import { useState } from "react";
+
+import axios from "axios";
+import OrderPreview from "../orderPreview/OrderPreview";
+
 
 export default function AdminDashboard() {
     const [ongoingOrders, setOngoingOrders] = useState();
@@ -30,18 +33,18 @@ export default function AdminDashboard() {
 
 
     return (
-        <section>
-            <section>
-                <h3>Pedidos en curso:</h3>
-                {ongoingOrders && ongoingOrders.map(order => {
-                    <OrderPreview data={order} />
-                })}
+        <section className="dashboard">
+            <section className="dashboard">
+                <h3 className="dashboard-title">Pedidos en curso:</h3>
+                {ongoingOrders && ongoingOrders.map(order => (
+                   <OrderPreview data={order} />
+                ))}
             </section>
-            <section>
-                <h3>Pedidos entregados:</h3>
-                {deliveredOrders && deliveredOrders.map(order => {
+            <section className="dashboard">
+                <h3 className="dashboard-title">Pedidos entregados:</h3>
+                {deliveredOrders && deliveredOrders.map(order => (
                     <OrderPreview data={order} />
-                })}
+                ))}
             </section>
         </section>
     )

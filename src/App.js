@@ -10,6 +10,7 @@ import Welcome from "./components/welcome/Welcome";
 import OrderCreator from "./components/orderCreator/OrderCreator";
 import PlaceOrder from "./components/placeOrder/PlaceOrder";
 import AdminDashboard from "./components/adminDashboard/AdminDashboard";
+import OngoingOrders from "./components/ongoingOrders/OngoingOrders";
 
 
 Amplify.configure(awsconfig);
@@ -28,7 +29,8 @@ function App() {
             {/* staff */}
             <Route path="/login" element={<StaffSignIn />} />
             {/* admin */}
-            <Route path="/admin/dashboard" element={<AdminDashboard/>} />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/orders/ongoing" element={<OngoingOrders />} />
           </Routes>
         </BrowserRouter>
       </StaticContextProvider>

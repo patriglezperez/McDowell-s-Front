@@ -17,21 +17,25 @@ export default function Delivering(props) {
     const [orders, setOrders] = useState(""); /// pedidos asignado al waiter
     const [finish, setFinish] = useState(false); /// pedido finalizado activar boton
     const statusRef = useRef(statusStaff);
+    const idRef = useRef(id);
     statusRef.current = statusStaff; /// se supone q da problemas el useState dentro del useEffect
+    idRef.current = id;
 
     if (statusStaff === null) {
-        AmplifyService.signOut();
-        // actualizar estado en tablas
+        /// actualizar estado en tablas
         axios.patch(`${process.env.REACT_APP_API_URL}/staff/status`,
             {"id": id,"status": "absent"});
+        AmplifyService.signOut();
         navigate("/login");
     }
 
     useEffect(() => {
         const timer = setTimeout(() => {
+            console.log('props-delivering:', idRef, statusRef);
             axios.get(`${process.env.REACT_APP_API_URL}/orders/delivering`,
-                {"waiter": id , "status": statusRef})
+                {"waiter": idRef , "status": statusRef})
                 .then((res) => {
+                    console.log('res.status:', res.status)
                     if (res.status === 200) {
                         const order = res.data.orders;
                         // if all menus delivering finish = true
@@ -41,8 +45,10 @@ export default function Delivering(props) {
                     } else {
                         /// pedidos no encontrados
                         /// errores
+                        console.log('res.status:', res.status)
                     }
-            })
+                })
+                /// tengo q ignorar el 404 
         }, 30000); // 30 seg
     }, []);
 
@@ -62,7 +68,7 @@ export default function Delivering(props) {
         <SelectStatus />
         {!orders ? null : <div className="orders--delivering">
             <div> Menu:  </div>
-            <div> <img src={burguer} /> </div>
+            <div> <img src={burguer} alt="logoBurguer" className="logoBurger"/> </div>
             <div> {orders.map((e, i) => {return (<OrderPreview uuid={e.uuid_menu} status={e.status} index={i} />)})}
             {/* /// componente para mostrar*/}
             </div> {/* /// ajustar si viene un solo menu o varios */}

@@ -16,11 +16,12 @@ const StatusStaffContext = createContext({
 export { StatusStaffContext };
 
 export default function Task() {
+    const [statusStaff, setStatusStaff] = useState(true);
     const navigate = useNavigate();
-    const { urlId } = useParams();
+    const { id } = useParams();
     const [rol, setRol] = useState("");
 
-    axios.get(`${process.env.REACT_APP_API_URL}/staff/:${urlId}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/staff/${id}`)
         .then((res) => {
             if (res.status === 200) {
                 setRol(res.data.rol);            
@@ -30,8 +31,8 @@ export default function Task() {
             }
     });
 
-    return (<StatusStaffContext.Provider>
-            {rol === "kitchen" ? <Kitchen id={urlId} /> : <Delivering id={urlId} />}
+    return (<StatusStaffContext.Provider value={{ statusStaff, setStatusStaff }}>
+            {rol === "kitchen" ? <Kitchen id={id} /> : <Delivering id={id} />}
         </StatusStaffContext.Provider>
     );
 }

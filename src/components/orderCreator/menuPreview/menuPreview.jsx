@@ -27,15 +27,10 @@ function MenuPreview({ counter1, counter2, changeCounter1, changeCounter2 }) {
 
   if (order.amountMenuMcDowells >= 0) {
     counter1 = order.amountMenuMcDowells;
-    console.log("amountMenuMcDowells MENU PREVIEW", order.amountMenuMcDowells);
   }
 
   if (order.amountMenuMcdowellsJr >= 0) {
     counter2 = order.amountMenuMcdowellsJr;
-    console.log(
-      "amountMenuMcdowellsJr MENU PREVIEW",
-      order.amountMenuMcdowellsJr
-    );
   }
 
   //*

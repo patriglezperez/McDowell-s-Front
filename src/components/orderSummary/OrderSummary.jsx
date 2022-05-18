@@ -11,7 +11,6 @@ function OrderSummary() {
   const { order, setOrder } = useContext(StaticContext);
   const navigate = useNavigate();
   let id = order.uuid_user;
-  console.log(order);
 
   //go back
   function backToMenus() {

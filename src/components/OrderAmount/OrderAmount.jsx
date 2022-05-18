@@ -35,9 +35,6 @@ function OrderAmount() {
   let orderTotal1 = priceMenu1 * order.amountMenuMcDowells;
   let orderTotal2 = priceMenu2 * order.amountMenuMcdowellsJr;
 
-  console.log(" order.amountMenuMcDowells;", order.amountMenuMcDowells);
-  console.log(" order.amountMenuMcdowellsJr;", order.amountMenuMcdowellsJr);
-
   useEffect(() => {
     //if the total of MenuMcDowells is greater than 0 then it rises to context
     const renderPrice = () => {

@@ -61,11 +61,11 @@ function StaffSignIn() {
     setIsLoggedIn(true);
     setUserId(user.attributes.sub);
   }
-  
+
   useEffect(() => {
     const handleUserRedirection = async () => {
       try {
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/staff/${userId}`);
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/login`, { id: userId });
         const adminsRole = "admin";
         const userRole = response.data.role;
         console.log("Entrando en McDowell's");
@@ -75,7 +75,6 @@ function StaffSignIn() {
           navigate(`/staff/${userId}`);
         }
       } catch (error) {
-        console.log(error);
         setAlertState({ ...alertState, open: true, message: 'Algo salió mal. Inténtalo de nuevo.' });
         setIsLoggedIn(false);
       }

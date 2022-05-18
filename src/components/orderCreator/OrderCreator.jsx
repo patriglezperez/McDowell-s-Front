@@ -18,6 +18,7 @@ function OrderCreator() {
 
   const [counter1, setCounter1] = useState(0); //Menu "McDowell's",
   const [counter2, setCounter2] = useState(0); //Menu "McDowell's Jr",
+  const uuid_user = order.uuid_user[0];
 
   const typeOfRestaurant = [
     {
@@ -45,8 +46,6 @@ function OrderCreator() {
     },
   ];
 
-  const uuid_user = order.uuid_user[0];
-
   // choose whether to take here or take away and you go to the next view
   function choose(id) {
     const place = id;
@@ -69,8 +68,8 @@ function OrderCreator() {
   async function confirmOrder() {
     setOrder({
       ...order,
-      amountMenuMcDowells: counter1,
-      amountMenuMcdowellsJr: counter2,
+      amountMenuMcDowells: order.amountMenuMcDowells,
+      amountMenuMcdowellsJr: order.amountMenuMcdowellsJr,
     });
     navigate(`/customers/order/${uuid_user}/cart`);
   }
@@ -88,14 +87,14 @@ function OrderCreator() {
   //   getMenusData();
   // }, []);
 
+  //set the McDowells menu counter
   function changeCounter1(data1) {
     setCounter1(data1);
-    console.log("data1", data1);
   }
 
+  //set the McDowellsJr menu counter
   function changeCounter2(data2) {
     setCounter2(data2);
-    console.log("data2", data2);
   }
 
   return (

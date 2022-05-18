@@ -25,16 +25,21 @@ const menus = [
 function MenuPreview({ counter1, counter2, changeCounter1, changeCounter2 }) {
   const { order, setOrder } = useContext(StaticContext);
 
-  if (order.amountMenuMcDowells > 0) {
+  if (order.amountMenuMcDowells >= 0) {
     counter1 = order.amountMenuMcDowells;
+    console.log("amountMenuMcDowells MENU PREVIEW", order.amountMenuMcDowells);
   }
 
-  if (order.amountMenuMcdowellsJr > 0) {
+  if (order.amountMenuMcdowellsJr >= 0) {
     counter2 = order.amountMenuMcdowellsJr;
+    console.log(
+      "amountMenuMcdowellsJr MENU PREVIEW",
+      order.amountMenuMcdowellsJr
+    );
   }
 
+  //*
   //add menus
-
   const addMenu = (num) => {
     let burguer = menus.filter((menu) => menu.num === num);
     order.menus.push(...burguer);
@@ -52,7 +57,9 @@ function MenuPreview({ counter1, counter2, changeCounter1, changeCounter2 }) {
           amountMenuMcdowellsJr: counter2 + 1,
         });
   };
+  //
 
+  //*
   //delete menus
   const deleteMenu = (num) => {
     //we differentiate between the two types of hamburgers, we keep the ones that do not move and select the ones we have to delete
@@ -109,11 +116,7 @@ function MenuPreview({ counter1, counter2, changeCounter1, changeCounter2 }) {
   if (counter2 <= 0) {
     changeCounter2((counter2 = 0));
   }
-
-  useEffect(() => {
-    addMenu();
-    deleteMenu();
-  }, [counter1, counter2]);
+  //
 
   return (
     <div className="space-menus">

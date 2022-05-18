@@ -27,14 +27,31 @@ function OrderAmount() {
   const [counter1, setCounter1] = useState(order.amountMenuMcDowells); //Menu "McDowell's",
   const [counter2, setCounter2] = useState(order.amountMenuMcdowellsJr); //Menu "McDowell's Jr",
 
-  console.log(order);
-  // total price of the menus
-
+  //we define the price of the menus
   const priceMenu1 = menus[0].price;
   const priceMenu2 = menus[1].price;
 
-  const orderTotal1 = priceMenu1 * order.amountMenuMcDowells;
-  const orderTotal2 = priceMenu2 * order.amountMenuMcdowellsJr;
+  //we do the calculations of what it is going to cost
+  let orderTotal1 = priceMenu1 * order.amountMenuMcDowells;
+  let orderTotal2 = priceMenu2 * order.amountMenuMcdowellsJr;
+
+  console.log(" order.amountMenuMcDowells;", order.amountMenuMcDowells);
+  console.log(" order.amountMenuMcdowellsJr;", order.amountMenuMcdowellsJr);
+
+  useEffect(() => {
+    //if the total of MenuMcDowells is greater than 0 then it rises to context
+    const renderPrice = () => {
+      if ((orderTotal1 > 0) | (orderTotal2 > 0)) {
+        setOrder({
+          ...order,
+          totalPriceMcDowells: orderTotal1,
+          totalPriceMcdowellsJr: orderTotal2,
+        });
+      }
+      //if the total of MenuMcdowellsJr is greater than 0 then it rises to context
+    };
+    renderPrice();
+  }, []);
 
   return (
     <>

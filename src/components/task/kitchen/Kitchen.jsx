@@ -22,10 +22,10 @@ export default function Kitchen(props) {
     idRef.current = id;
 
     if (statusStaff === null) {
-        AmplifyService.signOut();
         // actualizar estado en tablas
         axios.patch(`${process.env.REACT_APP_API_URL}/staff/status`,
             {"id": idRef,"status": "absent"});
+        AmplifyService.signOut();
         navigate("/login");
     }
 

@@ -30,7 +30,6 @@ export default function ConfirmOrder() {
     navigate("/customers");
   }
 
-  let location = window.location;
   //confirm order and place the POST
   async function confirmOrder() {
     const finishedOrder = { order: order.menus };

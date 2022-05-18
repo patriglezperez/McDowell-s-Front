@@ -17,6 +17,7 @@ export default function ConfirmOrder() {
       order.totalPriceMcDowells | order.totalPriceMcdowellsJr
     ) {
       let totalSum = 0;
+      totalSum.toFixed(2);
       totalSum = order.totalPriceMcDowells + order.totalPriceMcdowellsJr;
       setOrderTotal(totalSum);
     }

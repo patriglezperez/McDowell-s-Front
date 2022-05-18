@@ -17,8 +17,9 @@ export default function ConfirmOrder() {
       order.totalPriceMcDowells | order.totalPriceMcdowellsJr
     ) {
       let totalSum = 0;
-      totalSum.toFixed(2);
+
       totalSum = order.totalPriceMcDowells + order.totalPriceMcdowellsJr;
+      totalSum.toFixed(2);
       setOrderTotal(totalSum);
     }
   }, [order]);
@@ -29,6 +30,7 @@ export default function ConfirmOrder() {
     navigate("/customers");
   }
 
+  let location = window.location;
   //confirm order and place the POST
   async function confirmOrder() {
     const finishedOrder = { order: order.menus };

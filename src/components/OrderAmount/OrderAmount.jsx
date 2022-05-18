@@ -48,35 +48,69 @@ function OrderAmount() {
           totalPriceMcdowellsJr: orderTotal2,
         });
       }
-      //if the total of MenuMcdowellsJr is greater than 0 then it rises to context
     };
     renderPrice();
   }, []);
 
   return (
     <>
-      {menus.map((menu) => (
-        <div className="menus" key={menu.num}>
-          <div className="container">
-            <img
-              src={menu.name === "McDowell's" ? menuBurguer : burguer}
-              alt="logoBurguer"
-              className="img"
-            />
-            <div className="quantity">
-              <p>{menu.num === 1 ? `${counter1}` : `${counter2}`}</p>
-            </div>
+      {order.amountMenuMcDowells && order.amountMenuMcdowellsJr > 0 ? (
+        <>
+          {menus.map((menu) => (
+            <div className="menus" key={menu.num}>
+              <div className="container">
+                <img
+                  src={menu.name === "McDowell's" ? menuBurguer : burguer}
+                  alt="logoBurguer"
+                  className="img"
+                />
+                <div className="quantity">
+                  <p>{menu.num === 1 ? `${counter1}` : `${counter2}`}</p>
+                </div>
 
-            <p className="nameMenu">
-              Menú <br />
-              {menu.name}
-            </p>
-            <p className="priceMenu">
-              {menu.num === 1 ? `${orderTotal1}` : `${orderTotal2}`}€
-            </p>
+                <p className="nameMenu">
+                  Menú <br />
+                  {menu.name}
+                </p>
+                <p className="priceMenu">
+                  {menu.num === 1 ? `${orderTotal1}` : `${orderTotal2}`}€
+                </p>
+              </div>
+            </div>
+          ))}
+        </>
+      ) : (
+        <>
+          <div
+            className="menus"
+            key={order.amountMenuMcDowells ? menus[0].num : menus[1].num}
+          >
+            <div className="container">
+              <img
+                src={order.amountMenuMcDowells ? menuBurguer : burguer}
+                alt="logoBurguer"
+                className="img"
+              />
+              <div className="quantity">
+                <p>
+                  {order.amountMenuMcDowells ? `${counter1}` : `${counter2}`}
+                </p>
+              </div>
+
+              <p className="nameMenu">
+                Menú <br />
+                {order.amountMenuMcDowells ? menus[0].name : menus[1].name}
+              </p>
+              <p className="priceMenu">
+                {order.amountMenuMcDowells
+                  ? `${orderTotal1}`
+                  : `${orderTotal2}`}
+                €
+              </p>
+            </div>
           </div>
-        </div>
-      ))}
+        </>
+      )}
     </>
   );
 }

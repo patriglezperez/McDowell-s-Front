@@ -11,6 +11,7 @@ import burguer from "../../../assets/img/logoBurguer.png";
 
 export default function Delivering(props) {
     /// estado del staff activo
+    console.log('puto Delivering');
     const { id } = props;
     const { statusStaff } = useContext(StatusStaffContext)
     const navigate = useNavigate();

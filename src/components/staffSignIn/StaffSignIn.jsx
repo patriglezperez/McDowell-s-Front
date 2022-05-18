@@ -70,7 +70,8 @@ function StaffSignIn() {
       if (isLoggedIn) {
         const userId = getUserId();
         try {
-          console.log('fer mamon',`${process.env.REACT_APP_API_URL}/staff/login/${userId}`); ///
+          /// Ese userId viene a null muchas veces sobretodo cuando intentas salir
+          console.log('fer mamon',`${process.env.REACT_APP_API_URL}/staff/login/${userId}`); 
           const response = await axios.post(`${process.env.REACT_APP_API_URL}/staff/login/${userId}`);
           console.log('response:',response); ///
           const adminsRole = "admin";

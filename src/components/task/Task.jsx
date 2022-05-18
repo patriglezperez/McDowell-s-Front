@@ -24,7 +24,8 @@ export default function Task() {
     axios.get(`${process.env.REACT_APP_API_URL}/staff/${id}`)
         .then((res) => {
             if (res.status === 200) {
-                setRol(res.data.rol);            
+                setRol(res.data.rol);  
+                console.log('res.data.rol:', res.data.rol);          
             } else {
                 AmplifyService.signOut();
                 navigate(`/login`);
@@ -32,7 +33,7 @@ export default function Task() {
     });
 
     return (<StatusStaffContext.Provider value={{ statusStaff, setStatusStaff }}>
-            {rol === "kitchen" ? <Kitchen id={id} /> : <Delivering id={id} />}
+            {rol === "cook" ? <Kitchen id={id} /> : <Delivering id={id} />}
         </StatusStaffContext.Provider>
     );
 }

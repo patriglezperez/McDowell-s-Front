@@ -10,19 +10,22 @@ import burguer from "../../../assets/img/logoBurguer.png";
 
 
 export default function Kitchen(props) {
+    console.log('puto Kitchen');
     const { id } = props;
     /// estado del staff activo
     const { statusStaff } = useContext(StatusStaffContext)
     const navigate = useNavigate();
     const [orders, setOrders] = useState(""); /// pedidos asignado al cocinero
     const statusRef = useRef(statusStaff);
+    const idRef = useRef(id);
     statusRef.current = statusStaff; /// se supone q da problemas el useState dentro del useEffect
+    idRef.current = id;
 
     if (statusStaff === null) {
         AmplifyService.signOut();
         // actualizar estado en tablas
         axios.patch(`${process.env.REACT_APP_API_URL}/staff/status`,
-            {"id": id,"status": "absent"});
+            {"id": idRef,"status": "absent"});
         navigate("/login");
     }
 

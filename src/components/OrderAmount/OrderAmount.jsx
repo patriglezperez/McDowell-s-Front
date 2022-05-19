@@ -52,9 +52,11 @@ function OrderAmount() {
                 </div>
 
                 <p className="nameMenu">{menu.menu_name}</p>
-                <p className="priceMenu">
-                  {menu.menu_num === 1 ? `${orderTotal1}` : `${orderTotal2}`}€
-                </p>
+                <div>
+                  <p className="priceMenu">
+                    {menu.menu_num === 1 ? `${orderTotal1}` : `${orderTotal2}`}€
+                  </p>
+                </div>
               </div>
             </div>
           ))}

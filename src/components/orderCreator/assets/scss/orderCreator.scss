@@ -1,7 +1,6 @@
 .order-page {
   display: flex;
   flex-direction: column;
-  height: 90vh;
   justify-content: space-around;
 }
 .titleCreator {
@@ -11,6 +10,10 @@
   align-items: center;
   margin-top: 37px;
   height: 10vh;
+
+  h1 {
+    text-align: center;
+  }
 }
 
 .menu-away {

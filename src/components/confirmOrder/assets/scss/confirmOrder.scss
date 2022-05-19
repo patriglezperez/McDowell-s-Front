@@ -1,7 +1,7 @@
 .confirm-order {
   color: #0f2c0f;
   background-color: $green_clear;
-  padding-top: 1rem;
+  padding-top: 3rem;
   padding-bottom: 1rem;
   display: flex;
   flex-direction: column;
@@ -25,11 +25,15 @@
 }
 
 .price-wrapper {
-  width: 65rem;
+  width: 100rem;
   margin-bottom: 2.5rem;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media (max-width: 400px) {
+    width: 22rem;
+  }
 }
 
 .action-button {

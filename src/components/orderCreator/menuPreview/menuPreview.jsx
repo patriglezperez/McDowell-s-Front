@@ -3,6 +3,8 @@ import menuBurguer from "../../../assets/img/Menu1.png";
 import StaticContext from "../../../context/staticContext";
 import { useContext } from "react";
 import { v4 as uuidv4 } from "uuid";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 
 //the menus are collected from the back
 function MenuPreview({ counter1, counter2, changeCounter1, changeCounter2 }) {
@@ -20,7 +22,10 @@ function MenuPreview({ counter1, counter2, changeCounter1, changeCounter2 }) {
   //*
   //add menus
   const addMenu = (num) => {
+    //Find the menu that we need to add
     let burguer = dataMenus.filter((menu) => menu.menu_num === num);
+
+    //add in the menus the following information
     const serial_order = 0;
     const uuid_menu = uuidv4();
     const menu_num = burguer[0].menu_num;
@@ -44,8 +49,6 @@ function MenuPreview({ counter1, counter2, changeCounter1, changeCounter2 }) {
       date_order,
       consumption,
     });
-
-    //add in the menus the follow information
 
     //we change the amount
     num === 1 ? changeCounter1(counter1 + 1) : changeCounter2(counter2 + 1);
@@ -126,7 +129,10 @@ function MenuPreview({ counter1, counter2, changeCounter1, changeCounter2 }) {
     <div className="space-menus">
       {dataMenus.map((menu) => (
         <div className="amount" key={menu.menu_num}>
-          <p onClick={() => deleteMenu(menu.menu_num)}>-</p>
+          <RemoveCircleOutlineIcon
+            onClick={() => deleteMenu(menu.menu_num)}
+            size="large"
+          />
           <div className="menu" onClick={() => addMenu(menu.menu_num)}>
             <div
               className="card"
@@ -139,7 +145,7 @@ function MenuPreview({ counter1, counter2, changeCounter1, changeCounter2 }) {
               <div className="blob"></div>
               <img
                 src={
-                  menu.menu_name === "Menu McDowell's" ? menuBurguer : burguer
+                  menu.menu_name === "Menu McDowells" ? menuBurguer : burguer
                 }
                 alt="logoBurguer"
                 className="img"
@@ -153,7 +159,10 @@ function MenuPreview({ counter1, counter2, changeCounter1, changeCounter2 }) {
 
             <p>{menu.menu_num === 1 ? `${counter1}` : `${counter2}`}</p>
           </div>
-          <p onClick={() => addMenu(menu.menu_num)}>+</p>
+          <AddCircleOutlineIcon
+            onClick={() => addMenu(menu.menu_num)}
+            size="large"
+          />
         </div>
       ))}
     </div>

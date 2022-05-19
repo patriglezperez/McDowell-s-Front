@@ -18,7 +18,9 @@ export default function ConfirmOrder() {
     ) {
       let totalSum = 0;
 
-      totalSum = order.totalPriceMcDowells + order.totalPriceMcdowellsJr;
+      totalSum =
+        parseInt(order.totalPriceMcDowells) +
+        parseInt(order.totalPriceMcdowellsJr);
       totalSum.toFixed(2);
       setOrderTotal(totalSum);
     }
@@ -52,7 +54,7 @@ export default function ConfirmOrder() {
       <p className="section-title">Resumen de tu pedido</p>
       <span className="price-wrapper">
         <p className="total">TOTAL</p>
-        <b className="total-price">€{orderTotal}</b>
+        <b className="total-price">{orderTotal}€</b>
       </span>
       <button className="action-button" onClick={confirmOrder}>
         CONFIRMAR PEDIDO

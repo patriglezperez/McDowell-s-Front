@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+//, { useState, useEffect, useContext, useRef }
+/* import { useNavigate } from "react-router-dom";
 import AmplifyService from "../../services/amplifyService";
 import axios from "axios";
-import { StatusStaffContext } from "../Task";
+import { StatusStaffContext } from "../Task"; */
 
 import Countdown from "./countdown/Countdown";
 import SelectStatus from "../selectStatus/SelectStatus";
@@ -11,25 +12,26 @@ import burguer from "../../../assets/img/logoBurguer.png";
 
 export default function Kitchen(props) {
     console.log('puto Kitchen');
-    const { id } = props;
+    const { orders } = props;
     /// estado del staff activo
-    const { statusStaff } = useContext(StatusStaffContext)
+    /* const { statusStaff } = useContext(StatusStaffContext)
     const navigate = useNavigate();
     const [orders, setOrders] = useState(""); /// pedidos asignado al cocinero
     const statusRef = useRef(statusStaff);
     const idRef = useRef(id);
     statusRef.current = statusStaff; /// se supone q da problemas el useState dentro del useEffect
-    idRef.current = id;
+    idRef.current = id; */
 
-    if (statusStaff === null) {
+    /* if (statusStaff === null) {
         // actualizar estado en tablas
+        console.log('Kitchen', idRef.current);
         axios.patch(`${process.env.REACT_APP_API_URL}/staff/status`,
-            {"id": idRef,"status": "absent"});
+            {"id": idRef.current, "status": "absent"});
         AmplifyService.signOut();
         navigate("/login");
-    }
+    } */
 
-    useEffect(() => {
+    /* useEffect(() => {
         const timer = setTimeout(() => {
             axios.get(`${process.env.REACT_APP_API_URL}/orders/kitchen`,
                 {"cook": id , "status": statusRef})
@@ -42,13 +44,13 @@ export default function Kitchen(props) {
                     }
             })
         }, 30000); // 30 seg
-    }, []);
+    }, []); */
 
     return (<div> Cocinero 
         <SelectStatus />
         {!orders ? null : <div className="orders--kitchen">
             <div> Menu: <Countdown startingMinutes={orders.time} /> </div>
-            <div> <img src={burguer} /> </div>
+            <div> <img src={burguer} alt="logoBurguer" className="logoBurger"/> </div>
             <div> {orders.uuid} </div> 
         </div>} 
     </div>);

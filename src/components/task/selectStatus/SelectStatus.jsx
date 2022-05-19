@@ -13,6 +13,7 @@ export default function SelectStatus() {
     const [open, setOpen] = useState(false);
 
     const handleChange = (event) => {
+        console.log('event.target.value--selectStatus', event.target.value)
         setStatusStaff(event.target.value);
     }; 
 

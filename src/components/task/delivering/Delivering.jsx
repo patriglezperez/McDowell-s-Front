@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useContext, useRef } from "react";
-import { useNavigate } from "react-router-dom";
-import AmplifyService from "../../services/amplifyService";
+import React, { useState, useEffect } from "react";
+// , useEffect, useContext, useRef
+/* import { useNavigate } from "react-router-dom";
+import AmplifyService from "../../services/amplifyService"; */
 import axios from "axios";
-import { StatusStaffContext } from "../Task";
+/* import { StatusStaffContext } from "../Task"; */
 
 import SelectStatus from "../selectStatus/SelectStatus";
 import OrderPreview from "../../orderPreview/OrderPreview";
@@ -12,25 +13,33 @@ import burguer from "../../../assets/img/logoBurguer.png";
 export default function Delivering(props) {
     /// estado del staff activo
     console.log('puto Delivering');
-    const { id } = props;
-    const { statusStaff } = useContext(StatusStaffContext)
-    const navigate = useNavigate();
-    const [orders, setOrders] = useState(""); /// pedidos asignado al waiter
+    const { orders } = props;
+    /* const { statusStaff } = useContext(StatusStaffContext) */
+    /* const navigate = useNavigate(); */
+    /* const [orders, setOrders] = useState(""); /// pedidos asignado al waiter */
+
     const [finish, setFinish] = useState(false); /// pedido finalizado activar boton
-    const statusRef = useRef(statusStaff);
+    /* const statusRef = useRef(statusStaff);
     const idRef = useRef(id);
     statusRef.current = statusStaff; /// se supone q da problemas el useState dentro del useEffect
-    idRef.current = id;
-
-    if (statusStaff === null) {
-        /// actualizar estado en tablas
-        axios.patch(`${process.env.REACT_APP_API_URL}/staff/status`,
-            {"id": id,"status": "absent"});
-        AmplifyService.signOut();
-        navigate("/login");
-    }
+    idRef.current = id; */
 
     useEffect(() => {
+        if (orders !== null) {
+            setFinish(orders.every((e) => {return e.status === "delivering"}))
+        }
+    }, [orders]);
+
+    /* if (statusStaff === null) {
+        /// actualizar estado en tablas
+        console.log('Delivering', idRef.current);
+        axios.patch(`${process.env.REACT_APP_API_URL}/staff/status`,
+            {"id": idRef.current, "status": "absent"});
+        AmplifyService.signOut();
+        navigate("/login");
+    } */
+
+    /* useEffect(() => {
         const timer = setTimeout(() => {
             console.log('props-delivering:', idRef, statusRef);
             axios.get(`${process.env.REACT_APP_API_URL}/orders/delivering`,
@@ -51,14 +60,14 @@ export default function Delivering(props) {
                 })
                 /// tengo q ignorar el 404 
         }, 30000); // 30 seg
-    }, []);
+    }, []); */
 
     function handleFinish() {
         try {
             // todos los pedidos habilitar boton
             axios.patch(`${process.env.REACT_APP_API_URL}orders/finish/${orders.orderDay}`)
             // initialize
-            setOrders("");
+            orders = null;
             setFinish(false);
         } catch (err) {
             // mandar err

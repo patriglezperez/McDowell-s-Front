@@ -2,6 +2,7 @@ import burguer from "../../../assets/img/logoBurguer.png";
 import menuBurguer from "../../../assets/img/Menu1.png";
 import StaticContext from "../../../context/staticContext";
 import { useContext } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 //the menus are collected from the back
 function MenuPreview({ counter1, counter2, changeCounter1, changeCounter2 }) {
@@ -20,8 +21,33 @@ function MenuPreview({ counter1, counter2, changeCounter1, changeCounter2 }) {
   //add menus
   const addMenu = (num) => {
     let burguer = dataMenus.filter((menu) => menu.menu_num === num);
-    order.menus.push(...burguer);
+    const serial_order = 0;
+    const uuid_menu = uuidv4();
+    const menu_num = burguer[0].menu_num;
+    const uuid_user = order.uuid_user;
+    const status = "processing";
+    const chef = [];
+    const waiter = [];
+    const order_notes = "";
+    const date_order = "";
+    const consumption = order.consumption;
 
+    order.menus.push({
+      serial_order,
+      uuid_menu,
+      uuid_user,
+      menu_num,
+      status,
+      chef,
+      waiter,
+      order_notes,
+      date_order,
+      consumption,
+    });
+
+    //add in the menus the follow information
+
+    //we change the amount
     num === 1 ? changeCounter1(counter1 + 1) : changeCounter2(counter2 + 1);
 
     //we change the state total with the amount

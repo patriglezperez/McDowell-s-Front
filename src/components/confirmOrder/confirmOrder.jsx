@@ -33,6 +33,7 @@ export default function ConfirmOrder() {
   //confirm order and place the POST
   async function confirmOrder() {
     const finishedOrder = { order: order.menus };
+
     try {
       const confirmationResponse = await axios.post(
         `${process.env.REACT_APP_API_URL}/orders/new`,

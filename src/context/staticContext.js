@@ -7,7 +7,7 @@ export function StaticContextProvider({ children }) {
     uuid_user: [],
     menus: [],
   });
-  const [dataMenus, setDataMenus] = useState();
+  const [dataMenus, setDataMenus] = useState([]);
 
   return (
     <StaticContext.Provider

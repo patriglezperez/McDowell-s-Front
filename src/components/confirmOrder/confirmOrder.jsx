@@ -38,7 +38,7 @@ export default function ConfirmOrder() {
         `${process.env.REACT_APP_API_URL}/orders/new`,
         { order: finishedOrder }
       );
-      navigate(`customers/order/${order.uuid_user}/completed`, {
+      navigate(`/customers/order/${order.uuid_user}/completed`, {
         orderNumber: confirmationResponse.data.orderNumber,
       });
     } catch (error) {

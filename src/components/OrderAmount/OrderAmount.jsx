@@ -2,34 +2,17 @@ import burguer from "../../assets/img/logoBurguer.png";
 import menuBurguer from "../../assets/img/Menu1.png";
 import { useState, useContext, useEffect } from "react";
 import StaticContext from "../../context/staticContext";
-import { v4 as uuidv4 } from "uuid";
-
-const menus = [
-  {
-    num: 1,
-    name: "McDowell's",
-    price: 6.95,
-    uuid_menu: uuidv4(),
-    time_process: 3,
-  },
-  {
-    num: 2,
-    name: "McDowell's Jr",
-    price: 5.99,
-    uuid_menu: uuidv4(),
-    time_process: 2,
-  },
-];
 
 /*the menus are collected from the back*/
 function OrderAmount() {
   const { order, setOrder } = useContext(StaticContext);
   const [counter1, setCounter1] = useState(order.amountMenuMcDowells); //Menu "McDowell's",
   const [counter2, setCounter2] = useState(order.amountMenuMcdowellsJr); //Menu "McDowell's Jr",
+  const { dataMenus, setDataMenus } = useContext(StaticContext);
 
   //we define the price of the menus
-  const priceMenu1 = menus[0].price;
-  const priceMenu2 = menus[1].price;
+  const priceMenu1 = dataMenus[0].price;
+  const priceMenu2 = dataMenus[1].price;
 
   //we do the calculations of what it is going to cost
   let orderTotal1 = priceMenu1 * order.amountMenuMcDowells;
@@ -52,35 +35,38 @@ function OrderAmount() {
   return (
     <>
       {order.amountMenuMcDowells && order.amountMenuMcdowellsJr > 0 ? (
+        //if we want burguers from the both types of menus
         <>
-          {menus.map((menu) => (
-            <div className="menus" key={menu.num}>
+          {dataMenus.map((menu) => (
+            <div className="menus" key={menu.menu_num}>
               <div className="container">
                 <img
-                  src={menu.name === "McDowell's" ? menuBurguer : burguer}
+                  src={
+                    menu.menu_name === "Menu McDowells" ? menuBurguer : burguer
+                  }
                   alt="logoBurguer"
                   className="img"
                 />
                 <div className="quantity">
-                  <p>{menu.num === 1 ? `${counter1}` : `${counter2}`}</p>
+                  <p>{menu.menu_num === 1 ? `${counter1}` : `${counter2}`}</p>
                 </div>
 
-                <p className="nameMenu">
-                  Menú <br />
-                  {menu.name}
-                </p>
+                <p className="nameMenu">{menu.menu_name}</p>
                 <p className="priceMenu">
-                  {menu.num === 1 ? `${orderTotal1}` : `${orderTotal2}`}€
+                  {menu.menu_num === 1 ? `${orderTotal1}` : `${orderTotal2}`}€
                 </p>
               </div>
             </div>
           ))}
         </>
       ) : (
+        //if we want only one type of menu
         <>
           <div
             className="menus"
-            key={order.amountMenuMcDowells ? menus[0].num : menus[1].num}
+            key={
+              order.amountMenuMcDowells ? dataMenus[0].num : dataMenus[1].num
+            }
           >
             <div className="container">
               <img
@@ -95,8 +81,9 @@ function OrderAmount() {
               </div>
 
               <p className="nameMenu">
-                Menú <br />
-                {order.amountMenuMcDowells ? menus[0].name : menus[1].name}
+                {order.amountMenuMcDowells
+                  ? dataMenus[0].menu_name
+                  : dataMenus[1].menu_name}
               </p>
               <p className="priceMenu">
                 {order.amountMenuMcDowells

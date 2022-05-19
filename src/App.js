@@ -32,7 +32,6 @@ function App() {
               path="customers/order/:id/completed"
               element={<PlaceOrder />}
             />
-            {/* <MenuPreview /> */}
           </Routes>
         </BrowserRouter>
       </StaticContextProvider>

@@ -1,29 +1,12 @@
 import burguer from "../../../assets/img/logoBurguer.png";
 import menuBurguer from "../../../assets/img/Menu1.png";
 import StaticContext from "../../../context/staticContext";
-import { useContext, useEffect, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useContext } from "react";
 
-const menus = [
-  {
-    num: 1,
-    name: "McDowell's",
-    price: 6.95,
-    uuid_menu: uuidv4(),
-    time_process: 3,
-  },
-  {
-    num: 2,
-    name: "McDowell's Jr",
-    price: 5.99,
-    uuid_menu: uuidv4(),
-    time_process: 2,
-  },
-];
-
-/*the menus are collected from the back*/
+//the menus are collected from the back
 function MenuPreview({ counter1, counter2, changeCounter1, changeCounter2 }) {
   const { order, setOrder } = useContext(StaticContext);
+  const { dataMenus, setDataMenus } = useContext(StaticContext);
 
   if (order.amountMenuMcDowells >= 0) {
     counter1 = order.amountMenuMcDowells;
@@ -36,7 +19,7 @@ function MenuPreview({ counter1, counter2, changeCounter1, changeCounter2 }) {
   //*
   //add menus
   const addMenu = (num) => {
-    let burguer = menus.filter((menu) => menu.num === num);
+    let burguer = dataMenus.filter((menu) => menu.menu_num === num);
     order.menus.push(...burguer);
 
     num === 1 ? changeCounter1(counter1 + 1) : changeCounter2(counter2 + 1);
@@ -58,8 +41,8 @@ function MenuPreview({ counter1, counter2, changeCounter1, changeCounter2 }) {
   //delete menus
   const deleteMenu = (num) => {
     //we differentiate between the two types of hamburgers, we keep the ones that do not move and select the ones we have to delete
-    let differents = order.menus.filter((menu) => menu.num !== num);
-    let burguersSelected = order.menus.filter((menu) => menu.num === num);
+    let differents = order.menus.filter((menu) => menu.menu_num !== num);
+    let burguersSelected = order.menus.filter((menu) => menu.menu_num === num);
 
     burguersSelected.pop();
 
@@ -115,35 +98,36 @@ function MenuPreview({ counter1, counter2, changeCounter1, changeCounter2 }) {
 
   return (
     <div className="space-menus">
-      {menus.map((menu) => (
-        <div className="amount" key={menu.num}>
-          <p onClick={() => deleteMenu(menu.num)}>-</p>
-          <div className="menu" onClick={() => addMenu(menu.num)}>
+      {dataMenus.map((menu) => (
+        <div className="amount" key={menu.menu_num}>
+          <p onClick={() => deleteMenu(menu.menu_num)}>-</p>
+          <div className="menu" onClick={() => addMenu(menu.menu_num)}>
             <div
               className="card"
               onClick={() => {
-                menu.num === 1
+                menu.menu_num === 1
                   ? changeCounter1(counter1 + 1)
                   : changeCounter2(counter2 + 1);
               }}
             >
               <div className="blob"></div>
               <img
-                src={menu.name === "McDowell's" ? menuBurguer : burguer}
+                src={
+                  menu.menu_name === "Menu McDowell's" ? menuBurguer : burguer
+                }
                 alt="logoBurguer"
                 className="img"
               />
               <h2 className="description">
-                Menu <br />
-                {menu.name}
+                {menu.menu_name}
                 <br />
                 <span>{menu.price}€</span>
               </h2>
             </div>
 
-            <p>{menu.num === 1 ? `${counter1}` : `${counter2}`}</p>
+            <p>{menu.menu_num === 1 ? `${counter1}` : `${counter2}`}</p>
           </div>
-          <p onClick={() => addMenu(menu.num)}>+</p>
+          <p onClick={() => addMenu(menu.menu_num)}>+</p>
         </div>
       ))}
     </div>

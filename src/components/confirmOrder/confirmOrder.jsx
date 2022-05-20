@@ -35,7 +35,7 @@ export default function ConfirmOrder() {
   //cancel the order and delete everything
   function cancelOrder() {
     setOrder({ uuid_user: [], menus: [] });
-    navigate("/customers");
+    navigate("/");
   }
 
   //confirm order and place the POST
@@ -43,14 +43,12 @@ export default function ConfirmOrder() {
     //const finishedOrder = { order: order.menus };
 
     try {
-      console.log("confirmOrder:", order.menus);
       const confirmationResponse = await axios.post(
         `${process.env.REACT_APP_API_URL}/orders/new`,
         { order: order.menus }
       );
-      navigate(`/customers/order/${order.uuid_user}/completed`, {
-        orderNumber: confirmationResponse.data.orderNumber,
-      });
+      setOrder({ ...order, orderNumber: confirmationResponse.data.orders[0].order_day, orderTotal: orderTotal });
+      navigate(`/customers/order/${order.uuid_user}/completed`);
     } catch (error) {
       console.log(error);
     }

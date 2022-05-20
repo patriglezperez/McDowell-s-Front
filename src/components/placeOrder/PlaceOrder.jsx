@@ -18,8 +18,7 @@ const schemaEmail = yup.object().shape({
 export default function PlaceOrder() {
     const { order, setOrder } = useContext(StaticContext);
     const navigate = useNavigate();
-    //const orderNumber = useLocation().orderNumber;
-    const orderNumber = 123;
+
     //yup validation
     const {
         register,
@@ -32,15 +31,15 @@ export default function PlaceOrder() {
     async function handleFinishOrder(userEmail) {
         if (userEmail.email != '') {
             try {
-                //still unsure about what data we need
                 const data = { email: userEmail, order: { ...order } }
-                const response = await axios.post(`${process.env.REACT_APP_API_URL}/orders/sendReceipt`, data)
+                const response = await axios.post(`${process.env.REACT_APP_API_URL}/orders/receipt`, data);
+                setOrder({ uuid_user: [], menus: [] });
+                navigate('/');
             } catch (error) {
                 console.log(error);
             }
-            navigate('/customers');
         } else {
-            navigate('/customers');
+            navigate('/');
         }
     }
 
@@ -49,7 +48,7 @@ export default function PlaceOrder() {
             <img src={mealBurger} alt="meal picture" className="place-order-img" />
             <h3 className="payment-instruction">Paga tu pedido en caja y prepárate para disfrutar de tu McComida</h3>
             <p className="place-order-subtitle">Número de pedido</p>
-            {orderNumber && <div className="order-number">{orderNumber}</div>}
+            {order.orderNumber && <div className="order-number">{order.orderNumber}</div>}
             <form className="finish-order-form" onSubmit={handleSubmit(handleFinishOrder)}>
                 <p className="place-order-subtitle">¿Quieres recibir un email con el ticket?</p>
                 <input

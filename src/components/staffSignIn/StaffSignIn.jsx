@@ -27,6 +27,7 @@ const schemaUser = yup.object().shape({
 function StaffSignIn() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState();
   const [alertState, setAlertState] = useState({ open: false, message: "" });
 
   //yup validation
@@ -38,54 +39,55 @@ function StaffSignIn() {
     resolver: yupResolver(schemaUser),
   });
 
-  /*We login*/
-  const handleSignIn = async (userInput) => {
-    const response = await AmplifyService.signIn(userInput);
-    console.log(response);
-    if (response === AmplifyService.responses.success) {
-      console.log("Entrando en McDowell's");
-      setIsLoggedIn(true);
-    } else if (response === AmplifyService.responses.userNotFound) {
-      setAlertState({ ...alertState, open: true, message: "Este usuario no existe." });
-    } else if (response === AmplifyService.responses.failed) {
-      setAlertState({ ...alertState, open: true, message: "Email o contraseña incorrectos." });
-    } else if (response === AmplifyService.responses.userNotConfirmed) {
-      setAlertState({ ...alertState, open: true, message: "Debes confirmar tu cuenta. Por favor, revisa tu correo." });
-    } else {
-      setAlertState({ ...alertState, open: true, message: "Algo salió mal. Inténtelo de nuevo más tarde." });
-    }
-  }
-
-  const getUserId = () => {
-    return localStorage.getItem("userId");
-  }
-
   useEffect(() => {
-    const userId = getUserId();
-    (userId != null) ? setIsLoggedIn(true) : setIsLoggedIn(false);
-  }, [])
-
-  useEffect(() => {
-    const handleUserRedirection = async () => {
-      if (isLoggedIn) {
-        const userId = getUserId();
-        try {
-          const response = await axios.get(`${process.env.REACT_APP_API_URL}/staff/${userId}`);
-          const adminsRole = "admin";
-          const userRole = response.data.role;
-          if (userRole === adminsRole) {
-            navigate(`/admin/dashboard`);
-          } else {
-            navigate(`/staff/${userId}`);
-          }
-        } catch (error) {
-          console.log(error);
-        }
+    const checkIfLoggedIn = async () => {
+      const [user, error] = await AmplifyService.retrieveCurrentUser();
+      if (user) {
+        setUserId(user.attributes.sub);
+        setIsLoggedIn(true);
       }
     }
 
-    handleUserRedirection();
+    checkIfLoggedIn();
+  }, [])
+
+  /*We login*/
+  const handleSignIn = async (userInput) => {
+    const [user, error] = await AmplifyService.signIn(userInput);
+    if (error) {
+      setAlertState({ ...alertState, open: true, message: error.message });
+      return false;
+    }
+    setIsLoggedIn(true);
+    setUserId(user.attributes.sub);
+  }
+
+  useEffect(() => {
+    const handleUserRedirection = async () => {
+      try {
+        console.log(userId);
+        const response = await axios.post(`${process.env.REACT_APP_API_URL}/login/${userId}`);
+        const adminsRole = "admin";
+        const userRole = response.data.role;
+        console.log("Entrando en McDowell's");
+        if (userRole === adminsRole) {
+          navigate(`/admin/dashboard`);
+        } else {
+          navigate(`/staff/${userId}`);
+        }
+      } catch (error) {
+        setAlertState({ ...alertState, open: true, message: 'Algo salió mal. Inténtalo de nuevo.' });
+        setIsLoggedIn(false);
+        AmplifyService.signOut();
+      }
+    }
+
+    if (isLoggedIn) {
+      handleUserRedirection();
+    }
+
   }, [isLoggedIn, navigate]);
+
 
   const closeSnackbarAlert = (event, reason) => {
     if (reason === "clickaway") {

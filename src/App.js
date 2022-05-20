@@ -5,7 +5,8 @@ import awsconfig from "./aws-exports";
 
 import { StaticContextProvider } from "./context/staticContext";
 import StaffSignIn from "./components/staffSignIn/StaffSignIn";
-import Header from "./components/header";
+import Task from "./components/task/Task"
+import Header from "./components/Header";
 import Welcome from "./components/welcome/Welcome";
 import OrderCreator from "./components/orderCreator/OrderCreator";
 import PlaceOrder from "./components/placeOrder/PlaceOrder";
@@ -23,15 +24,10 @@ function App() {
           <Routes>
             <Route path="/customers" element={<Welcome />} />
             <Route path="/login" element={<StaffSignIn />} />
+            <Route path="/staff/:id" element={<Task />} />
             <Route path="/customers/order/:id" element={<OrderCreator />} />
-            <Route
-              path="/customers/order/:id/cart"
-              element={<OrderSummary />}
-            />
-            <Route
-              path="customers/order/:id/completed"
-              element={<PlaceOrder />}
-            />
+            <Route path="/customers/order/:id/cart" element={<OrderSummary />} />
+            <Route path="customers/order/:id/completed" element={<PlaceOrder />} />
           </Routes>
         </BrowserRouter>
       </StaticContextProvider>

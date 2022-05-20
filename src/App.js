@@ -5,7 +5,7 @@ import { StaticContextProvider } from "./context/staticContext";
 import StaffSignIn from "./components/staffSignIn/StaffSignIn";
 import AdministrateStaff from "./components/administrateStaff/AdministrateStaff";
 import Task from "./components/task/Task";
-import Header from "./components/header";
+import Header from "./components/Header";
 import Welcome from "./components/welcome/Welcome";
 import OrderCreator from "./components/orderCreator/OrderCreator";
 import PlaceOrder from "./components/placeOrder/PlaceOrder";

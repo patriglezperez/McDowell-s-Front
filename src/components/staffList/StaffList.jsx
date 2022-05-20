@@ -8,7 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import OrderPreviewStaff from "../staffList/orderPreviewStaff";
+import OrderPreviewStaff from "./orderPreview/orderPreviewStaff";
 
 function StaffList() {
   // const [availability, setAvailability] = useState("");
@@ -37,16 +37,15 @@ function StaffList() {
 
   return (
     <>
+      <div className="top-page">
+        <p>Personal:</p>
+        <PersonAddAlt1Icon
+          onClick={() => {
+            navigate(`/admin/employees/new`);
+          }}
+        />
+      </div>
       <div className="staff-page">
-        <div className="top-page">
-          <p>Personal:</p>
-          <PersonAddAlt1Icon
-            onClick={() => {
-              navigate(`${process.env.REACT_APP_API_URL}/admin/employees/new`);
-            }}
-          />
-        </div>
-
         {personal.map((staff) => {
           return (
             <OrderPreviewStaff

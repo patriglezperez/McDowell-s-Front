@@ -64,7 +64,7 @@ function OrderCreator() {
   //cancel the order and empty the context
   function cancelOrder() {
     setOrder({ uuid_user: [], menus: [] });
-    navigate("/customers");
+    navigate("/");
   }
 
   //finalize the cart

@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 
-import { statusStaffContext } from "../Task";
+import { StatusStaffContext } from "../Task";
 
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
@@ -9,10 +9,11 @@ import Select from '@mui/material/Select';
 
 
 export default function SelectStatus() {
-    const { statusStaff, setStatusStaff } = useContext(statusStaffContext)
+    const { statusStaff, setStatusStaff } = useContext(StatusStaffContext);
     const [open, setOpen] = useState(false);
 
     const handleChange = (event) => {
+        console.log('event.target.value--selectStatus', event.target.value)
         setStatusStaff(event.target.value);
     }; 
 
@@ -38,7 +39,7 @@ export default function SelectStatus() {
                     label="Status"
                     onChange={handleChange}>
                     <MenuItem value="">
-                        <em>Pausado</em>
+                        {/* <em>Pausado</em> */}
                     </MenuItem>
                     <MenuItem value={true}>Pausado</MenuItem>
                     <MenuItem value={false}>Recibir nuevos</MenuItem>

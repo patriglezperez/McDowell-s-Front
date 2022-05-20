@@ -1,7 +1,6 @@
 .order-page {
   display: flex;
   flex-direction: column;
-  height: 80vh;
   justify-content: space-around;
 }
 .titleCreator {
@@ -9,8 +8,12 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 37px;
   height: 10vh;
+
+  h1 {
+    text-align: center;
+  }
 }
 
 .menu-away {
@@ -28,9 +31,13 @@
 
 .space-buttons {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  @media (max-width: 650px) {
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
 
   button {
     width: 200px;

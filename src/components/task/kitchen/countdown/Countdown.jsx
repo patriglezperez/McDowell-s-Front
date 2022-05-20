@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 
 export default function Countdown(props) {
@@ -8,21 +8,26 @@ export default function Countdown(props) {
     const [secs, setSeconds] = useState(startingSeconds);
 
     const [color, setColor] = useState("#000000");
+    const minsRef = useRef(mins);
+    minsRef.current = mins;
+    const secsRef = useRef(secs);
+    secsRef.current = secs;
 
     useEffect(() => {
         let sampleInterval = setInterval(() => {
-            if (secs > 0) {
-                if ((mins === 0) && (secs <= 15)) {
+            if (secsRef.current > 0) {
+                if ((minsRef.current === 0) && (secsRef.current = 15)) {
+                    console.log("puto red")
                     setColor("#DC143C"); // Crisom Red
                 } else {
-                    setSeconds(secs - 1);
+                    setSeconds(secsRef.current - 1);
                 }
             }
-            if (secs === 0) {
-                if (mins === 0) {
+            if (secsRef.current === 0) {
+                if (minsRef.current === 0) {
                     clearInterval(sampleInterval);
                 } else {
-                    setMinutes(mins - 1);
+                    setMinutes(minsRef.current - 1);
                     setSeconds(59);
                 }
             }
@@ -34,10 +39,10 @@ export default function Countdown(props) {
 
     return (
         <div>
-            {!(mins && secs) ? "" : (
+            {!(minsRef.current && secsRef.current) ? "" : (
                 <p className="countdown--time" style={{color: color}}>
                     {" "}
-                    {mins}:{secs < 10 ? `0${secs}` : secs}
+                    {minsRef.current}:{secsRef.current < 10 ? `0${secsRef.current}` : secsRef.current}
                 </p>
             )}
         </div>

@@ -11,6 +11,7 @@ import OrderCreator from "./components/orderCreator/OrderCreator";
 import PlaceOrder from "./components/placeOrder/PlaceOrder";
 import StaffList from "./components/staffList/StaffList";
 import AdminDashboard from "./components/adminDashboard/AdminDashboard";
+import OngoingOrders from "./components/ongoingOrders/OngoingOrders";
 import OrderSummary from "./components/orderSummary/OrderSummary";
 
 Amplify.configure(awsconfig);
@@ -23,7 +24,7 @@ function App() {
           <Header />
           <Routes>
             {/* customers */}
-            <Route path="/customers" element={<Welcome />} />
+            <Route path="/" element={<Welcome />} />
             <Route path="/customers/order/:id" element={<OrderCreator />} />
             <Route
               path="customers/order/:id/completed"
@@ -39,6 +40,7 @@ function App() {
             <Route path="/staff/:id" element={<Task />} />
             {/* admin */}
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/orders/ongoing" element={<OngoingOrders />} />
             <Route path="/admin/employees/new" element={<AdministrateStaff />} />
             <Route path="admin/employees" element={<StaffList />} />
           </Routes>

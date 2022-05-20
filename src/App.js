@@ -9,8 +9,10 @@ import Header from "./components/header";
 import Welcome from "./components/welcome/Welcome";
 import OrderCreator from "./components/orderCreator/OrderCreator";
 import PlaceOrder from "./components/placeOrder/PlaceOrder";
-import OrderAmount from "./components/OrderAmount/OrderAmount";
 import AdministrateStaff from "./components/administrateStaff/AdministrateStaff";
+import Task from "./components/task/Task"
+import AdminDashboard from "./components/adminDashboard/AdminDashboard";
+import OrderSummary from "./components/orderSummary/OrderSummary";
 
 Amplify.configure(awsconfig);
 
@@ -21,13 +23,20 @@ function App() {
         <BrowserRouter>
           <Header />
           <Routes>
+            {/* customers */}
             <Route path="/customers" element={<Welcome />} />
-            <Route path="/login" element={<StaffSignIn />} />
             <Route path="/customers/order/:id" element={<OrderCreator />} />
             <Route
               path="customers/order/:id/completed"
               element={<PlaceOrder />}
             />
+            <Route path="/customers/order/:id/cart" element={<OrderSummary />} />
+            <Route path="customers/order/:id/completed" element={<PlaceOrder />} />
+            {/* staff */}
+            <Route path="/login" element={<StaffSignIn />} />
+            <Route path="/staff/:id" element={<Task />} />
+            {/* admin */}
+            <Route path="/admin/dashboard" element={<AdminDashboard/>} />
             <Route
               path="/admin/employees/new"
               element={<AdministrateStaff />}

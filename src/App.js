@@ -9,7 +9,6 @@ import Header from "./components/header";
 import Welcome from "./components/welcome/Welcome";
 import OrderCreator from "./components/orderCreator/OrderCreator";
 import PlaceOrder from "./components/placeOrder/PlaceOrder";
-import OrderAmount from "./components/OrderAmount/OrderAmount";
 import StaffList from "./components/staffList/StaffList";
 import AdminDashboard from "./components/adminDashboard/AdminDashboard";
 import OrderSummary from "./components/orderSummary/OrderSummary";
@@ -31,7 +30,6 @@ function App() {
               element={<PlaceOrder />}
             />
             <Route path="customers/order/:id/completed" element={<PlaceOrder />} />
-            <Route path="admin/employees" element={<StaffList />} />
             <Route
               path="/customers/order/:id/cart"
               element={<OrderSummary />}
@@ -41,6 +39,8 @@ function App() {
             <Route path="/staff/:id" element={<Task />} />
             {/* admin */}
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/employees/new" element={<AdministrateStaff />} />
+            <Route path="admin/employees" element={<StaffList />} />
           </Routes>
         </BrowserRouter>
       </StaticContextProvider>

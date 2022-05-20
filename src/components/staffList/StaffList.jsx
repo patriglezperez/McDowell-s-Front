@@ -11,16 +11,9 @@ import axios from "axios";
 import OrderPreviewStaff from "./orderPreview/orderPreviewStaff";
 
 function StaffList() {
-  // const [availability, setAvailability] = useState("");
   const [personal, setPersonal] = useState([]);
-  console.log(personal, "personal");
-  const navigate = useNavigate();
 
-  // const handleChange = (event) => {
-  //   event.preventDefault();
-  //   setAvailability(event.target.value);
-  //   console.log(availability, "availability");
-  // };
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getStaff = async () => {
@@ -60,23 +53,3 @@ function StaffList() {
   );
 }
 export default StaffList;
-
-// {
-//   /* <Box sx={{ minWidth: 120 }}>
-//         <FormControl fullWidth>
-//           <InputLabel id="demo-simple-select-label">Filtrar estado</InputLabel>
-//           <Select
-//             labelId="demo-simple-select-label"
-//             id="demo-simple-select"
-//             value={availability}
-//             label="availability"
-//             onChange={handleChange}
-//           >
-//             <MenuItem value={1}>Disponible</MenuItem>
-//             <MenuItem value={2}>Pausado</MenuItem>
-//             <MenuItem value={3}>Ocupado</MenuItem>
-//             <MenuItem value={4}>Ausente</MenuItem>
-//           </Select>
-//         </FormControl>
-//       </Box> */
-// }

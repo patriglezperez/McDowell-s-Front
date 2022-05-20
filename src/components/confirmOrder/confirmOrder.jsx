@@ -34,12 +34,13 @@ export default function ConfirmOrder() {
 
   //confirm order and place the POST
   async function confirmOrder() {
-    const finishedOrder = { order: order.menus };
+    //const finishedOrder = { order: order.menus };
 
     try {
+      console.log('confirmOrder:' , order.menus)
       const confirmationResponse = await axios.post(
         `${process.env.REACT_APP_API_URL}/orders/new`,
-        { order: finishedOrder }
+        { order: order.menus }
       );
       navigate(`/customers/order/${order.uuid_user}/completed`, {
         orderNumber: confirmationResponse.data.orderNumber,

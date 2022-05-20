@@ -26,27 +26,17 @@ function MenuPreview({ counter1, counter2, changeCounter1, changeCounter2 }) {
     let burguer = dataMenus.filter((menu) => menu.menu_num === num);
 
     //add in the menus the following information
-    const serial_order = 0;
     const uuid_menu = uuidv4();
     const menu_num = burguer[0].menu_num;
     const uuid_user = order.uuid_user;
     const status = "processing";
-    const chef = [];
-    const waiter = [];
-    const order_notes = "";
-    const date_order = "";
     const consumption = order.consumption;
 
     order.menus.push({
-      serial_order,
       uuid_menu,
       uuid_user,
       menu_num,
       status,
-      chef,
-      waiter,
-      order_notes,
-      date_order,
       consumption,
     });
 

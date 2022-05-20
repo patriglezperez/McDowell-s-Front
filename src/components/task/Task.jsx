@@ -41,13 +41,16 @@ export default function Task() {
     });
 
     const orderKitchen = () => {
-        axios.get(`${process.env.REACT_APP_API_URL}/orders/kitchen`,
+        console.log('orderKitchen:', idRef.current , statusRef.current)
+        axios.patch(`${process.env.REACT_APP_API_URL}/orders/kitchen`,
             {"cook": idRef.current , "status": statusRef.current})
-                .then((res) => {
-                    if (res.status === 200) {
-                        setOrders(res.data.orders);            
-                    }
-            })
+            .then((res) => {
+                if (res.status === 200) {
+                    console.log('orderKitchen:', res.data.deliveredDay);
+                    setOrders(res.data.deliveredDay); 
+                    console.log('orderKitchen-orders:', orders);           
+                }
+        })
     }
 
     const orderDelivering = () => {

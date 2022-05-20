@@ -11,8 +11,10 @@ import burguer from "../../../assets/img/logoBurguer.png";
 
 
 export default function Kitchen(props) {
-    console.log('puto Kitchen');
+    console.log('puto Kitchen', props);
     const { orders } = props;
+    const timeFinish = orders.order_notes.split(',')
+    console.log('puto Kitchen--timeFinish', timeFinish)
     /// estado del staff activo
     /* const { statusStaff } = useContext(StatusStaffContext)
     const navigate = useNavigate();
@@ -49,9 +51,9 @@ export default function Kitchen(props) {
     return (<div> Cocinero 
         <SelectStatus />
         {!orders ? null : <div className="orders--kitchen">
-            <div> Menu: <Countdown startingMinutes={orders.time} /> </div>
+            <div> Menu: <Countdown startingMinutes={timeFinish[1]} /> </div>
             <div> <img src={burguer} alt="logoBurguer" className="logoBurger"/> </div>
-            <div> {orders.uuid} </div> 
+            <div> {orders.uuid_menu} </div> 
         </div>} 
     </div>);
 }

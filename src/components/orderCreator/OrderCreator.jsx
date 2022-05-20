@@ -10,12 +10,17 @@ import checkMark from "../../assets/img/checkbox_mark.png";
 
 function OrderCreator() {
   const { order, setOrder } = useContext(StaticContext);
+  const { dataMenus, setDataMenus } = useContext(StaticContext);
+
   const [view, setView] = useState(false);
   const [renderId, setRenderId] = useState(0);
   const navigate = useNavigate();
-  // const { dataMenus, setDataMenus } = useContext(StaticContext);
 
   let locationUrl = window.location.href;
+
+  const [counter1, setCounter1] = useState(0); //Menu "McDowell's",
+  const [counter2, setCounter2] = useState(0); //Menu "McDowell's Jr",
+  const uuid_user = order.uuid_user[0];
 
   const typeOfRestaurant = [
     {
@@ -43,49 +48,70 @@ function OrderCreator() {
     },
   ];
 
+  // choose whether to take here or take away and you go to the next view
   function choose(id) {
     const place = id;
     setRenderId(id);
     setView(true);
-    const uuid_user = order[0].uuid_user;
     const createMenuView = `customers/order/${uuid_user}/create`;
     locationUrl = createMenuView;
-    order[0].menus.push({ consumption: place });
+    setOrder({
+      ...order,
+      consumption: place,
+    });
   }
 
   //cancel the order and empty the context
   function cancelOrder() {
-    setOrder({ 0: { uuid_user: [], menus: [] } });
-    console.log(order);
+    setOrder({ uuid_user: [], menus: [] });
     navigate("/customers");
   }
 
+  //finalize the cart
   async function confirmOrder() {
-    const uuid_user = order[0].uuid_user;
-    navigate(`customers/order/${uuid_user}/cart`);
+    setOrder({
+      ...order,
+      amountMenuMcDowells: order.amountMenuMcDowells,
+      amountMenuMcdowellsJr: order.amountMenuMcdowellsJr,
+    });
+    navigate(`/customers/order/${uuid_user}/cart`);
   }
 
-  // useEffect(() => {
-  //   function getMenusData() {
-  //     try {
-  //       axios
-  //         .get("http://localhost:3001/api/menus/all")
-  //         .then((res) => setData(res.data));
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   getMenusData();
-  // }, []);
+  useEffect(() => {
+    function getMenusData() {
+      try {
+        axios
+          .get("http://localhost:3000/api/menu/all")
+          .then((res) => setDataMenus(res.data.menuAll.rows));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getMenusData();
+  }, []);
+
+  //set the McDowells menu counter
+  function changeCounter1(data1) {
+    setCounter1(data1);
+  }
+
+  //set the McDowellsJr menu counter
+  function changeCounter2(data2) {
+    setCounter2(data2);
+  }
 
   return (
     <div className="order-page">
       <div className="titleCreator">
         <h2 className="welcome-title">
+          {/* render take or take away and when you click on it, it renders the menus.  */}
+
           {view === false ? titles[0].name1 : titles[1].name1}
         </h2>
         <h1>{view === false ? titles[0].name2 : titles[1].name2}</h1>
       </div>
+
+      {/* view 1, take or take away */}
       {view === false ? (
         <div className="space-menus">
           {typeOfRestaurant.map((restaurant) => (
@@ -104,8 +130,17 @@ function OrderCreator() {
           ))}
         </div>
       ) : (
-        <MenuPreview />
+        // view 2, select menu type
+        <MenuPreview
+          counter1={counter1}
+          changeCounter1={changeCounter1}
+          changeCounter2={changeCounter2}
+          counter2={counter2}
+        />
       )}
+
+      {/* Confirm and Cancel buttons */}
+
       {view === false ? (
         <div className="space-buttons">
           <button className="cancelOrder" onClick={cancelOrder}>

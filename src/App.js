@@ -1,16 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import Amplify, { Auth } from "aws-amplify";
 import awsconfig from "./aws-exports";
-
 import { StaticContextProvider } from "./context/staticContext";
 import StaffSignIn from "./components/staffSignIn/StaffSignIn";
-import Header from "./components/Header";
+import AdministrateStaff from "./components/administrateStaff/AdministrateStaff";
+import Task from "./components/task/Task";
+import Header from "./components/header";
 import Welcome from "./components/welcome/Welcome";
 import OrderCreator from "./components/orderCreator/OrderCreator";
 import PlaceOrder from "./components/placeOrder/PlaceOrder";
-import AdministrateStaff from "./components/administrateStaff/AdministrateStaff";
-import Task from "./components/task/Task"
+import OrderAmount from "./components/OrderAmount/OrderAmount";
+import StaffList from "./components/staffList/StaffList";
 import AdminDashboard from "./components/adminDashboard/AdminDashboard";
 import OrderSummary from "./components/orderSummary/OrderSummary";
 
@@ -30,17 +30,17 @@ function App() {
               path="customers/order/:id/completed"
               element={<PlaceOrder />}
             />
-            <Route path="/customers/order/:id/cart" element={<OrderSummary />} />
             <Route path="customers/order/:id/completed" element={<PlaceOrder />} />
+            <Route path="admin/employees" element={<StaffList />} />
+            <Route
+              path="/customers/order/:id/cart"
+              element={<OrderSummary />}
+            />
             {/* staff */}
             <Route path="/login" element={<StaffSignIn />} />
             <Route path="/staff/:id" element={<Task />} />
             {/* admin */}
-            <Route path="/admin/dashboard" element={<AdminDashboard/>} />
-            <Route
-              path="/admin/employees/new"
-              element={<AdministrateStaff />}
-            />
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
           </Routes>
         </BrowserRouter>
       </StaticContextProvider>

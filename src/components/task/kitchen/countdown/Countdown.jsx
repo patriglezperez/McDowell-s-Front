@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 
 export default function Countdown(props) {
-
+    console.log('Countdown:',props)
     const { startingMinutes = 0, startingSeconds = 0 } = props;
     const [mins, setMinutes] = useState(startingMinutes);
     const [secs, setSeconds] = useState(startingSeconds);

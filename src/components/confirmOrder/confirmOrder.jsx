@@ -6,42 +6,63 @@ import axios from "axios";
 import StaticContext from "../../context/staticContext";
 
 export default function ConfirmOrder() {
-    const { order, setOrder } = useContext(StaticContext);
-    const [orderTotal, setOrderTotal] = useState(0);
-    const navigate = useNavigate();
+  const { order, setOrder } = useContext(StaticContext);
+  const [orderTotal, setOrderTotal] = useState(0);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        if (order.menus && order.menus.length > 0) {
-            let totalSum = 0;
-            totalSum = order.menus.reduce((previousValue, currentValue) => previousValue + currentValue);
-            setOrderTotal(totalSum);
-        }
-    }, [order])
+  //if there is the total price of one or the other, then it adds up to
+  useEffect(() => {
+    if (
+      order.menus &&
+      order.totalPriceMcDowells | order.totalPriceMcdowellsJr
+    ) {
+      let totalSum = 0;
 
-    function cancelOrder() {
-        setOrder({ id: [], menus: [] });
-        navigate("/customers");
+      totalSum =
+        parseInt(order.totalPriceMcDowells) +
+        parseInt(order.totalPriceMcdowellsJr);
+      totalSum.toFixed(2);
+      setOrderTotal(totalSum);
     }
+  }, [order]);
 
-    async function confirmOrder() {
-        const finishedOrder = { order: order.menus };
-        try {
-            const confirmationResponse = await axios.post(`${process.env.REACT_APP_API_URL}/orders/new`, { order: finishedOrder });
-            navigate(`customers/order/${order.id[0]}/completed`, { orderNumber: confirmationResponse.data.orderNumber });
-        } catch (error) {
-            console.log(error);
-        }
+  //cancel the order and delete everything
+  function cancelOrder() {
+    setOrder({ uuid_user: [], menus: [] });
+    navigate("/customers");
+  }
+
+  //confirm order and place the POST
+  async function confirmOrder() {
+    //const finishedOrder = { order: order.menus };
+
+    try {
+      console.log('confirmOrder:' , order.menus)
+      const confirmationResponse = await axios.post(
+        `${process.env.REACT_APP_API_URL}/orders/new`,
+        { order: order.menus }
+      );
+      navigate(`/customers/order/${order.uuid_user}/completed`, {
+        orderNumber: confirmationResponse.data.orderNumber,
+      });
+    } catch (error) {
+      console.log(error);
     }
+  }
 
-    return (
-        <section className="confirm-order">
-            <p className="section-title">Resumen de tu pedido</p>
-            <span className="price-wrapper">
-                <p className="total">TOTAL</p>
-                <b className="total-price">€{orderTotal}</b>
-            </span>
-            <button className="action-button" onClick={confirmOrder}>CONFIRMAR PEDIDO</button>
-            <button className="action-button" onClick={cancelOrder}>CANCELAR PEDIDO</button>
-        </section>
-    )
+  return (
+    <section className="confirm-order">
+      <p className="section-title">Resumen de tu pedido</p>
+      <span className="price-wrapper">
+        <p className="total">TOTAL</p>
+        <b className="total-price">{orderTotal}€</b>
+      </span>
+      <button className="action-button" onClick={confirmOrder}>
+        CONFIRMAR PEDIDO
+      </button>
+      <button className="action-button" onClick={cancelOrder}>
+        CANCELAR PEDIDO
+      </button>
+    </section>
+  );
 }

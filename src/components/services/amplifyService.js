@@ -2,13 +2,15 @@ import { Auth } from "aws-amplify";
 
 export default class AmplifyService {
 
-    static signUp = async (userInput) => {
+    static signUp = async (data) => {
         try {
             const { user } = await Auth.signUp({
-                username: userInput.email,
-                password: userInput.password,
+                username: data.email,
+                password: data.password,
                 attributes: {
-                    email: userInput.email,
+                    email: data.email,
+                    'custom:rol': data.rol,
+                    'custom:name': data.name
                 }
             });
             return [user, undefined];
@@ -29,7 +31,7 @@ export default class AmplifyService {
     static retrieveCurrentUser = async () => {
         try {
             const user = await Auth.currentAuthenticatedUser();
-            return [user, undefined]; 
+            return [user, undefined];
         } catch (error) {
             return [undefined, error];
         }

@@ -65,7 +65,6 @@ function StaffSignIn() {
   useEffect(() => {
     const handleUserRedirection = async () => {
       try {
-        console.log('te mato fer', userId);
         const response = await axios.post(`${process.env.REACT_APP_API_URL}/staff/login/${userId}`);
         const adminsRole = "admin";
         const userRole = response.data.role;

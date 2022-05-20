@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 // , useEffect, useContext, useRef
 /* import { useNavigate } from "react-router-dom";
 import AmplifyService from "../../services/amplifyService"; */
@@ -19,14 +19,20 @@ export default function Delivering(props) {
     /* const [orders, setOrders] = useState(""); /// pedidos asignado al waiter */
 
     const [finish, setFinish] = useState(false); /// pedido finalizado activar boton
+    /* const finishRef = useRef(finish);
+    finishRef.current = finish; */
     /* const statusRef = useRef(statusStaff);
     const idRef = useRef(id);
     statusRef.current = statusStaff; /// se supone q da problemas el useState dentro del useEffect
     idRef.current = id; */
 
     useEffect(() => {
-        if (orders !== null) {
-            setFinish(orders.every((e) => {return e.status === "delivering"}))
+        
+        if (orders) {
+            console.log("orders--finish:", orders)
+            const kaka = orders.every((e) => {return e.statuss === "delivering"})
+            console.log("kaka:",kaka)
+            setFinish(kaka)
         }
     }, [orders]);
 
@@ -62,10 +68,10 @@ export default function Delivering(props) {
         }, 30000); // 30 seg
     }, []); */
 
-    function handleFinish() {
+    async function handleFinish() {
         try {
             // todos los pedidos habilitar boton
-            axios.patch(`${process.env.REACT_APP_API_URL}orders/finish/${orders.orderDay}`)
+            await axios.patch(`${process.env.REACT_APP_API_URL}orders/finish/${orders.orderDay}`)
             // initialize
             orders = null;
             setFinish(false);
@@ -79,7 +85,7 @@ export default function Delivering(props) {
         {!orders ? null : <div className="orders--delivering">
             <div> Menu:  </div>
             <div> <img src={burguer} alt="logoBurguer" className="logoBurger"/> </div>
-            <div> {orders.map((e, i) => {return (<OrderPreview uuid={e.uuid_menu} status={e.status} index={i} />)})}
+            <div> {orders.map((e, i) => {return (<OrderPreview uuid={e.uuid_menu} status={e.statuss} index={i} />)})}
             {/* /// componente para mostrar*/}
             </div> {/* /// ajustar si viene un solo menu o varios */}
             {finish ? <button onClick={handleFinish} > Finalizar </button> : null}

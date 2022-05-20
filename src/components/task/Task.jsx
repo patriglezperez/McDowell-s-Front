@@ -54,11 +54,12 @@ export default function Task() {
     }
 
     const orderDelivering = () => {
-        axios.get(`${process.env.REACT_APP_API_URL}/orders/delivering`,
+        axios.patch(`${process.env.REACT_APP_API_URL}/orders/delivering`,
             {"waiter": idRef.current , "status": statusRef.current})
                 .then((res) => {
                     console.log('res.status:', res.status)
                     if (res.status === 200) {
+                        console.log('orderDelivering-orders', res.data);
                         setOrders(res.data.orders);
                     }
             })

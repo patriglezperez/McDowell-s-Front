@@ -3,6 +3,7 @@ import Amplify, { Auth } from "aws-amplify";
 import awsconfig from "./aws-exports";
 import { StaticContextProvider } from "./context/staticContext";
 import StaffSignIn from "./components/staffSignIn/StaffSignIn";
+import Task from "./components/task/Task";
 import Header from "./components/header";
 import Welcome from "./components/welcome/Welcome";
 import OrderCreator from "./components/orderCreator/OrderCreator";
@@ -22,6 +23,7 @@ function App() {
           <Routes>
             <Route path="/customers" element={<Welcome />} />
             <Route path="/login" element={<StaffSignIn />} />
+            <Route path="/staff/:id" element={<Task />} />
             <Route path="/customers/order/:id" element={<OrderCreator />} />
             <Route
               path="customers/order/:id/completed"

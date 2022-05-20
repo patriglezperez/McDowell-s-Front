@@ -14,14 +14,20 @@ export default function ConfirmOrder() {
   useEffect(() => {
     if (
       order.menus &&
-      order.totalPriceMcDowells | order.totalPriceMcdowellsJr
+      order.totalPriceMcDowells &&
+      order.totalPriceMcdowellsJr
     ) {
       let totalSum = 0;
 
-      totalSum =
-        parseInt(order.totalPriceMcDowells) +
-        parseInt(order.totalPriceMcdowellsJr);
-      totalSum.toFixed(2);
+      totalSum = order.totalPriceMcDowells + order.totalPriceMcdowellsJr;
+      totalSum = totalSum.toFixed(2);
+      setOrderTotal(totalSum);
+    } else if (
+      (order.menus && order.totalPriceMcDowells) ||
+      order.totalPriceMcdowellsJr
+    ) {
+      let totalSum = order.totalPriceMcDowells || order.totalPriceMcdowellsJr;
+
       setOrderTotal(totalSum);
     }
   }, [order]);
@@ -34,12 +40,13 @@ export default function ConfirmOrder() {
 
   //confirm order and place the POST
   async function confirmOrder() {
-    const finishedOrder = { order: order.menus };
+    //const finishedOrder = { order: order.menus };
 
     try {
+      console.log("confirmOrder:", order.menus);
       const confirmationResponse = await axios.post(
         `${process.env.REACT_APP_API_URL}/orders/new`,
-        { order: finishedOrder }
+        { order: order.menus }
       );
       navigate(`/customers/order/${order.uuid_user}/completed`, {
         orderNumber: confirmationResponse.data.orderNumber,

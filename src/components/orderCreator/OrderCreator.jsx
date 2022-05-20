@@ -81,7 +81,7 @@ function OrderCreator() {
     function getMenusData() {
       try {
         axios
-          .get("http://localhost:3000/api/menu/all")
+          .get(`${process.env.REACT_APP_API_URL}/menu/all`)
           .then((res) => setDataMenus(res.data.menuAll.rows));
       } catch (error) {
         console.log(error);

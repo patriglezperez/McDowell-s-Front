@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 //, { useState, useEffect, useContext, useRef }
 /* import { useNavigate } from "react-router-dom";
 import AmplifyService from "../../services/amplifyService";
@@ -13,8 +13,13 @@ import burguer from "../../../assets/img/logoBurguer.png";
 export default function Kitchen(props) {
     console.log('puto Kitchen', props);
     const { orders } = props;
-    const timeFinish = orders.order_notes.split(',')
-    console.log('puto Kitchen--timeFinish', timeFinish)
+    const [timeFinish, setTimeFinish] = useState();
+
+    if (!orders === null) {
+        console.log('puto Kitchen--timeFinish', timeFinish)
+        setTimeFinish(orders.order_notes.split(','))    
+    } 
+
     /// estado del staff activo
     /* const { statusStaff } = useContext(StatusStaffContext)
     const navigate = useNavigate();
@@ -51,7 +56,7 @@ export default function Kitchen(props) {
     return (<div> Cocinero 
         <SelectStatus />
         {!orders ? null : <div className="orders--kitchen">
-            <div> Menu: <Countdown startingMinutes={timeFinish[1]} /> </div>
+            <div> Menu: <Countdown startingMinutes={3} /> </div>
             <div> <img src={burguer} alt="logoBurguer" className="logoBurger"/> </div>
             <div> {orders.uuid_menu} </div> 
         </div>} 

@@ -46,8 +46,8 @@ export default function Task() {
             {"cook": idRef.current , "status": statusRef.current})
             .then((res) => {
                 if (res.status === 200) {
-                    console.log('orderKitchen:', res.data.deliveredDay);
-                    setOrders(res.data.deliveredDay); 
+                    console.log('orderKitchen:', res.data);
+                    setOrders(res.data.orders); 
                     console.log('orderKitchen-orders:', orders);           
                 }
         })

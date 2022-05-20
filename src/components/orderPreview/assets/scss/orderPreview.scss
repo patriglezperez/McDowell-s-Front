@@ -1,0 +1,40 @@
+.orderpreview--wrapper {
+    width: fit-content;
+    min-width: 45rem;
+    height: 9rem;
+    background-color: #ababab;
+    border-radius: 20px;
+    padding-right: 2.5rem;
+    padding-left: 2.5rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin: 1rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dashboard-title {
+    margin-top: 3rem;
+    font-size: 3rem;
+}
+
+.orderpreview--uuid {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.orderpreview--status {
+    font-size: 2.5rem;
+}
+
+.status-green {
+    color: $green_dark;
+}

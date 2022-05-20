@@ -10,6 +10,7 @@ import OrderCreator from "./components/orderCreator/OrderCreator";
 import PlaceOrder from "./components/placeOrder/PlaceOrder";
 import OrderAmount from "./components/OrderAmount/OrderAmount";
 import StaffList from "./components/staffList/StaffList";
+import AdminDashboard from "./components/adminDashboard/AdminDashboard";
 import OrderSummary from "./components/orderSummary/OrderSummary";
 
 Amplify.configure(awsconfig);
@@ -21,9 +22,8 @@ function App() {
         <BrowserRouter>
           <Header />
           <Routes>
+            {/* customers */}
             <Route path="/customers" element={<Welcome />} />
-            <Route path="/login" element={<StaffSignIn />} />
-            <Route path="/staff/:id" element={<Task />} />
             <Route path="/customers/order/:id" element={<OrderCreator />} />
             <Route
               path="customers/order/:id/completed"
@@ -35,6 +35,11 @@ function App() {
               path="/customers/order/:id/cart"
               element={<OrderSummary />}
             />
+            {/* staff */}
+            <Route path="/login" element={<StaffSignIn />} />
+            <Route path="/staff/:id" element={<Task />} />
+            {/* admin */}
+            <Route path="/admin/dashboard" element={<AdminDashboard />} />
           </Routes>
         </BrowserRouter>
       </StaticContextProvider>

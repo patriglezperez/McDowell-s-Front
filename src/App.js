@@ -5,7 +5,7 @@ import { StaticContextProvider } from "./context/staticContext";
 import StaffSignIn from "./components/staffSignIn/StaffSignIn";
 import AdministrateStaff from "./components/administrateStaff/AdministrateStaff";
 import Task from "./components/task/Task";
-import Header from "./components/Header";
+import Header from "./components/header";
 import Welcome from "./components/welcome/Welcome";
 import OrderCreator from "./components/orderCreator/OrderCreator";
 import PlaceOrder from "./components/placeOrder/PlaceOrder";
@@ -35,7 +35,10 @@ function App() {
               path="customers/order/:id/completed"
               element={<PlaceOrder />}
             />
-            <Route path="customers/order/:id/completed" element={<PlaceOrder />} />
+            <Route
+              path="customers/order/:id/completed"
+              element={<PlaceOrder />}
+            />
             <Route
               path="/customers/order/:id/cart"
               element={<OrderSummary />}
@@ -46,7 +49,10 @@ function App() {
             {/* admin */}
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/orders/ongoing" element={<OngoingOrders />} />
-            <Route path="/admin/employees/new" element={<AdministrateStaff />} />
+            <Route
+              path="/admin/employees/new"
+              element={<AdministrateStaff />}
+            />
             <Route path="admin/employees" element={<StaffList />} />
             <Route path="/admin/orders/history" element={<OrdersHistory />} />
           </Routes>

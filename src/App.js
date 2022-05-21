@@ -13,6 +13,7 @@ import StaffList from "./components/staffList/StaffList";
 import AdminDashboard from "./components/adminDashboard/AdminDashboard";
 import OngoingOrders from "./components/ongoingOrders/OngoingOrders";
 import OrderSummary from "./components/orderSummary/OrderSummary";
+import OrdersHistory from "./components/orderHistory/OrderHistory";
 
 Amplify.configure(awsconfig);
 
@@ -43,6 +44,7 @@ function App() {
             <Route path="/admin/orders/ongoing" element={<OngoingOrders />} />
             <Route path="/admin/employees/new" element={<AdministrateStaff />} />
             <Route path="admin/employees" element={<StaffList />} />
+            <Route path="/admin/orders/history" element={<OrdersHistory />} />
           </Routes>
         </BrowserRouter>
       </StaticContextProvider>

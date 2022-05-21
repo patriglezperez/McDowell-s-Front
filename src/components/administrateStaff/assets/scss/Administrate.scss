@@ -120,7 +120,7 @@ label {
 }
 
 // buttons
-button {
+.administrate {
   background-color: #eee;
   border: none;
   padding: 1rem;
@@ -132,19 +132,19 @@ button {
   cursor: pointer;
 }
 
-button:active {
+.administrate:active {
   color: white;
   box-shadow: 0 0.2rem #dfd9d9;
   transform: translateY(0.2rem);
 }
 
-button:hover:not(:disabled) {
+.administrate:hover:not(:disabled) {
   background: $green_clear;
   color: black;
   text-shadow: 0 0.1rem #bcb4b4;
 }
 
-button:disabled {
+.administrate:disabled {
   cursor: auto;
   color: grey;
 }

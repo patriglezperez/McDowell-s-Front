@@ -47,7 +47,11 @@ export default function ConfirmOrder() {
         `${process.env.REACT_APP_API_URL}/orders/new`,
         { order: order.menus }
       );
-      setOrder({ ...order, orderNumber: confirmationResponse.data.orders[0].order_day, orderTotal: orderTotal });
+      setOrder({
+        ...order,
+        orderNumber: confirmationResponse.data.orders[0].order_day,
+        orderTotal: orderTotal,
+      });
       navigate(`/customers/order/${order.uuid_user}/completed`);
     } catch (error) {
       console.log(error);

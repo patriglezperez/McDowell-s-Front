@@ -15,19 +15,23 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 /* Verification */
 const schemaUser = yup.object().shape({
-  email: yup
-    .string()
-    .required("El nombre de usuario es necesario."),
+  email: yup.string().required("El nombre de usuario es necesario."),
   password: yup
     .string()
     .required("La contraseña es obligatoria.")
-    .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/, "Debe contener 5 caracteres, una mayúscula, una minúscula y un número."),
+    .matches(
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
+      "Debe contener 5 caracteres, una mayúscula, una minúscula y un número."
+    ),
   //Must Contain 5 characters, One Uppercase, One Lowercase and One Number
 });
 
-
 function AdministrateStaff() {
-  const [alertState, setAlertState] = useState({ open: false, message: "", severity:"" });
+  const [alertState, setAlertState] = useState({
+    open: false,
+    message: "",
+    severity: "",
+  });
   const [rol, setRol] = useState("");
   const [staff, setStaff] = useState("");
   const navigate = useNavigate();
@@ -45,12 +49,27 @@ function AdministrateStaff() {
     try {
       const [user, error] = await AmplifyService.signUp(data);
       if (user) {
-        setAlertState({ ...alertState, open: true, message: 'Se ha agregado el nuevo empleado.', severity: 'success' });
+        setAlertState({
+          ...alertState,
+          open: true,
+          message: "Se ha agregado el nuevo empleado.",
+          severity: "success",
+        });
       } else {
-        setAlertState({ ...alertState, open: true, message: error.message, severity: 'error' });
+        setAlertState({
+          ...alertState,
+          open: true,
+          message: error.message,
+          severity: "error",
+        });
       }
     } catch (error) {
-      setAlertState({ ...alertState, open: true, message: error.message, severity: 'error' });
+      setAlertState({
+        ...alertState,
+        open: true,
+        message: error.message,
+        severity: "error",
+      });
     }
   }
 
@@ -71,7 +90,13 @@ function AdministrateStaff() {
         <div className="data-staff">
           <p>Nuevo empleado</p>
           <div className="group">
-            <input type="email" id="user-email" name="email" className="input"  {...register("email", {})} />
+            <input
+              type="email"
+              id="user-email"
+              name="email"
+              className="input"
+              {...register("email", {})}
+            />
             <span className="highlight"></span>
             <span className="bar"></span>
             <label for="user-email">Email</label>
@@ -91,7 +116,12 @@ function AdministrateStaff() {
             <label for="pass">Contraseña</label>
           </div>
           <div className="group">
-            <input required="" type="text" className="input" {...register("name", {})} />
+            <input
+              required=""
+              type="text"
+              className="input"
+              {...register("name", {})}
+            />
             <span className="highlight"></span>
             <span className="bar"></span>
             <label>Name</label>
@@ -107,27 +137,37 @@ function AdministrateStaff() {
                 label="availability"
                 {...register("rol", {})}
               >
-                <MenuItem value={'admin'}>Administrador</MenuItem>
-                <MenuItem value={'cook'}>Cocinero</MenuItem>
-                <MenuItem value={'waiter'}>Camarero</MenuItem>
+                <MenuItem value={"admin"}>Administrador</MenuItem>
+                <MenuItem value={"cook"}>Cocinero</MenuItem>
+                <MenuItem value={"waiter"}>Camarero</MenuItem>
               </Select>
             </FormControl>
           </Box>
           <div className="staff-btn">
-            <button type="submit" >Añadir</button>
+            <button type="submit" className="administrate">
+              Añadir
+            </button>
             <button
+              className="administrate"
               onClick={() => {
                 navigate(`/admin/employees`);
               }}
             >
               Volver
             </button>
-
           </div>
         </div>
       </form>
-      <Snackbar open={alertState.open} autoHideDuration={3100} onClose={closeSnackbarAlert}>
-        <Alert onClose={closeSnackbarAlert} severity={alertState.severity} sx={{ width: "100%", fontSize: "2rem" }}>
+      <Snackbar
+        open={alertState.open}
+        autoHideDuration={3100}
+        onClose={closeSnackbarAlert}
+      >
+        <Alert
+          onClose={closeSnackbarAlert}
+          severity={alertState.severity}
+          sx={{ width: "100%", fontSize: "2rem" }}
+        >
           {alertState.message}
         </Alert>
       </Snackbar>

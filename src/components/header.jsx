@@ -1,10 +1,11 @@
+import { useLocation } from "react-router-dom";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import MenuIcon from '@mui/icons-material/Menu';
 
 import DrawerMenu from './DrawerMenu';
 
 export default function Header() {
-  const locationUrl = window.location.href;
+  const locationUrl = useLocation().pathname;
   const orderCreatorView = '/customers/orders';
   const adminView = '/admin';
 

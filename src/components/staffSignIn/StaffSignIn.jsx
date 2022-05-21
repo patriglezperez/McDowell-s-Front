@@ -67,11 +67,13 @@ function StaffSignIn() {
       try {
         const response = await axios.post(`${process.env.REACT_APP_API_URL}/staff/login/${userId}`);
         const adminsRole = "admin";
-        const userRole = response.data.role;
+        const waiterRole = "waiter";
+        const cookRole = "cook";
+        const userRole = response.data.rol;
         console.log("Entrando en McDowell's");
         if (userRole === adminsRole) {
           navigate(`/admin/dashboard`);
-        } else {
+        } else if (userRole === waiterRole || userRole === cookRole) {
           navigate(`/staff/${userId}`);
         }
       } catch (error) {

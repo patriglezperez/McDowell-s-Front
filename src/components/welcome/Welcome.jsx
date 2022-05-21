@@ -13,7 +13,7 @@ function Welcome() {
   async function start() {
     const id = uuidv4();
     order.uuid_user.push(id);
-    navigate(`order/${id}`);
+    navigate(`/customers/order/${id}`);
   }
 
   return (

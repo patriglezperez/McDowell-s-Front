@@ -9,9 +9,9 @@ export default function OngoingOrders() {
   async function getOngoingOrders() {
     try {
       const ordersResponse = await axios.get(
-        `${process.env.REACT_APP_API_URL}/orders/status/finished`
+        `${process.env.REACT_APP_API_URL}/orders/delivery/delivered`
       );
-      setOngoingOrders(ordersResponse.data.activeOrders.rows);
+      setOngoingOrders(ordersResponse.data.finished);
     } catch (error) {
       console.log(error);
     }

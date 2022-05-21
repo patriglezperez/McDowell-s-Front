@@ -9,19 +9,17 @@ import Countdown from "./countdown/Countdown";
 import SelectStatus from "../selectStatus/SelectStatus";
 import burguer from "../../../assets/img/logoBurguer.png";
 
-
 export default function Kitchen(props) {
-    console.log('puto Kitchen', props);
-    const { orders } = props;
-    const [timeFinish, setTimeFinish] = useState();
+  const { orders } = props;
+  const [timeFinish, setTimeFinish] = useState();
 
-    if (!orders === null) {
-        console.log('puto Kitchen--timeFinish', timeFinish)
-        setTimeFinish(orders.order_notes.split(','))    
-    } 
+  if (!orders === null) {
+    console.log("Kitchen--timeFinish", timeFinish);
+    setTimeFinish(orders.order_notes.split(","));
+  }
 
-    /// estado del staff activo
-    /* const { statusStaff } = useContext(StatusStaffContext)
+  /// estado del staff activo
+  /* const { statusStaff } = useContext(StatusStaffContext)
     const navigate = useNavigate();
     const [orders, setOrders] = useState(""); /// pedidos asignado al cocinero
     const statusRef = useRef(statusStaff);
@@ -29,7 +27,7 @@ export default function Kitchen(props) {
     statusRef.current = statusStaff; /// se supone q da problemas el useState dentro del useEffect
     idRef.current = id; */
 
-    /* if (statusStaff === null) {
+  /* if (statusStaff === null) {
         // actualizar estado en tablas
         console.log('Kitchen', idRef.current);
         axios.patch(`${process.env.REACT_APP_API_URL}/staff/status`,
@@ -38,7 +36,7 @@ export default function Kitchen(props) {
         navigate("/login");
     } */
 
-    /* useEffect(() => {
+  /* useEffect(() => {
         const timer = setTimeout(() => {
             axios.get(`${process.env.REACT_APP_API_URL}/orders/kitchen`,
                 {"cook": id , "status": statusRef})
@@ -53,12 +51,32 @@ export default function Kitchen(props) {
         }, 30000); // 30 seg
     }, []); */
 
-    return (<div> Cocinero 
+  return (
+    <div className="page">
+      <div className="cook-top">
+        <p className="green">Cocinero</p>
         <SelectStatus />
-        {!orders ? null : <div className="orders--kitchen">
-            <div> Menu: <Countdown startingMinutes={3} /> </div>
-            <div> <img src={burguer} alt="logoBurguer" className="logoBurger"/> </div>
-            <div> {orders.uuid_menu} </div> 
-        </div>} 
-    </div>);
+      </div>
+      {!orders ? null : (
+        <>
+          <div className="orders--kitchen cook">
+            <div className="cook-top">
+              <p>Menu:</p>
+              <Countdown startingMinutes={3} />
+            </div>
+            <div>
+              {" "}
+              <img
+                src={burguer}
+                alt="logoBurguer"
+                className="logoBurger"
+              />{" "}
+            </div>
+            <div> {orders.uuid_menu} </div>
+          </div>
+          <div className="loader"></div>
+        </>
+      )}
+    </div>
+  );
 }

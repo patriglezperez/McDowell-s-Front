@@ -28,6 +28,10 @@ function App() {
             <Route path="/" element={<Welcome />} />
             <Route path="/customers/order/:id" element={<OrderCreator />} />
             <Route
+              path="/customers/order/:id/cart"
+              element={<OrderSummary />}
+            />
+            <Route
               path="customers/order/:id/completed"
               element={<PlaceOrder />}
             />

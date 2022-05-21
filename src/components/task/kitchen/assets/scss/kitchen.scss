@@ -1,0 +1,67 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.green {
+  color: $green_dark;
+  font-size: 5rem;
+}
+
+.cook-top {
+  display: flex;
+  width: 100vh;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 20px;
+}
+
+.orders--kitchen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: gainsboro;
+  border-radius: 20px;
+  width: 40rem;
+  height: 35rem;
+}
+
+/* From uiverse.io by @satyamchaudharydev */
+.loader {
+  --height-of-loader: 4px;
+  --loader-color: #8ae68a;
+
+  width: 30%;
+  margin-top: 30px;
+  height: var(--height-of-loader);
+  border-radius: 30px;
+  background-color: rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin-top: 20px;
+}
+
+.loader::before {
+  content: "";
+  position: absolute;
+  background: var(--loader-color);
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 100%;
+  border-radius: 30px;
+  animation: moving 1s ease-in-out infinite;
+}
+
+@keyframes moving {
+  50% {
+    width: 100%;
+  }
+
+  100% {
+    width: 0;
+    right: 0;
+    left: unset;
+  }
+}
